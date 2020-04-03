@@ -9,33 +9,38 @@ import javax.validation.constraints.Size;
 public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int seller_id;
+    private long seller_id;
 
     @Column
+    @Size(max=100)
     @NotNull
     private String seller_name;
 
     @Column
+    @Size(max=300)
     @NotNull
     private String seller_address;
 
     @Column(unique= true)
+    @Size(max=100)
     @NotNull
     private String shop_name;
 
     @Column(unique= true)
+    @Size(max=10)
     @NotNull
     private String seller_contactNo;
 
     @Column(unique= true)
-    @Size(max=10)
+    @Size(max=100)
     @NotNull
     private String seller_emailId;
 
-    @OneToOne
+    @OneToMany
     private Product product;
 
     public Seller() {}
+
 
     public Seller(@NotNull String seller_name, @NotNull String seller_address, @NotNull String shop_name, @NotNull String seller_contactNo, @Size(max = 10) @NotNull String seller_emailId) {
         this.seller_name = seller_name;
@@ -54,11 +59,11 @@ public class Seller {
         this.product = product;
     }
 
-    public int getSeller_id() {
+    public long getSeller_id() {
         return seller_id;
     }
 
-    public void setSeller_id(int seller_id) {
+    public void setSeller_id(long seller_id) {
         this.seller_id = seller_id;
     }
 
