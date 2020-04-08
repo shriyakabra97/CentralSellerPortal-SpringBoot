@@ -36,21 +36,26 @@ public class Seller {
     @NotNull
     private String seller_emailId;
 
-    @OneToMany
+    @Column
+    @NotNull
+    private String seller_password;
+
+    @OneToMany(mappedBy = "seller" , fetch=FetchType.LAZY , cascade = CascadeType.ALL)
     private Product product;
 
     public Seller() {}
 
 
-    public Seller(@NotNull String seller_name, @NotNull String seller_address, @NotNull String shop_name, @NotNull String seller_contactNo, @Size(max = 10) @NotNull String seller_emailId) {
+    public Seller(@NotNull String seller_name, @NotNull String seller_address, @NotNull String shop_name, @NotNull String seller_contactNo, @NotNull String seller_emailId , @NotNull String seller_password ) {
         this.seller_name = seller_name;
         this.seller_address = seller_address;
         this.shop_name = shop_name;
         this.seller_contactNo = seller_contactNo;
         this.seller_emailId = seller_emailId;
+        this.seller_password = seller_password;
     }
 
-    public Seller(@NotNull String seller_name, @NotNull String seller_address, @NotNull String shop_name, @NotNull String seller_contactNo, @Size(max = 10) @NotNull String seller_emailId, Product product) {
+   public Seller(@NotNull String seller_name, @NotNull String seller_address, @NotNull String shop_name, @NotNull String seller_contactNo, @Size(max = 10) @NotNull String seller_emailId, Product product) {
         this.seller_name = seller_name;
         this.seller_address = seller_address;
         this.shop_name = shop_name;
@@ -107,7 +112,15 @@ public class Seller {
         this.seller_emailId = seller_emailId;
     }
 
-    public Product getProduct() {
+    public String getSeller_password() {
+        return seller_password;
+    }
+
+    public void setSeller_password(String seller_password) {
+        this.seller_password = seller_password;
+    }
+
+     public Product getProduct() {
         return product;
     }
 
