@@ -29,9 +29,9 @@ public class LoginController {
       public Seller create( @RequestParam("email") String email,
                                @RequestParam("password") String password){
 
-        List<sellerRepository> seller = sellerRepository.findAll(body.get("email")).orElse(null);
+         List<Seller> seller = sellerRepository.findAll(email).orElse(null);
         for(seller s:list){
-          if(body.get("password").equals(s.getPassword())){
+            if((password).equals(s.getSeller_password()){
 
 
           return s;
