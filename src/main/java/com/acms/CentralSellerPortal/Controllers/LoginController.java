@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-
-
+import java.util.ArrayList;
+import java.util.List;
+@CrossOrigin(origins = "*")
 @RestController
+@RequestMapping("/")
 public class LoginController {
 
 
@@ -28,10 +30,10 @@ public class LoginController {
         @GetMapping("/seller")
       public Seller create( @RequestParam("email") String email,
                                @RequestParam("password") String password){
-
-         List<Seller> seller = sellerRepository.findAll(email).orElse(null);
-        for(seller s:list){
-            if((password).equals(s.getSeller_password()){
+            List<Seller> seller = new ArrayList<Seller>();
+            seller = sellerRepository.findAll();
+        for(Seller s: seller){
+            if((password).equals(s.getSeller_password()) && (email).equals(s.getSeller_emailId())){
 
 
           return s;
