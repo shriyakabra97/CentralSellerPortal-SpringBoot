@@ -3,6 +3,7 @@ package com.acms.CentralSellerPortal.Entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table (name="seller")
@@ -40,8 +41,8 @@ public class Seller {
     @NotNull
     private String seller_password;
 
-    @OneToMany(mappedBy = "seller" , fetch=FetchType.LAZY , cascade = CascadeType.ALL)
-    private Product product;
+    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Product> product;
 
     public Seller() {}
 
@@ -61,7 +62,7 @@ public class Seller {
         this.shop_name = shop_name;
         this.seller_contactNo = seller_contactNo;
         this.seller_emailId = seller_emailId;
-        this.product = product;
+        this.product = (List<Product>) product;
     }
 
     public long getSeller_id() {
@@ -120,11 +121,10 @@ public class Seller {
         this.seller_password = seller_password;
     }
 
-     public Product getProduct() {
-        return product;
-    }
+    public List<Product> getProduct() {
 
-    public void setProduct(Product product) {
+
+    public void setProduct(List<Product> product) {
         this.product = product;
     }
 }

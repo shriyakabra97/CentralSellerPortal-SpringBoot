@@ -28,7 +28,7 @@ public class ProductController {
         product.setPrice(p);
         product.setDiscount(disc);
 
-        Optional<Seller> optionalSeller = sellerRepository.findById(Math.toIntExact(sellerId));
+        Optional<Seller> optionalSeller = sellerRepository.findById(sellerId);
         if(optionalSeller.isPresent()) {
             Seller seller = optionalSeller.get();
             product.setSeller(seller);
