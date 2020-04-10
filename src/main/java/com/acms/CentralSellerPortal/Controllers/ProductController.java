@@ -7,6 +7,7 @@ import com.acms.CentralSellerPortal.Repositories.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -56,5 +57,11 @@ public class ProductController {
         }
         else
             return "error updating";
+    }
+
+    @GetMapping(value = "/display")
+    public List<Product> getAllProducts() {
+        System.out.println("%%%%%%%%%DISPLAYING%%%%%%%%%");
+        return productRepository.findAll();
     }
 }

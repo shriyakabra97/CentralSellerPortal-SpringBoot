@@ -121,8 +121,10 @@ public class Seller {
         this.seller_password = seller_password;
     }
 
-    public List<Product> getProduct() {
 
+    public List<Product> getProduct() {
+        return product;
+    }
 
     public void setProduct(List<Product> product) {
         this.product = product;
