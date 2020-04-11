@@ -6,6 +6,8 @@ import com.acms.CentralSellerPortal.Entities.Seller;
 import com.acms.CentralSellerPortal.Repositories.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Map;
 import java.util.ArrayList;
@@ -24,19 +26,23 @@ public class LoginController {
         //@Autowired
         //CompanyRepository companyRepository;
 
-       
 
 
-        @GetMapping("/seller")
-      public Seller create( @RequestParam("email") String email,
-                               @RequestParam("password") String password){
+
+    @RequestMapping(value="/verifyseller" , method=RequestMethod.GET)
+      public RedirectView create(@RequestParam("s_mobile") String s_mobile,
+                                 @RequestParam("s_password") String s_password , RedirectAttributes redirectAttrs){
             List<Seller> seller = new ArrayList<Seller>();
             seller = sellerRepository.findAll();
+
         for(Seller s: seller){
-            if((password).equals(s.getSeller_password()) && (email).equals(s.getSeller_emailId())){
+            if((s_password).equals(s.getSeller_password()) && (s_mobile).equals(s.getSeller_contactNo())){
 
+                RedirectView rv = new RedirectView();
+                String rurl="/Sellerdashboard.jsp?id="+Long.toString(s.getSeller_id());
+                rv.setUrl(rurl);
+                return rv;
 
-          return s;
       }
 
     }
