@@ -91,4 +91,16 @@ public class Product {
     public void setSeller(Seller seller) {
         this.seller = seller;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "product_id=" + product_id +
+                ", product_name='" + product_name + '\'' +
+                ", product_description='" + product_description + '\'' +
+                ", price=" + price +
+                ", discount=" + discount +
+                ", seller=" + seller.toString() +
+                '}'+'\n';
+    }
 }

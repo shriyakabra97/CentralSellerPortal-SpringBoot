@@ -60,8 +60,10 @@ public class ProductController {
     }
 
     @GetMapping(value = "/display")
-    public List<Product> getAllProducts() {
+    public String getAllProducts() {
         System.out.println("%%%%%%%%%DISPLAYING%%%%%%%%%");
-        return productRepository.findAll();
+        StringBuilder output = new StringBuilder();
+        productRepository.findAll().forEach(p->output.append(p.toString()));
+        return output.toString();
     }
 }

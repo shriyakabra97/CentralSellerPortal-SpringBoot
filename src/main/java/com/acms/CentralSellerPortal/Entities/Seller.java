@@ -129,4 +129,18 @@ public class Seller {
     public void setProduct(List<Product> product) {
         this.product = product;
     }
+
+    @Override
+    public String toString() {
+        return "Seller{" +
+                "seller_id=" + seller_id +
+                ", seller_name='" + seller_name + '\'' +
+                ", seller_address='" + seller_address + '\'' +
+                ", shop_name='" + shop_name + '\'' +
+                ", seller_contactNo='" + seller_contactNo + '\'' +
+                ", seller_emailId='" + seller_emailId + '\'' +
+                ", seller_password='" + seller_password + '\'' +
+                //", product=" + product +
+                '}';
+    }
 }
