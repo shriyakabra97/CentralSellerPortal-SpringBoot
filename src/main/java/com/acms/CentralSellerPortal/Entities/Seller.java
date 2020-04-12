@@ -3,128 +3,132 @@ package com.acms.CentralSellerPortal.Entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table (name="seller")
 public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long seller_id;
+    private long sellerId;
 
     @Column
     @Size(max=100)
     @NotNull
-    private String seller_name;
+    private String sellerName;
 
     @Column
     @Size(max=300)
     @NotNull
-    private String seller_address;
+    private String sellerAddress;
 
     @Column(unique= true)
     @Size(max=100)
     @NotNull
-    private String shop_name;
+    private String shopName;
 
     @Column(unique= true)
     @Size(max=10)
     @NotNull
-    private String seller_contactNo;
+    private String sellerContactNo;
 
     @Column(unique= true)
     @Size(max=100)
     @NotNull
-    private String seller_emailId;
+    private String sellerEmailId;
 
     @Column
     @NotNull
-    private String seller_password;
+    private String sellerPassword;
 
-    //@OneToMany(mappedBy = "seller" , fetch=FetchType.LAZY , cascade = CascadeType.ALL)
-   // private Product product;
+    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Product> product;
 
     public Seller() {}
 
 
     public Seller(@NotNull String seller_name, @NotNull String seller_address, @NotNull String shop_name, @NotNull String seller_contactNo, @NotNull String seller_emailId , @NotNull String seller_password ) {
-        this.seller_name = seller_name;
-        this.seller_address = seller_address;
-        this.shop_name = shop_name;
-        this.seller_contactNo = seller_contactNo;
-        this.seller_emailId = seller_emailId;
-        this.seller_password = seller_password;
+        this.sellerName = seller_name;
+        this.sellerAddress = seller_address;
+        this.shopName = shop_name;
+        this.sellerContactNo = seller_contactNo;
+        this.sellerEmailId = seller_emailId;
+        this.sellerPassword = seller_password;
     }
 
-  /* public Seller(@NotNull String seller_name, @NotNull String seller_address, @NotNull String shop_name, @NotNull String seller_contactNo, @Size(max = 10) @NotNull String seller_emailId, Product product) {
-        this.seller_name = seller_name;
-        this.seller_address = seller_address;
-        this.shop_name = shop_name;
-        this.seller_contactNo = seller_contactNo;
-        this.seller_emailId = seller_emailId;
-        this.product = product;
-    } */
-
-    public long getSeller_id() {
-        return seller_id;
+   public Seller(@NotNull String seller_name, @NotNull String seller_address, @NotNull String shop_name, @NotNull String seller_contactNo, @Size(max = 10) @NotNull String seller_emailId, Product product) {
+        this.sellerName = seller_name;
+        this.sellerAddress = seller_address;
+        this.shopName = shop_name;
+        this.sellerContactNo = seller_contactNo;
+        this.sellerEmailId = seller_emailId;
+        this.product = (List<Product>) product;
     }
 
-    public void setSeller_id(long seller_id) {
-        this.seller_id = seller_id;
+    public long getSellerId() {
+        return sellerId;
     }
 
-    public String getSeller_name() {
-        return seller_name;
+    public void setSellerId(long sellerId) {
+        this.sellerId = sellerId;
     }
 
-    public void setSeller_name(String seller_name) {
-        this.seller_name = seller_name;
+    public String getSellerName() {
+        return sellerName;
     }
 
-    public String getSeller_address() {
-        return seller_address;
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
     }
 
-    public void setSeller_address(String seller_address) {
-        this.seller_address = seller_address;
+    public String getSellerAddress() {
+        return sellerAddress;
     }
 
-    public String getShop_name() {
-        return shop_name;
+    public void setSellerAddress(String sellerAddress) {
+        this.sellerAddress = sellerAddress;
     }
 
-    public void setShop_name(String shop_name) {
-        this.shop_name = shop_name;
+    public String getShopName() {
+        return shopName;
     }
 
-    public String getSeller_contactNo() {
-        return seller_contactNo;
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
     }
 
-    public void setSeller_contactNo(String seller_contactNo) {
-        this.seller_contactNo = seller_contactNo;
+    public String getSellerContactNo() {
+        return sellerContactNo;
     }
 
-    public String getSeller_emailId() {
-        return seller_emailId;
+    public void setSellerContactNo(String sellerContactNo) {
+        this.sellerContactNo = sellerContactNo;
     }
 
-    public void setSeller_emailId(String seller_emailId) {
-        this.seller_emailId = seller_emailId;
+    public String getSellerEmailId() {
+        return sellerEmailId;
     }
 
-    public String getSeller_password() {
-        return seller_password;
+    public void setSellerEmailId(String sellerEmailId) {
+        this.sellerEmailId = sellerEmailId;
     }
 
-    public void setSeller_password(String seller_password) {
-        this.seller_password = seller_password;
+    public String getSellerPassword() {
+        return sellerPassword;
     }
 
-   /*  public Product getProduct() {
+    public void setSellerPassword(String sellerPassword) {
+        this.sellerPassword = sellerPassword;
+    }
+
+
+    public List<Product> getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(List<Product> product) {
         this.product = product;
-    } */
+    }
+
+
 }

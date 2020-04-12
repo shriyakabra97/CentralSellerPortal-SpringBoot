@@ -1,8 +1,9 @@
 package com.acms.CentralSellerPortal.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table (name="product")
@@ -10,15 +11,15 @@ public class Product {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        private long product_id;
+        private long productId;
 
         @Column
         @NotNull
-        private String product_name;
+        private String productName;
 
         @Column
         @NotNull
-        private String product_description;
+        private String productDescription;
 
         @Column
         @NotNull
@@ -28,36 +29,37 @@ public class Product {
         @NotNull
         private int discount;
 
+        @JsonIgnore
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
-        @JoinColumn(name = "seller_id", nullable = false)
+        @JoinColumn(name = "seller_id") //, nullable = false)
         private Seller seller;
 
     public Product() {
     }
 
     public Product(int product_id, @NotNull String product_name, @NotNull int price, @NotNull String product_description, @NotNull int discount, Seller seller) {
-        this.product_id = product_id;
-        this.product_name = product_name;
+        this.productId = product_id;
+        this.productName = product_name;
         this.price = price;
-        this.product_description = product_description;
+        this.productDescription = product_description;
         this.discount = discount;
         this.seller = seller;
     }
 
-    public long getProduct_id() {
-        return product_id;
+    public long getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(long product_id) {
-        this.product_id = product_id;
+    public void setProductId(long productId) {
+        this.productId = productId;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public int getPrice() {
@@ -68,12 +70,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getProduct_description() {
-        return product_description;
+    public String getProductDescription() {
+        return productDescription;
     }
 
-    public void setProduct_description(String product_description) {
-        this.product_description = product_description;
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
     }
 
     public int getDiscount() {
@@ -95,12 +97,12 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "product_id=" + product_id +
-                ", product_name='" + product_name + '\'' +
-                ", product_description='" + product_description + '\'' +
+                "product_id=" + productId +
+                ", product_name='" + productName + '\'' +
+                ", product_description='" + productDescription + '\'' +
                 ", price=" + price +
                 ", discount=" + discount +
-                ", seller=" + seller.toString() +
+               // ", seller=" + seller.toString() +
                 '}'+'\n';
     }
 }

@@ -32,11 +32,11 @@ class CentralSellerPortalApplicationTests {
 	@Test
 	public void testCreateUser() {
 		Seller seller = new Seller();
-		seller.setSeller_name("admin");
-		seller.setSeller_address("admn");
-		seller.setShop_name("admin");
-		seller.setSeller_contactNo("admin");
-		seller.setSeller_emailId("adn");
+		seller.setSellerName("admin");
+		seller.setSellerAddress("admn");
+		seller.setShopName("admin");
+		seller.setSellerContactNo("admin");
+		seller.setSellerEmailId("adn");
 
 		ResponseEntity<Seller> postResponse = restTemplate.postForEntity(getRootUrl() + "/seller",seller, Seller.class);
 		Assert.assertNotNull(postResponse);

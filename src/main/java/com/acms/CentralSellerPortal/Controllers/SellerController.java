@@ -2,14 +2,10 @@ package com.acms.CentralSellerPortal.Controllers;
 
 
 import com.acms.CentralSellerPortal.Entities.Seller;
-import com.acms.CentralSellerPortal.Exception.ResourceNotFoundException;
 import com.acms.CentralSellerPortal.Repositories.SellerRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
@@ -33,12 +29,12 @@ public class SellerController {
                                ) {
 
         Seller seller=new Seller();
-        seller.setSeller_name(seller_name);
-        seller.setSeller_address(seller_address);
-        seller.setShop_name(shop_name);
-        seller.setSeller_emailId(seller_emailId);
-        seller.setSeller_contactNo(seller_contactNo);
-        seller.setSeller_password(password);
+        seller.setSellerName(seller_name);
+        seller.setSellerAddress(seller_address);
+        seller.setShopName(shop_name);
+        seller.setSellerEmailId(seller_emailId);
+        seller.setSellerContactNo(seller_contactNo);
+        seller.setSellerPassword(password);
 
         sellerRepository.save(seller);
         return new RedirectView("/");
@@ -52,7 +48,7 @@ public class SellerController {
 
     @RequestMapping(value="/viewSeller/{id}" , method=RequestMethod.GET)
 
-    public ResponseEntity<Seller> getSellerById(@PathVariable(value = "id") Long seller_id)
+    public ResponseEntity<Seller>    getSellerById(@PathVariable(value = "id") Long seller_id)
     {
         Seller seller =sellerRepository.findById(seller_id).orElse(null);
         return ResponseEntity.ok().body(seller);
@@ -69,16 +65,16 @@ public class SellerController {
     {
         Seller seller =sellerRepository.findById(seller_id).orElse(null);
 System.out.println("hi................................");
-        seller.setSeller_name(seller_name);
-        seller.setSeller_address(seller_address);
-        seller.setShop_name(shop_name);
-        seller.setSeller_emailId(seller_emailId);
-        seller.setSeller_contactNo(seller_contactNo);
-        seller.setSeller_password(password);
+        seller.setSellerName(seller_name);
+        seller.setSellerAddress(seller_address);
+        seller.setShopName(shop_name);
+        seller.setSellerEmailId(seller_emailId);
+        seller.setSellerContactNo(seller_contactNo);
+        seller.setSellerPassword(password);
 
         sellerRepository.save(seller);
         RedirectView rv = new RedirectView();
-        String rurl="/Sellerdashboard.jsp?id="+Long.toString(seller.getSeller_id());
+        String rurl="/Sellerdashboard.jsp?id="+Long.toString(seller.getSellerId());
         rv.setUrl(rurl);
         return rv;
     }
