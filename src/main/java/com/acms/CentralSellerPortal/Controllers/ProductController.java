@@ -24,8 +24,8 @@ public class ProductController {
     @Autowired
     SellerRepository sellerRepository;
 
-    @GetMapping(value = "/add")
-    public String addProduct(@RequestParam Long  sellerId, @RequestParam String n , @RequestParam String d,
+    @RequestMapping(value = "/add/{id}", method=RequestMethod.POST)
+    public String addProduct(@PathVariable(value = "id") Long seller_id, @RequestParam Long  sellerId, @RequestParam String n , @RequestParam String d,
                              @RequestParam int p, @RequestParam int disc)
     {
         Product product = new Product();
@@ -34,7 +34,7 @@ public class ProductController {
         product.setPrice(p);
         product.setDiscount(disc);
 
-        Optional<Seller> optionalSeller = sellerRepository.findById(sellerId);
+        Optional<Seller> optionalSeller = sellerRepository.findById(seller_id);
         if(optionalSeller.isPresent()) {
             Seller seller = optionalSeller.get();
             product.setSeller(seller);
@@ -46,10 +46,10 @@ public class ProductController {
     }
 
     @GetMapping(value = "/update")
-    public String updateProduct(@RequestParam Long  productId, @RequestParam String n , @RequestParam String d,
+    public String updateProduct(@RequestParam Long  product_id, @RequestParam String n , @RequestParam String d,
                                 @RequestParam int p, @RequestParam int disc)
     {
-        Optional<Product> optionalProduct = productRepository.findById(productId);
+        Optional<Product> optionalProduct = productRepository.findById(product_id);
         if(optionalProduct.isPresent()) {
             Product product = optionalProduct.get();
             product.setProductName(n);
@@ -84,20 +84,26 @@ public class ProductController {
     {
         List<Product> productList = productRepository.findBySeller_SellerId(seller_id);
         System.out.println("getting Products");
-        System.out.println(productList.get(0));
-        String[][] str = new String[productList.size()][5];
-        for(int i = 0; i < productList.size(); i++){
-
-                session.setAttribute("string"+i+"0", productList.get(i).getProductId());
-                session.setAttribute("string"+i+"1", productList.get(i).getProductName());
-                session.setAttribute("string"+i+"2", productList.get(i).getProductDescription());
-                session.setAttribute("string"+i+"3", productList.get(i).getPrice());
-                session.setAttribute("string"+i+"4", productList.get(i).getDiscount());
-
-        }
+        //System.out.println(productList.get(0));
+        //Seller seller = sellerRepository.findById(seller_id).orElse(null);
+        System.out.println(productList);
+        session.setAttribute("productList",productList);
+        System.out.println(session.getAttribute("productList"));
+        //String[][] str = new String[productList.size()][5];
+//        for(int i = 0; i < productList.size(); i++){
+//
+//                session.setAttribute("string"+i+"0", productList.get(i).getProductId());
+//                session.setAttribute("string"+i+"1", productList.get(i).getProductName());
+//                session.setAttribute("string"+i+"2", productList.get(i).getProductDescription());
+//                session.setAttribute("string"+i+"3", productList.get(i).getPrice());
+//                session.setAttribute("string"+i+"4", productList.get(i).getDiscount());
+//
+//        }
+//        session.setAttribute("listSize", productList.size());
         //System.out.println((String)string[0][1]);
         //System.out.println(session.getAttribute("string00"));
         RedirectView rv = new RedirectView();
+        System.out.println(session.getAttributeNames());
         String rurl="/SellerDashboard.jsp?id="+Long.toString(seller_id);
         System.out.println(rurl);
         rv.setUrl(rurl);

@@ -4,10 +4,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.Serializable;
+
 
 @Entity
 @Table (name="product")
-public class Product {
+public class Product implements Serializable {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)

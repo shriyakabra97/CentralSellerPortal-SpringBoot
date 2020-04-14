@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @CrossOrigin(origins = "*")
-@RestController
+@Controller
 @RequestMapping("/")
 public class SellerController {
 
@@ -74,12 +74,13 @@ public class SellerController {
         System.out.println(seller_id);
         Seller seller = sellerRepository.findById(seller_id).orElse(null);
 
-        session.setAttribute("sellerContact", seller.getSellerContactNo());
+        session.setAttribute("sellerContactNo", seller.getSellerContactNo());
         session.setAttribute("sellerAddress", seller.getSellerAddress());
         session.setAttribute("sellerName", seller.getSellerName());
-        session.setAttribute("sellerEmail", seller.getSellerEmailId());
-        session.setAttribute("sellerShopName", seller.getShopName());
+        session.setAttribute("sellerEmailId", seller.getSellerEmailId());
+        session.setAttribute("shopName", seller.getShopName());
         session.setAttribute("sellerPassword",seller.getSellerPassword());
+
         //session.setAttribute("seller", seller);
 
 

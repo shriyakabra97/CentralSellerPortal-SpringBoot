@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Successful Registration</title>
+    <title>Login Failed !</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -25,20 +25,17 @@
         </div>
     </div>
 </nav>
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-sm-6 col-sm-offset-3">
-                <br><br> <h2 style="color:#0fad00">Success</h2>
-<!--                <img src="http://osmhotels.com//assets/check-true.jpg">-->
-
-<!--                <p style="font-size:20px;color:#5C5C5C;">Thank you  + for Registering with us. You can Login by clicking at the button below.-->
-<!--                    </p>-->
-                <p th:text="Thank You for Registering with us. You can Login by clicking at the button below.' " />
-                <a href="index.html" action="index.html" class="btn btn-success">     Log in      </a>
-                <br><br>
-            </div>
-
+<div class="container">
+    <div class="row text-center">
+        <div class="col-sm-6 col-sm-offset-3">
+            <br><br> <h2 style="color: darksalmon">Failed to Login</h2>
+                             <br>
+            <p style="color: darksalmon; font-size: large; font-family: Arial">Invalid. Please Check Your Username/Password </p><br><br>
+            <a href="index.html" action="index.html" class="btn btn-primary" style="font-size: medium"> Log in </a>
+            <br><br>
         </div>
+
     </div>
+</div>
 </body>
 </html>

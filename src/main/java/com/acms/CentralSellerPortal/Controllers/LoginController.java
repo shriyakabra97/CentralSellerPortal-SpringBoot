@@ -45,7 +45,11 @@ public class LoginController {
             }
 
         }
-        return null;
+        RedirectView rv = new RedirectView();
+        String failLogin = "/FailedLogin.jsp";
+        rv.setUrl(failLogin);
+
+        return rv;
     }
    /* @GetMapping("/company")
   public Company create(@RequestBody Map<String,String> body){

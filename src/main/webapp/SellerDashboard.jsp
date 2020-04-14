@@ -1,4 +1,7 @@
+
 <%@ page import="com.acms.CentralSellerPortal.Entities.Seller" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.acms.CentralSellerPortal.Entities.Product" %>
 <%@ page import="org.springframework.http.ResponseEntity" %>
 <%@ page import="com.acms.CentralSellerPortal.Controllers.SellerController" %>
 <%@ page import="com.acms.CentralSellerPortal.Controllers.ProductController" %>
@@ -38,10 +41,8 @@
 
 
 
-        <% long id = Long.parseLong(request.getParameter("id"));
-            //String string_id = request.getParameter("id");
-        %>
-
+        <% long id = Long.parseLong(request.getParameter("id")); %>
+<%--        <jsp:useBean id="seller" scope="request" class="com.acms.CentralSellerPortal.Entities.Seller"/>--%>
         <form class ="form-view" id="view-form"  action = "/viewSeller/<%=id%>" method="get">
             <form :hidden path="id"/>
             <div class="form-row">
@@ -51,28 +52,21 @@
                 <!-- form-group end.// -->
             </div>
         </form>
-<%
-//    Seller seller = (Seller)session.getAttribute("seller");
-//    System.out.println(seller.getSellerId());
-
-%>
 
 
+<%--        ${seller}--%>
         <td>Welcome   ${sellerName}         </td>
         <br>
         <td>ID: <%=id%>                             </td>
         <br>
-        <td>Contact No:   ${sellerContact}</td>
+        <td>Contact No:   ${sellerContactNo}</td>
         <br>
-        <td>E-mail:   ${sellerEmail}      </td>
+        <td>E-mail:   ${sellerEmailId}      </td>
         <br>
-        <td>Store Name:    ${sellerShopName}       </td>
+        <td>Store Name:    ${shopName}       </td>
         <br>
         <td>Address:   ${sellerAddress}     </td>
         <br>
-
-
-
         <a class="btn btn-primary" href="/UpdateSellerProfile.jsp?id=<%=id%>"  action="UpdateSellerprofile.jsp" role="button">Update Profile</a>
         <a class="btn btn-primary" href="/index.html" role="button">Logout</a>
     </div>
@@ -99,8 +93,6 @@
                 <table id="mytable" class="table table-bordred table-striped">
 
                     <thead>
-
-
                     <th>ProductID</th>
                     <th>Name</th>
                     <th>Description</th>
@@ -110,18 +102,45 @@
                     <th>Delete</th>
                     </thead>
                     <tbody>
-
-
+<%--                    <jsp:useBean id="productList" scope="request" type="java.util.List" class="com.acms.CentralSellerPortal.Entities.Product"/>--%>
+                    <c:forEach var="e" items="${productList}">
                     <tr>
-
-                        <td>${string00}</td>
-                        <td>${string01}</td>
-                        <td>${string02}</td>
-                        <td>${string03}</td>
-                        <td>${string04}</td>
+                        <td>${e.productId}</td>
+                        <td>${e.productName}</td>
+                        <td>${e.productDescription}</td>
+                        <td>${e.price}</td>
+                        <td>${e.discount}</td>
                         <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><i class="fas fa-pencil-square-o"></i></button></p></td>
                         <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fas fa-trash"></i></button></p></td>
                     </tr>
+                    </c:forEach>
+
+<%--<%        for(int i = 0 ; i < 2 ; i++ ) {--%>
+
+<%--                                            %>--%>
+<%--                    <tr>--%>
+
+<%--                        <td>${string+"0"+"0" }</td>--%>
+<%--                        <td>string<%= i %>1</td>--%>
+<%--                        <td>string<%= i %>2</td>--%>
+<%--                        <td>string<%= i %>3</td>--%>
+<%--                        <td>string<%= i %>4</td>--%>
+<%--                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><i class="fas fa-pencil-square-o"></i></button></p></td>--%>
+<%--                        <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fas fa-trash"></i></button></p></td>--%>
+<%--                    </tr>--%>
+
+<%--<% } %>--%>
+<%--                    <tr>--%>
+
+
+<%--                        <td>${string10}</td>--%>
+<%--                        <td>${string11}</td>--%>
+<%--                        <td>${string12}</td>--%>
+<%--                        <td>${string13}</td>--%>
+<%--                        <td>${string14}</td>--%>
+<%--                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><i class="fas fa-pencil-square-o"></i></button></p></td>--%>
+<%--                        <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fas fa-trash"></i></button></p></td>--%>
+<%--                    </tr>--%>
 
                     </tbody>
 
