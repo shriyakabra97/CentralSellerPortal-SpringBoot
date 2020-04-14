@@ -24,7 +24,7 @@ public class SellerController {
 
     @RequestMapping(value="/addseller"   , method=RequestMethod.POST)
     public RedirectView addseller(
-            @RequestParam("s_name") String seller_name,
+                                @RequestParam("s_name") String seller_name,
                                @RequestParam("s_address") String seller_address,
                                @RequestParam("s_shop") String shop_name,
                                @RequestParam("s_mail") String seller_emailId,
@@ -96,7 +96,8 @@ public class SellerController {
 
     @RequestMapping(value="/UpdateSeller/{id}" , method=RequestMethod.POST)
     public RedirectView updateUser(
-            @PathVariable(value = "id") Long seller_id, @RequestParam("s_name") String seller_name,
+            @PathVariable(value = "id") Long seller_id,
+            @RequestParam("s_name") String seller_name,
             @RequestParam("s_address") String seller_address,
             @RequestParam("s_shop") String shop_name,
             @RequestParam("s_mail") String seller_emailId,

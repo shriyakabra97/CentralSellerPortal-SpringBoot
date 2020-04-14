@@ -5,6 +5,7 @@ import com.acms.CentralSellerPortal.Entities.Seller;
 import com.acms.CentralSellerPortal.Repositories.ProductRepository;
 import com.acms.CentralSellerPortal.Repositories.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.view.RedirectView;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/products")
 public class ProductController {
 
@@ -25,8 +26,11 @@ public class ProductController {
     SellerRepository sellerRepository;
 
     @RequestMapping(value = "/add/{id}", method=RequestMethod.POST)
-    public String addProduct(@PathVariable(value = "id") Long seller_id, @RequestParam Long  sellerId, @RequestParam String n , @RequestParam String d,
-                             @RequestParam int p, @RequestParam int disc)
+    public RedirectView addProduct(@PathVariable(value = "id") Long seller_id,
+                                   @RequestParam("p_name") String n ,
+                                   @RequestParam("p_description") String d,
+                                   @RequestParam("p_price") int p,
+                                   @RequestParam("p_discount") int disc)
     {
         Product product = new Product();
         product.setProductName(n);
@@ -39,10 +43,14 @@ public class ProductController {
             Seller seller = optionalSeller.get();
             product.setSeller(seller);
             productRepository.save(product);
-            return "Saved";
+
+            //return "updated..";
         }
-        else
-             return "unsuccessful";
+        RedirectView rv = new RedirectView();
+        String rurl="/SellerDashboard.jsp?id="+Long.toString(seller_id);
+        rv.setUrl(rurl);
+        return rv;
+
     }
 
     @GetMapping(value = "/update")

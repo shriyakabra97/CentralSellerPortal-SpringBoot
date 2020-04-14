@@ -67,6 +67,7 @@
         <br>
         <td>Address:   ${sellerAddress}     </td>
         <br>
+        <br>
         <a class="btn btn-primary" href="/UpdateSellerProfile.jsp?id=<%=id%>"  action="UpdateSellerprofile.jsp" role="button">Update Profile</a>
         <a class="btn btn-primary" href="/index.html" role="button">Logout</a>
     </div>
@@ -115,32 +116,7 @@
                     </tr>
                     </c:forEach>
 
-<%--<%        for(int i = 0 ; i < 2 ; i++ ) {--%>
 
-<%--                                            %>--%>
-<%--                    <tr>--%>
-
-<%--                        <td>${string+"0"+"0" }</td>--%>
-<%--                        <td>string<%= i %>1</td>--%>
-<%--                        <td>string<%= i %>2</td>--%>
-<%--                        <td>string<%= i %>3</td>--%>
-<%--                        <td>string<%= i %>4</td>--%>
-<%--                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><i class="fas fa-pencil-square-o"></i></button></p></td>--%>
-<%--                        <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fas fa-trash"></i></button></p></td>--%>
-<%--                    </tr>--%>
-
-<%--<% } %>--%>
-<%--                    <tr>--%>
-
-
-<%--                        <td>${string10}</td>--%>
-<%--                        <td>${string11}</td>--%>
-<%--                        <td>${string12}</td>--%>
-<%--                        <td>${string13}</td>--%>
-<%--                        <td>${string14}</td>--%>
-<%--                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><i class="fas fa-pencil-square-o"></i></button></p></td>--%>
-<%--                        <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fas fa-trash"></i></button></p></td>--%>
-<%--                    </tr>--%>
 
                     </tbody>
 
@@ -154,7 +130,7 @@
     </div>
 </div>
 <dev class="container">
-    <a id="add_row" class="btn btn-primary float-right" style="color: white; margin-right: 30px ;margin-bottom: 30px ; margin-top: 10px">Add Product</a>
+    <a id="add_row"  href="/AddProduct.jsp?id=<%=id%>"  action="AddProduct.jsp"  class="btn btn-primary float-right" style="color: white; margin-right: 30px ;margin-bottom: 30px ; margin-top: 10px" role="button">Add Product</a>
 </dev>
 
 <br>
