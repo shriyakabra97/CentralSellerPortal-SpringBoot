@@ -12,6 +12,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/")
@@ -70,20 +71,22 @@ public class SellerController {
     public RedirectView getSellerById(@PathVariable(value = "id") long seller_id, HttpSession session)
     {
         System.out.println("Getting your details seller..please wait!!");
-        //System.out.println(seller_id);
+        System.out.println(seller_id);
         Seller seller = sellerRepository.findById(seller_id).orElse(null);
-        //System.out.println(seller.getSeller_contactNo());
-        session.setAttribute("seller_contact", seller.getSellerContactNo());
-        session.setAttribute("seller_address", seller.getSellerAddress());
-        session.setAttribute("seller_name", seller.getSellerName());
-        session.setAttribute("seller_email", seller.getSellerEmailId());
-        session.setAttribute("seller_shopname", seller.getShopName());
-        session.setAttribute("seller_pass",seller.getSellerPassword());
 
-        System.out.println(seller.getSellerContactNo());
+        session.setAttribute("sellerContact", seller.getSellerContactNo());
+        session.setAttribute("sellerAddress", seller.getSellerAddress());
+        session.setAttribute("sellerName", seller.getSellerName());
+        session.setAttribute("sellerEmail", seller.getSellerEmailId());
+        session.setAttribute("sellerShopName", seller.getShopName());
+        session.setAttribute("sellerPassword",seller.getSellerPassword());
+        //session.setAttribute("seller", seller);
+
+
 
         RedirectView rv = new RedirectView();
         String rurl="/SellerDashboard.jsp?id="+Long.toString(seller.getSellerId());
+        System.out.println(rurl);
         rv.setUrl(rurl);
         return rv;
     }

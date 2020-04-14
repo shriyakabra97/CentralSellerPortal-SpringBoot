@@ -5,13 +5,12 @@ import com.acms.CentralSellerPortal.Entities.Seller;
 import com.acms.CentralSellerPortal.Repositories.ProductRepository;
 import com.acms.CentralSellerPortal.Repositories.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.servlet.view.RedirectView;
 
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,11 +79,32 @@ public class ProductController {
         return ResponseEntity.ok().body(product);
     }
 
-    @GetMapping(value = "/displayBySellerId")
-    public List<Product> getProductBySellerId(@RequestParam Long  seller_id)
+    @RequestMapping(value = "/displayBySellerId/{id}", method = RequestMethod.GET)
+    public RedirectView getProductBySellerId(@PathVariable(value = "id") long seller_id, HttpSession session)
     {
         List<Product> productList = productRepository.findBySeller_SellerId(seller_id);
-        return productList;
+        System.out.println("getting Products");
+        System.out.println(productList.get(0));
+        String[][] str = new String[productList.size()][5];
+        for(int i = 0; i < productList.size(); i++){
+
+                session.setAttribute("string"+i+"0", productList.get(i).getProductId());
+                session.setAttribute("string"+i+"1", productList.get(i).getProductName());
+                session.setAttribute("string"+i+"2", productList.get(i).getProductDescription());
+                session.setAttribute("string"+i+"3", productList.get(i).getPrice());
+                session.setAttribute("string"+i+"4", productList.get(i).getDiscount());
+
+        }
+        //System.out.println((String)string[0][1]);
+        //System.out.println(session.getAttribute("string00"));
+        RedirectView rv = new RedirectView();
+        String rurl="/SellerDashboard.jsp?id="+Long.toString(seller_id);
+        System.out.println(rurl);
+        rv.setUrl(rurl);
+        return rv;
+
+
+
         //return ResponseEntity.ok().body(productList);
     }
 }

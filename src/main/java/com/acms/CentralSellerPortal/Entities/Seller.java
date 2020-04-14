@@ -43,9 +43,9 @@ public class Seller {
     @NotNull
     private String sellerPassword;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Product> product;
+    //@JsonIgnore
+    //@OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //private List<Product> product;
 
     public Seller() {}
 
@@ -59,14 +59,14 @@ public class Seller {
         this.sellerPassword = seller_password;
     }
 
-   public Seller(@NotNull String seller_name, @NotNull String seller_address, @NotNull String shop_name, @NotNull String seller_contactNo, @Size(max = 10) @NotNull String seller_emailId, Product product) {
-        this.sellerName = seller_name;
-        this.sellerAddress = seller_address;
-        this.shopName = shop_name;
-        this.sellerContactNo = seller_contactNo;
-        this.sellerEmailId = seller_emailId;
-        this.product = (List<Product>) product;
-    }
+//   public Seller(@NotNull String seller_name, @NotNull String seller_address, @NotNull String shop_name, @NotNull String seller_contactNo, @Size(max = 10) @NotNull String seller_emailId, Product product) {
+//        this.sellerName = seller_name;
+//        this.sellerAddress = seller_address;
+//        this.shopName = shop_name;
+//        this.sellerContactNo = seller_contactNo;
+//        this.sellerEmailId = seller_emailId;
+//        //this.product = (List<Product>) product;
+//    }
 
     public long getSellerId() {
         return sellerId;
@@ -125,25 +125,25 @@ public class Seller {
     }
 
 
-    public List<Product> getProduct() {
-        return product;
-    }
+//    public List<Product> getProduct() {
+//        return product;
+//    }
 
-    public void setProduct(List<Product> product) {
-        this.product = product;
-    }
+//    public void setProduct(List<Product> product) {
+//        this.product = product;
+//    }
 
-    @Override
-    public String toString() {
-        return "Seller{" +
-                "seller_id=" + sellerId +
-                ", seller_name='" + sellerName + '\'' +
-                ", seller_address='" + sellerAddress + '\'' +
-                ", shop_name='" + shopName + '\'' +
-                ", seller_contactNo='" + sellerContactNo + '\'' +
-                ", seller_emailId='" + sellerEmailId + '\'' +
-                ", seller_password='" + sellerPassword + '\'' +
-                //", product=" + product +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Seller{" +
+//                "sellerId=" + sellerId +
+//                ", sellerName='" + sellerName + '\'' +
+//                ", sellerAddress='" + sellerAddress + '\'' +
+//                ", shopName='" + shopName + '\'' +
+//                ", sellerContactNo='" + sellerContactNo + '\'' +
+//                ", sellerEmailId='" + sellerEmailId + '\'' +
+//                ", sellerPassword='" + sellerPassword + '\'' +
+//                //", product=" + product +
+//                '}';
+//    }
 }

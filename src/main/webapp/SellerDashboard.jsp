@@ -1,6 +1,7 @@
 <%@ page import="com.acms.CentralSellerPortal.Entities.Seller" %>
 <%@ page import="org.springframework.http.ResponseEntity" %>
 <%@ page import="com.acms.CentralSellerPortal.Controllers.SellerController" %>
+<%@ page import="com.acms.CentralSellerPortal.Controllers.ProductController" %>
 <%@ page import="org.springframework.web.bind.annotation.RequestMapping" %>
 <%--<%@ page import="org.springframework.web.bind.annotation.RequestBody" %>--%>
 <!DOCTYPE html>
@@ -51,21 +52,23 @@
             </div>
         </form>
 <%
+//    Seller seller = (Seller)session.getAttribute("seller");
+//    System.out.println(seller.getSellerId());
 
 %>
 
 
-        <td>Welcome   ${seller_name}         </td>
+        <td>Welcome   ${sellerName}         </td>
         <br>
         <td>ID: <%=id%>                             </td>
         <br>
-        <td>Contact No:   ${seller_contact}</td>
+        <td>Contact No:   ${sellerContact}</td>
         <br>
-        <td>E-mail:   ${seller_email}      </td>
+        <td>E-mail:   ${sellerEmail}      </td>
         <br>
-        <td>Store Name:    ${seller_shop_name}       </td>
+        <td>Store Name:    ${sellerShopName}       </td>
         <br>
-        <td>Address:   ${seller_address}     </td>
+        <td>Address:   ${sellerAddress}     </td>
         <br>
 
 
@@ -74,12 +77,22 @@
         <a class="btn btn-primary" href="/index.html" role="button">Logout</a>
     </div>
 </div>
+
 <div class="container">
     <div class="row">
+        <form class ="form-view" id="view-form-products"  action = "/products/displayBySellerId/<%=id%>" method="get">
+            <form :hidden path="id"/>
+            <div class="form-row">
+                <div class="form-group">
+                    <button  type="submit"   class="btn btn-primary btn-block"> View Your Products</button>
+                </div> <!-- form-group// -->
+                <!-- form-group end.// -->
+            </div>
+        </form>
 
 
         <div class="col-md-12">
-            <h4>${seller_name}, Here are your Listed Products</h4>
+            <h4> ${sellerName}, Here are your Listed Products</h4>
             <div class="table-responsive">
 
 
@@ -98,13 +111,14 @@
                     </thead>
                     <tbody>
 
+
                     <tr>
-                        <!--                            <td><input type="checkbox" class="checkthis" /></td>-->
-                        <td>1</td>
-                        <td>Ball</td>
-                        <td>Sport Equipment</td>
-                        <td>30</td>
-                        <td>5</td>
+
+                        <td>${string00}</td>
+                        <td>${string01}</td>
+                        <td>${string02}</td>
+                        <td>${string03}</td>
+                        <td>${string04}</td>
                         <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><i class="fas fa-pencil-square-o"></i></button></p></td>
                         <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fas fa-trash"></i></button></p></td>
                     </tr>

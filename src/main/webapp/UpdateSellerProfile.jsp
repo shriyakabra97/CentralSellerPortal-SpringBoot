@@ -35,27 +35,27 @@
                     <div class="form-row">
                         <div class="col form-group">
                             <label>Name </label>
-                            <input type="text" id="s_name" name="s_name" class="form-control" value=${seller_name} placeholder=${seller_name}>
+                            <input type="text" id="s_name" name="s_name" class="form-control" value=${sellerName} placeholder=${sellerName}>
                         </div> <!-- form-group end.// -->
                         <!-- form-group end.// -->
                     </div> <!-- form-row end.// -->
                     <div class="form-group">
                         <label>Address</label>
-                        <input type="text" id="s_address" name="s_address"  class="form-control" value=${seller_address} placeholder=${seller_address}>
+                        <input type="text" id="s_address" name="s_address"  class="form-control" value=${sellerAddress} placeholder=${sellerAddress}>
 
                     </div>
                     <div class="form-group">
                         <label>Mobile No.</label>
-                        <input type="number" id="s_mobile" name="s_mobile"  class="form-control" value=${seller_contact} placeholder=${seller_contact}>
+                        <input type="number" id="s_mobile" name="s_mobile"  class="form-control" value=${sellerContact} placeholder=${sellerContact}>
 
                     </div>
                     <div class="form-group">
                         <label>Email address</label>
-                        <input type="email" id="s_mail" name="s_mail" class="form-control"  value= ${seller_email} placeholder=${seller_email}>
+                        <input type="email" id="s_mail" name="s_mail" class="form-control"  value= ${sellerEmail} placeholder=${sellerEmail}>
                     </div> <!-- form-group end.// -->
                     <div class="form-group">
                         <label>Store Name</label>
-                        <input type="text" id="s_shop" name="s_shop"  class="form-control" value=${seller_shopname} placeholder=${seller_shopname}>
+                        <input type="text" id="s_shop" name="s_shop"  class="form-control" value=${sellerShopName} placeholder=${sellerShopName}>
 
                     </div>
 
