@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -32,6 +33,7 @@ public class SellerController {
                                @RequestParam("s_password") String password
                                ) {
 
+  
         Seller seller=new Seller();
         seller.setSeller_name(seller_name);
         seller.setSeller_address(seller_address);
@@ -43,7 +45,7 @@ public class SellerController {
         sellerRepository.save(seller);
         return new RedirectView("/");
     }
-
+    //ResponseEntity<Seller>
 
     @GetMapping("/sellers")
     public List<Seller> getAllSellers() {
@@ -52,10 +54,11 @@ public class SellerController {
 
     @RequestMapping(value="/viewSeller/{id}" , method=RequestMethod.GET)
 
-    public ResponseEntity<Seller> getSellerById(@PathVariable(value = "id") Long seller_id)
+    public Seller getSellerById(@PathVariable(value = "id") Long seller_id)
     {
         Seller seller =sellerRepository.findById(seller_id).orElse(null);
-        return ResponseEntity.ok().body(seller);
+        //return ResponseEntity.ok().body(seller);
+        return seller;
     }
 
     @RequestMapping(value="/UpdateSeller/{id}" , method=RequestMethod.POST)

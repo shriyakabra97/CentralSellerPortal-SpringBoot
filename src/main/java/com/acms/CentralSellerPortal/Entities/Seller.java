@@ -1,8 +1,12 @@
 package com.acms.CentralSellerPortal.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table (name="seller")
@@ -40,8 +44,12 @@ public class Seller {
     @NotNull
     private String seller_password;
 
-    //@OneToMany(mappedBy = "seller" , fetch=FetchType.LAZY , cascade = CascadeType.ALL)
-   // private Product product;
+    @JsonIgnore
+    @OneToMany(mappedBy = "seller" , fetch=FetchType.LAZY , cascade = CascadeType.ALL)
+    private List<Product> product;
+
+
+
 
     public Seller() {}
 
@@ -54,15 +62,6 @@ public class Seller {
         this.seller_emailId = seller_emailId;
         this.seller_password = seller_password;
     }
-
-  /* public Seller(@NotNull String seller_name, @NotNull String seller_address, @NotNull String shop_name, @NotNull String seller_contactNo, @Size(max = 10) @NotNull String seller_emailId, Product product) {
-        this.seller_name = seller_name;
-        this.seller_address = seller_address;
-        this.shop_name = shop_name;
-        this.seller_contactNo = seller_contactNo;
-        this.seller_emailId = seller_emailId;
-        this.product = product;
-    } */
 
     public long getSeller_id() {
         return seller_id;
@@ -120,11 +119,11 @@ public class Seller {
         this.seller_password = seller_password;
     }
 
-   /*  public Product getProduct() {
+  public List<Product> getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(List<Product> product) {
         this.product = product;
-    } */
+    }
 }
