@@ -7,7 +7,9 @@ import com.acms.CentralSellerPortal.Repositories.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,8 +25,8 @@ public class ProductController {
     SellerRepository sellerRepository;
 
 
-    @GetMapping(value = "/add")
-    public String addProduct(@RequestParam Long  sellerId, @RequestParam String n , @RequestParam String d,
+    @RequestMapping(value = "/add/{id}",method=RequestMethod.POST)
+    public String addProduct(@PathVariable(value = "id")Long  sellerId, @RequestParam String n , @RequestParam String d,
                              @RequestParam int p, @RequestParam int disc)
     {
         Product product = new Product();
@@ -78,11 +80,21 @@ public class ProductController {
         return ResponseEntity.ok().body(product);
     }
 
-    @GetMapping(value = "/displayBySellerId")
-    public List<Product> getProductBySellerId(@RequestParam Long  seller_id)
+    @GetMapping(value = "/displayBySellerId/{id}")
+    public RedirectView getProductBySellerId(@RequestParam Long  seller_id)
     {
         List<Product> productList = productRepository.findBySeller_SellerId(seller_id);
-        return productList;
+        System.out.println("Getting your PRODUCT details seller..please wait!!");
+        //System.out.println(seller_id);
+        Seller seller = sellerRepository.findById(seller_id).orElse(null);
+        System.out.println(productList);
+        session.setAttribute("productList",productList);
+        System.out.println(session.getAttribute("productList"));
+        RedirectView rv = new RedirectView();
+        String rurl="/Sellerdashboard.jsp?id="+Long.toString(seller_id);
+        rv.setUrl(rurl);
+        return rv;
+        //return productList;
         //return ResponseEntity.ok().body(productList);
     }
 }

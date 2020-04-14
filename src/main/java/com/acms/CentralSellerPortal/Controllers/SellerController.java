@@ -37,6 +37,7 @@ public class SellerController {
         seller.setSellerPassword(password);
 
         sellerRepository.save(seller);
+        System.out.println("Successfully SignedUp,Please LOGIN!");
         return new RedirectView("/");
     }
 
@@ -47,8 +48,7 @@ public class SellerController {
     }
 
     @RequestMapping(value="/viewSeller/{id}" , method=RequestMethod.GET)
-
-    public ResponseEntity<Seller>    getSellerById(@PathVariable(value = "id") Long seller_id)
+    public ResponseEntity<Seller>   getSellerById(@PathVariable(value = "id") Long seller_id)
     {
         Seller seller =sellerRepository.findById(seller_id).orElse(null);
         return ResponseEntity.ok().body(seller);
