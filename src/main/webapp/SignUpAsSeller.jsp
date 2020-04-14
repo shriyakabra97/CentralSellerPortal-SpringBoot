@@ -90,7 +90,7 @@ and open the template in the editor.
                             <input class="form-control" id="s_password" name="s_password" type="password" minlength="4" required>
                         </div> <!-- form-group end.// -->
                         <div class="form-group">
-                            <label>Re-type password</label>
+                            <label>Confirm password</label>
                             <input class="form-control" oninput="check()" id="s_pass" name="s_pass" type="password" minlength="4" required>
                         </div>
                     <p id ="pass-match" style="color:crimson"></p>
