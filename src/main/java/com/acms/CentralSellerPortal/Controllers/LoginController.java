@@ -2,9 +2,9 @@
 package com.acms.CentralSellerPortal.Controllers;
 
 
-import com.acms.CentralSellerPortal.Entities.Ecommerce;
+//import com.acms.CentralSellerPortal.Entities.Ecommerce;
 import com.acms.CentralSellerPortal.Entities.Seller;
-import com.acms.CentralSellerPortal.Repositories.EcommerceRepository;
+//import com.acms.CentralSellerPortal.Repositories.EcommerceRepository;
 import com.acms.CentralSellerPortal.Repositories.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +25,8 @@ public class LoginController {
 
         @Autowired
         SellerRepository sellerRepository;
-        @Autowired
-        EcommerceRepository ecommerceRepository;
+        //@Autowired
+        //EcommerceRepository ecommerceRepository;
 
 
 
@@ -63,7 +63,7 @@ public class LoginController {
     return rvf;
   }
 
-    @RequestMapping(value="/verifyecommerce" , method=RequestMethod.GET)
+ /*   @RequestMapping(value="/verifyecommerce" , method=RequestMethod.GET)
       public RedirectView createecomm(@RequestParam("c_email") String c_email,
                                  @RequestParam("c_password") String c_password , RedirectAttributes redirectAttrs){
             List<Ecommerce> ecomm = new ArrayList<Ecommerce>();
@@ -84,7 +84,7 @@ public class LoginController {
 	String furl="/FailedLogin.jsp";
 	rvf.setUrl(furl);
     return rvf;
-  }
+  }*/
 
 
 }
