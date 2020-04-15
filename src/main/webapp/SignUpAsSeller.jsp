@@ -17,18 +17,14 @@ and open the template in the editor.
     <link rel="stylesheet" href="../../css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="../../css/main.css">
     <script src="../../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <!--          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                          </button>-->
-                <a class="navbar-brand" href="#" style="color:gray ; font-size: 18px">Central Seller Portal</a>
+                   <a class="navbar-brand" href="#" style="color:gray ; font-size: 18px">Central Seller Portal</a>
             </div>
         </div>
     </nav>
@@ -72,17 +68,6 @@ and open the template in the editor.
                             <input type="text" id="s_shop" name="s_shop" class="form-control" placeholder="" required>
 
                         </div>
-                    <script>
-                        function check() {
-                            var pass1= document.getElementById("s_password");
-                            var pass2= document.getElementById("s_pass");
-                            if(pass1 !== pass2){
-                                document.getElementById("pass-match").innerHTML = "Passwords don't match" ;
-                            }
-
-                        }
-
-                    </script>
 
 
                         <div class="form-group">
@@ -91,63 +76,35 @@ and open the template in the editor.
                         </div> <!-- form-group end.// -->
                         <div class="form-group">
                             <label>Confirm password</label>
-                            <input class="form-control" oninput="check()" id="s_pass" name="s_pass" type="password" minlength="4" required>
+                            <input class="form-control" onclick="validate()" id="s_pass" name="s_pass" type="password" minlength="4" required>
                         </div>
-                    <p id ="pass-match" style="color:crimson"></p>
-<%--                    <script>--%>
-<%--                        function check() {--%>
-<%--                            var pass1= document.getElementById("s_password");--%>
-<%--                            var pass2= document.getElementById("s_pass");--%>
-<%--                            if(pass1 != pass2){--%>
-<%--                                var text = "Passwords don't match";--%>
-<%--                                document.getElementById("pass-match").innerHTML = text ;--%>
-<%--                            }--%>
+                    <p id ="pass-match" style="color:crimson ; font-family: Arial" ></p>
 
-<%--                        }--%>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        $('#s_password, #s_pass').on('keyup', function () {
+                        if ($('#s_password').val() == $('#s_pass').val()) {
+                        $('#pass-match').html('Passwords match :D').css('color', 'green');
+                        } else
+                        $('#pass-match').html('Passwords dont match').css('color', 'red');
 
-<%--                    </script>--%>
+                        });
+                    </script>
 
 
-<%--                    <c:choose>--%>
-<%--                        <c:when test= "${s_password.equals(s_pass)}">--%>
-<%--                            <p></p>--%>
-<%--                        </c:when>--%>
-<%--                    <c:otherwise>--%>
-<%--                        <p style="color: #c7254e">Passwords don't match..</p>--%>
-<%--                    </c:otherwise>--%>
-<%--                    </c:choose>--%>
-                    <%--%>
-<%--                        if(request.getParameter("s_password")!=null && request.getParameter("s_pass")!=null){--%>
-<%--                            String pass_f1 = request.getParameter("s_password");--%>
-<%--                            String pass_f2 = request.getParameter("s_pass");--%>
-<%--                            if(pass_f1.equals(pass_f2)){--%>
-<%--                                String msg = "Passwords match";--%>
 
-<%--                     %>--%>
-<%--                    --%>
 
-<%--                    <%--%>
 
-<%--                            }else{--%>
-<%--                                String msg = "Passwords don't match.";--%>
-<%--                            }--%>
-<%--                        }--%>
-<%--                    %>--%>
                         <div class="form-group">
                             <button id="sub-btn" type="submit" class="btn btn-primary btn-block"> Register  </button>
-                        </div> <!-- form-group// -->
+                        </div>
                         <small class="text-muted">By clicking the 'Register' button, you confirm that you accept our <br> Terms of use and Privacy Policy.</small>
                     </form>
-                </article> <!-- card-body end .// -->
-                <!--<div class="border-top card-body text-center">Have an account? <a href="">Log In</a></div>-->
-            </div> <!-- card.// -->
-        </div> <!-- col.//-->
+                </article>
+            </div>
+        </div>
 
-    </div> <!-- row.//-->
-
-
-
-<!--container end.//-->
+    </div>
 
 <br><br>
 

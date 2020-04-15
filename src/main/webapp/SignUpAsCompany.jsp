@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -16,6 +18,8 @@ and open the template in the editor.
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -41,14 +45,20 @@ and open the template in the editor.
                             <div class="form-row">
                                 <div class="col form-group">
                                     <label>Company Name </label>   
-                                    <input type="text" class="form-control" placeholder="">
+                                    <input type="text"  id="cName" name="cName" class="form-control" placeholder="">
                                 </div> <!-- form-group end.// -->
                                 <!-- form-group end.// -->
                             </div> <!-- form-row end.// -->
 
                             <div class="form-group">
+                                <label>Email address</label>
+                                <input type="email" id="cEmailId" name="cEmailId" class="form-control" placeholder="" required>
+                                <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+
+                            <div class="form-group">
                                 <label>Mobile No.</label>
-                                <input type="number" class="form-control" placeholder="">
+                                <input type="number" id="cContactNo" name="cContactNo" class="form-control" placeholder="">
 
                             </div>
                             <!-- form-group end.// -->
@@ -57,14 +67,28 @@ and open the template in the editor.
 
                             <div class="form-group">
                                 <label>Create password</label>
-                                <input class="form-control" type="password">
+                                <input class="form-control" name="cPassword"  id="cPassword" type="password">
                             </div> <!-- form-group end.// -->
                             <div class="form-group">
-                                <label>Re-type password</label>
-                                <input class="form-control" type="password">
+                                <label>Confirm password</label>
+                                <input class="form-control" name="cPass" id="cPass" type="password">
                             </div>
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                            <p id ="c-pass-match" style="color:crimson ; font-family: Arial" ></p>
+
+                            <script>
+                                $('#cPassword, #cPass').on('keyup', function () {
+                                    if ($('#cPassword').val() == $('#cPass').val()) {
+                                        $('#c-pass-match').html('Passwords match :D').css('color', 'green');
+                                    } else
+                                        $('#c-pass-match').html('Passwords dont match').css('color', 'red');
+
+                                });
+                            </script>
+
+
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block"> Register  </button>
+                                <button type="submit" id="c-sub-btn" name="c-sub-btn" class="btn btn-primary btn-block"> Register  </button>
                             </div> <!-- form-group// -->      
                             <small class="text-muted">By clicking the 'Register' button, you confirm that you accept our <br> Terms of use and Privacy Policy.</small>
                         </form>
