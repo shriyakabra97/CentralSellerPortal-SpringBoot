@@ -7,9 +7,9 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/main.css">
-    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <link rel="stylesheet" href="../../css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <script src="../../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     <title>Update Seller Profile</title>
 </head>
 <body>
@@ -35,34 +35,34 @@
                     <div class="form-row">
                         <div class="col form-group">
                             <label>Name </label>
-                            <input type="text" id="s_name" name="s_name" class="form-control" placeholder="">
+                            <input type="text" id="s_name" name="s_name" class="form-control" value=${sellerName} placeholder=${sellerName}>
                         </div> <!-- form-group end.// -->
                         <!-- form-group end.// -->
                     </div> <!-- form-row end.// -->
                     <div class="form-group">
                         <label>Address</label>
-                        <input type="text" id="s_address" name="s_address"  class="form-control" placeholder="">
+                        <input type="text" id="s_address" name="s_address"  class="form-control" value=${sellerAddress} placeholder=${sellerAddress}>
 
                     </div>
                     <div class="form-group">
                         <label>Mobile No.</label>
-                        <input type="number" id="s_mobile" name="s_mobile"  class="form-control" placeholder="">
+                        <input type="number" id="s_mobile" name="s_mobile"  class="form-control" value=${sellerContact} placeholder=${sellerContact}>
 
                     </div>
                     <div class="form-group">
                         <label>Email address</label>
-                        <input type="email" id="s_mail" name="s_mail" class="form-control" placeholder="">
+                        <input type="email" id="s_mail" name="s_mail" class="form-control"  value= ${sellerEmail} placeholder=${sellerEmail}>
                     </div> <!-- form-group end.// -->
                     <div class="form-group">
                         <label>Store Name</label>
-                        <input type="text" id="s_shop" name="s_shop"  class="form-control" placeholder="">
+                        <input type="text" id="s_shop" name="s_shop"  class="form-control" value=${sellerShopName} placeholder=${sellerShopName}>
 
                     </div>
 
 
                     <div class="form-group">
                         <label>Password</label>
-                        <input class="form-control" id="s_password" name="s_password"  type="password">
+                        <input class="form-control" id="s_password" name="s_password"  value=${seller_pass} placeholder=${seller_pass} type="password" >
                     </div> <!-- form-group end.// -->
 
                     <br>

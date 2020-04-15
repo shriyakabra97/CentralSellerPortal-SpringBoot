@@ -11,30 +11,30 @@ import java.io.Serializable;
 @Table (name="product")
 public class Product implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long productId;
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private long productId;
 
-    @Column
-    @NotNull
-    private String productName;
+        @Column
+        @NotNull
+        private String productName;
 
-    @Column
-    @NotNull
-    private String productDescription;
+        @Column
+        @NotNull
+        private String productDescription;
 
-    @Column
-    @NotNull
-    private int price;
+        @Column
+        @NotNull
+        private int price;
 
-    @Column
-    @NotNull
-    private int discount;
+        @Column
+        @NotNull
+        private int discount;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "seller_id") //nullable = false)
-    private Seller seller;
+        @JsonIgnore
+        @ManyToOne(fetch = FetchType.LAZY, optional = false)
+        @JoinColumn(name = "seller_id") //nullable = false)
+        private Seller seller;
 
     public Product() {
     }
