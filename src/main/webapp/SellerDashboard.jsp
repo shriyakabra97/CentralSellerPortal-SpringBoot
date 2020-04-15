@@ -68,7 +68,7 @@
         <td>Address:   ${sellerAddress}     </td>
         <br>
         <br>
-        <a class="btn btn-primary" href="/UpdateSellerProfile.jsp?id=<%=id%>"  action="UpdateSellerprofile.jsp" role="button">Update Profile</a>
+        <a class="btn btn-primary" href="/UpdateSellerProfile.jsp?id=<%=id%>"  action="UpdateSellerProfile.jsp" role="button">Update Profile</a>
         <a class="btn btn-primary" href="/index.html" role="button">Logout</a>
     </div>
 </div>

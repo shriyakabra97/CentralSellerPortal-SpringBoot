@@ -46,23 +46,23 @@
                     </div>
                     <div class="form-group">
                         <label>Mobile No.</label>
-                        <input type="number" id="s_mobile" name="s_mobile"  class="form-control" value=${sellerContact} placeholder=${sellerContact}>
+                        <input type="number" id="s_mobile" name="s_mobile"  class="form-control" value=${sellerContactNo} placeholder=${sellerContactNo}>
 
                     </div>
                     <div class="form-group">
                         <label>Email address</label>
-                        <input type="email" id="s_mail" name="s_mail" class="form-control"  value= ${sellerEmail} placeholder=${sellerEmail}>
+                        <input type="email" id="s_mail" name="s_mail" class="form-control"  value= ${sellerEmailId} placeholder=${sellerEmailId}>
                     </div> <!-- form-group end.// -->
                     <div class="form-group">
                         <label>Store Name</label>
-                        <input type="text" id="s_shop" name="s_shop"  class="form-control" value=${sellerShopName} placeholder=${sellerShopName}>
+                        <input type="text" id="s_shop" name="s_shop"  class="form-control" value=${shopName} placeholder=${shopName}>
 
                     </div>
 
 
                     <div class="form-group">
                         <label>Password</label>
-                        <input class="form-control" id="s_password" name="s_password"  value=${seller_pass} placeholder=${seller_pass} type="password" >
+                        <input class="form-control" id="s_password" name="s_password"  value=${sellerPassword} placeholder=${sellerPassword} type="password" >
                     </div> <!-- form-group end.// -->
 
                     <br>
