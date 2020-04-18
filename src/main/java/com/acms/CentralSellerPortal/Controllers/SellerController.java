@@ -9,6 +9,7 @@ and storing data in session object
 package com.acms.CentralSellerPortal.Controllers;
 import com.acms.CentralSellerPortal.Entities.Seller;
 import com.acms.CentralSellerPortal.Repositories.SellerRepository;
+import com.acms.CentralSellerPortal.Services.EmailService;
 import com.acms.CentralSellerPortal.Services.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,8 @@ public class SellerController {
     @Autowired
     SellerRepository sellerRepository;
 
+    @Autowired
+    private EmailService emailService;
 
     //post method
     //redirected view to dashboard in success
@@ -89,6 +92,7 @@ public class SellerController {
         seller1.setSellerContactNo(seller_contactNo);
         seller1.setSellerPassword(password);
         sellerService.save(seller1);
+        emailService.sendMail("anmoltuteja98265@gmail.com", "A new seller has registered", seller_name+" has signed up");
 
         //redirecting
         RedirectView redirectView = new RedirectView();
