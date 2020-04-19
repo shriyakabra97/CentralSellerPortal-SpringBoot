@@ -53,9 +53,12 @@ public class ProductController {
 
     }
 
-    @GetMapping(value = "/update")
-    public String updateProduct(@RequestParam Long  product_id, @RequestParam String n , @RequestParam String d,
-                                @RequestParam int p, @RequestParam int disc)
+    @RequestMapping(value = "/update/{p_id}/{id}" , method = RequestMethod.POST)
+    public RedirectView updateProduct(@PathVariable(value = "p_id") Long product_id,@PathVariable(value = "id") Long seller_id,
+                                @RequestParam("ep_name") String n ,
+                                @RequestParam("ep_description") String d,
+                                @RequestParam("ep_price") int p,
+                                @RequestParam("ep_discount") int disc)
     {
         Optional<Product> optionalProduct = productRepository.findById(product_id);
         if(optionalProduct.isPresent()) {
@@ -66,10 +69,21 @@ public class ProductController {
             product.setDiscount(disc);
 
             productRepository.save(product);
-            return "updated";
+//            return "updated";
+            RedirectView rv = new RedirectView();
+            String rurl="/SellerDashboard.jsp?id="+seller_id;
+            System.out.println(rurl);
+            rv.setUrl(rurl);
+            return rv;
         }
-        else
-            return "error updating";
+        else {
+//          return "error updating";
+            RedirectView rv = new RedirectView();
+            String rurl = "/SellerDashboard.jsp?id="+seller_id;
+            System.out.println(rurl);
+            rv.setUrl(rurl);
+            return rv;
+        }
     }
 
     @GetMapping(value = "/displayAll")

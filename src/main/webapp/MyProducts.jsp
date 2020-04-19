@@ -26,15 +26,6 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-    <script>
-        $(document).ready(function(){
-            $("#view-form-viewprofile").click(function(){
-                $("#profile").show();
-            });
-        });
-    </script>
-
-
 </head>
 <body>
 <% long id = Long.parseLong(request.getParameter("id")); %>
@@ -135,8 +126,8 @@
                             <td>${e.productDescription}</td>
                             <td>${e.price}</td>
                             <td>${e.discount}</td>
-                            <td><a data-placement="top" data-toggle="tooltip" href="EditListedProduct.jsp" title="Edit" ><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"  href="EditListedProduct.jsp" data-target="#edit" ><i class="fas fa-pencil-square-o"></i></button></a></td>
-                            <td><p data-placement="top" data-toggle="tooltip" href="#" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fas fa-trash"></i></button></p></td>
+                            <td><a data-placement="top" data-toggle="tooltip" href="/EditListedProduct.jsp?p_id=${e.productId}&id=<%=id%>&p_name=${e.productName}&p_desc=${e.productDescription}&p_price=${e.price}&p_disc=${e.discount}"   action="EditListedProduct.jsp"role="button" title="Edit" ><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"  href="EditListedProduct.jsp" data-target="#edit" ><i class="fas fa-pencil-square-o"></i></button></a></td>
+                            <td><a data-placement="top" data-toggle="tooltip" href="/DeleteListedProduct.jsp?p_id=${e.productId}&id=<%=id%>"  action="DeleteListedProduct.jsp" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fas fa-trash"></i></button></a></td>
                         </tr>
                     </c:forEach>
                     </tbody>

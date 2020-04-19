@@ -6,13 +6,12 @@
 <%@ page import="com.acms.CentralSellerPortal.Controllers.SellerController" %>
 <%@ page import="com.acms.CentralSellerPortal.Controllers.ProductController" %>
 <%@ page import="org.springframework.web.bind.annotation.RequestMapping" %>
-<%@ page import="java.util.List" %>
 <%--<%@ page import="org.springframework.web.bind.annotation.RequestBody" %>--%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Seller Dashboard</title>
+    <title>Delete Product</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -22,7 +21,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
     <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="../css/main.css">
-
+    <link rel="stylesheet" href="../css/InlineBtn.css">
     <%--    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">--%>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -32,10 +31,6 @@
 <body>
 <% long id = Long.parseLong(request.getParameter("id")); %>
 <% long p_id = Long.parseLong(request.getParameter("p_id")); %>
-<% String p_name = request.getParameter("p_name"); %>
-<% String p_desc = request.getParameter("p_desc"); %>
-<% long p_disc= Long.parseLong(request.getParameter("p_disc")); %>
-<% long p_price = Long.parseLong(request.getParameter("p_price")); %>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="font-size: medium; background-color: #2A2A2A ; font-family: Ubuntu">
     <div class="container">
         <div class="navbar-header">
@@ -107,61 +102,61 @@
     </div>
 </nav>
 <br>
+<div class="jumbotron">
+    <div class="container" style="font-family: Ubuntu; font-size: large">
+        <h1> Welcome, ${sellerName}.</h1>
+        <h3 style="color: #c7254e"> Delete Product </h3>
+        <h4 style="font-size:20px;color:#5C5C5C;">Are you sure? </h4>
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <header class="card-header">
+        <div class="ui-group-buttons">
 
-                <h4 class="card-title mt-2">Edit Product Details</h4>
-            </header>
-            <article class="card-body">
-
-                <form class ="form-editProduct" id="editProduct-form" action = "/products/update/<%=p_id%>/<%=id%>" method="post">
-                    <form :hidden path="p_id"/>
-                    <div class="form-row">
-                        <div class="col form-group">
-                            <label>Name </label>
-                            <input type="text" id="ep_name" name="ep_name" class="form-control"  value="<%=p_name%>">
-                        </div> <!-- form-group end.// -->
-                        <!-- form-group end.// -->
-                    </div> <!-- form-row end.// -->
+            <form class ="form-deleteProducts" id="deleteProducts-form"  action = "/products/delete/<%=p_id%>" method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
                     <div class="form-group">
-                        <label>Description</label>
-                        <input type="text" id="ep_description" name="ep_description" class="form-control" value="<%=p_desc%>">
-
-                    </div>
-
-                    <!-- form-group end.// -->
-                    <div class="form-group">
-                        <label>Price</label>
-                        <input id="ep_price" name="ep_price" type="text" class="form-control" value="<%=p_price%>">
-
-                    </div>
-
-
-                    <div class="form-group">
-                        <label>Discount</label>
-                        <input class="form-control"  id="ep_discount" name="ep_discount" type="number" value="<%=p_disc%>">
-                    </div> <!-- form-group end.// -->
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block"> Save Changes</button>
+                        <button  type="submit"  class="btn btn-primary btn-lg"> Delete</button>
+                        <div class="or or-lg"></div>
+                        <a  type="button" href="SellerDashboard.jsp?id=<%=id%>" class="btn btn-success btn-lg"> Cancel</a>
                     </div> <!-- form-group// -->
-
-                </form>
-            </article> <!-- card-body end .// -->
-            <!--<div class="border-top card-body text-center">Have an account? <a href="">Log In</a></div>-->
-        </div> <!-- card.// -->
-    </div> <!-- col.//-->
-
-</div> <!-- row.//-->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
 
 
 
-<!--container end.//-->
 
+<%--            <form class ="form-deleteProducts" id="cancelProducts-form" method="get">--%>
+<%--                <form :hidden path="id"/>--%>
+<%--                <div class="form-row">--%>
+<%--                    <div class="form-group">--%>
+<%--                        <button  type="submit"  class="btn btn-primary btn-lg"> Cancel</button>--%>
+<%--                    </div> <!-- form-group// -->--%>
+<%--                    <!-- form-group end.// -->--%>
+<%--                </div>--%>
+<%--            </form>--%>
 
+        </div>
+<%--        <form class ="form-deleteProducts" id="deleteProducts-form"  action = "/products/delete/<%=p_id%>" method="get">--%>
+<%--            <form :hidden path="id"/>--%>
+<%--            <div class="form-row">--%>
+<%--                <div class="form-group">--%>
+<%--                    <button  style="margin-left: 0px" type="submit"  class="btn btn-primary btn-block"> Delete</button>--%>
+<%--                </div> <!-- form-group// -->--%>
+<%--                <!-- form-group end.// -->--%>
+<%--            </div>--%>
+<%--        </form>--%>
+<%--        <form class ="form-deleteProducts" id="cancelProducts-form"  method="get">--%>
+<%--            <form :hidden path="id"/>--%>
+<%--            <div class="form-row">--%>
+<%--                <div class="form-group">--%>
+<%--                    <button  style="margin-left: 0px" type="submit"  class="btn btn-primary btn-block">Cancel</button>--%>
+<%--                </div> <!-- form-group// -->--%>
+<%--                <!-- form-group end.// -->--%>
+<%--            </div>--%>
+<%--        </form>--%>
+
+    </div>
+</div>
 
 
 
