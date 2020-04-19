@@ -41,6 +41,7 @@ public class SellerController {
         seller.setSellerEmailId(seller_emailId);
         seller.setSellerContactNo(seller_contactNo);
         seller.setSellerPassword(password);
+        System.out.println("i got here...");
 
         sellerRepository.save(seller);
         //model.addAttribute("name", seller_name);
@@ -86,7 +87,7 @@ public class SellerController {
 
 
         RedirectView rv = new RedirectView();
-        String rurl="/SellerDashboard.jsp?id="+Long.toString(seller.getSellerId());
+        String rurl="/ViewYourProfile.jsp?id="+Long.toString(seller.getSellerId());
         System.out.println(rurl);
         rv.setUrl(rurl);
         return rv;

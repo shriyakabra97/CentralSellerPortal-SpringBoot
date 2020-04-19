@@ -13,10 +13,74 @@
     <title>Update Seller Profile</title>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<% long id = Long.parseLong(request.getParameter("id")); %>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="font-size: medium; background-color: #2A2A2A ; font-family: Ubuntu">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#" style="color:gray ; font-size: 18px">Central Seller Portal</a>
+            <form class ="form-view" id="view-form-head"   method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <a  type="submit"  href="/SellerDashboard.jsp?id=<%=id%>" style="color: whitesmoke" class="btn"> Central Seller Portal</a>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form-viewprofile"  action = "/viewSeller/<%=id%>" method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <button id = "view-profile" type="submit"   style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Your Profile</button>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form-updateseller"  method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <a class="btn" href="/UpdateSellerProfile.jsp?id=<%=id%>" style="color: whitesmoke; background-color: #2A2A2A" action="UpdateSellerProfile.jsp" role="button">Update Profile</a>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form-addproduct"   method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <a  id = "view-profile-addproduct" type="submit" href="/AddProduct.jsp?id=<%=id%>"  action="AddProduct.jsp"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> Add Product</a>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form-viewproduct"  action = "/products/displayBySellerId/<%=id%>" method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <button  id = "view-profile-viewproduct" type="submit"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Products</button>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form" method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <button class="btn" href="/index.html" style="color: whitesmoke; background-color: #2A2A2A" role="button">Logout</button>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
         </div>
     </div>
 </nav>
@@ -29,7 +93,7 @@
                 <h4 class="card-title mt-2">Update Seller Profile</h4>
             </header>
             <article class="card-body">
-                <% long id = Long.parseLong(request.getParameter("id")); %>
+
                 <form class ="form-update" id="updation-form" action = "/UpdateSeller/<%=id%>" method="post">
                     <form :hidden path="id"/>
                     <div class="form-row">

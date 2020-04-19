@@ -112,7 +112,7 @@ public class ProductController {
         //System.out.println(session.getAttribute("string00"));
         RedirectView rv = new RedirectView();
         System.out.println(session.getAttributeNames());
-        String rurl="/SellerDashboard.jsp?id="+Long.toString(seller_id);
+        String rurl="/MyProducts.jsp?id="+Long.toString(seller_id);
         System.out.println(rurl);
         rv.setUrl(rurl);
         return rv;
