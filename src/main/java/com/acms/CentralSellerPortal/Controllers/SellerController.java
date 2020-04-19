@@ -47,7 +47,7 @@ public class SellerController {
         //model.addAttribute("name", seller_name);
         RedirectView redirectView = new RedirectView();
         redirectView.setContextRelative(true);
-        redirectView.setUrl("/RedirectToIndexAfterAddingSeller.html");
+        redirectView.setUrl("/AddSellerSuccessful.jsp");
         return redirectView;
 
 
