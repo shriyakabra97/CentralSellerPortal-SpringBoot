@@ -1,3 +1,4 @@
+<%@ page import="com.acms.CentralSellerPortal.Controllers.SpringSessionController" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,11 +73,11 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form" method="get">
+            <form class ="form-view" id="view-form" action="/destroy" method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
-                        <button class="btn" href="/index.html" style="color: whitesmoke; background-color: #2A2A2A" role="button">Logout</button>
+                        <button class="btn" href="/index.html" type="submit" style="color: whitesmoke; background-color: #2A2A2A" role="button">Logout</button>
                     </div> <!-- form-group// -->
                     <!-- form-group end.// -->
                 </div>

@@ -1,4 +1,4 @@
-
+<%@ page import="com.acms.CentralSellerPortal.Controllers.SpringSessionController" %>
 <%@ page import="com.acms.CentralSellerPortal.Entities.Seller" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.acms.CentralSellerPortal.Entities.Product" %>
@@ -97,11 +97,11 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form" method="get">
+            <form class ="form-view" id="view-form" action="/destroy" method="post">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
-                        <button class="btn" href="/index.html" style="color: whitesmoke; background-color: #2A2A2A" role="button">Logout</button>
+                        <button class="btn" type="submit" style="color: whitesmoke; background-color: #2A2A2A" role="button">Logout</button>
                     </div> <!-- form-group// -->
                     <!-- form-group end.// -->
                 </div>
@@ -118,62 +118,6 @@
         <p >Start Selling...</p>
     </div>
 </div>
-
-<div class="jumbotron" id="profile" style="font-size: large; font-family: Ubuntu ;display:none" >
-    <div class="container">
-        <div id="seller-profile">
-        <td>Welcome,    ${sellerName}         </td>
-        <br>
-<%--        <td>ID: <%=id%>                             </td>--%>
-<%--        <br>--%>
-        <td>Contact No:   ${sellerContactNo}</td>
-        <br>
-        <td>E-mail:   ${sellerEmailId}      </td>
-        <br>
-        <td>Store Name:    ${shopName}       </td>
-        <br>
-        <td>Address:   ${sellerAddress}     </td>
-        <br>
-        <br>
-        </div>
-    </div>
-</div>
-
-<div id="product-table" class="container" hidden>
-    <div class="row">
-        <div class="col-md-12">
-            <h4> ${sellerName}, Here are your Listed Products</h4>
-            <div class="table-responsive">
-                <table id="mytable" class="table table-bordred table-striped">
-                    <thead>
-                    <th>ProductID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Price(Rs.)</th>
-                    <th>Discount(%)</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                    </thead>
-                    <tbody>
-                     <c:forEach var="e" items="${productList}">
-                    <tr>
-                        <td>${e.productId}</td>
-                        <td>${e.productName}</td>
-                        <td>${e.productDescription}</td>
-                        <td>${e.price}</td>
-                        <td>${e.discount}</td>
-                        <td><a data-placement="top" data-toggle="tooltip" href="EditListedProduct.jsp" title="Edit" ><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"  href="EditListedProduct.jsp" data-target="#edit" ><i class="fas fa-pencil-square-o"></i></button></a></td>
-                        <td><p data-placement="top" data-toggle="tooltip" href="#" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fas fa-trash"></i></button></p></td>
-                    </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <br>
 
