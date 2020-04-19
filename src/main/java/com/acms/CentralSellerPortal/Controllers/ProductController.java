@@ -100,6 +100,18 @@ public class ProductController {
         Product product =productRepository.findById(product_id).orElse(null);
         return ResponseEntity.ok().body(product);
     }
+    @RequestMapping(value = "/delete/{p_id}/{id}")
+    public RedirectView deleteProduct(@PathVariable(value = "p_id") Long product_id,
+                                      @PathVariable(value = "id") Long seller_id
+                                      ){
+        productRepository.deleteById(product_id);
+
+        RedirectView redirectView = new RedirectView();
+        redirectView.setContextRelative(true);
+        String rurl = "/SellerDashboard.jsp?id="+seller_id;
+        redirectView.setUrl(rurl);
+        return redirectView;
+    }
 
     @RequestMapping(value = "/displayBySellerId/{id}", method = RequestMethod.GET)
     public RedirectView getProductBySellerId(@PathVariable(value = "id") long seller_id, HttpSession session)

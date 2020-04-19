@@ -110,7 +110,7 @@
 
         <div class="ui-group-buttons">
 
-            <form class ="form-deleteProducts" id="deleteProducts-form"  action = "/products/delete/<%=p_id%>" method="get">
+            <form class ="form-deleteProducts" id="deleteProducts-form"  action = "/products/delete/<%=p_id%>/<%=id%>" method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
