@@ -56,11 +56,22 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form-updateseller"  method="get">
+            <form class ="form-view" id="view-form-update-ecomm"  method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
                         <a class="btn" href="/UpdateEcommProfile.jsp?e_id=<%=e_id%>" style="color: whitesmoke; background-color: #2A2A2A" action="UpdateEcommProfile.jsp" role="button">Update Profile</a>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form-view-sellers" action="/products/displayAll/<%=e_id%>" method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <button id = "view-sellers" type="submit"   style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View All Products</button>
                     </div> <!-- form-group// -->
                     <!-- form-group end.// -->
                 </div>

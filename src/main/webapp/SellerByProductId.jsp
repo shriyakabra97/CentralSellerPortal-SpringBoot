@@ -30,6 +30,7 @@
 </head>
 <body>
 <% long e_id = Long.parseLong(request.getParameter("e_id")); %>
+<% String p_name = request.getParameter("p_name"); %>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="font-size: medium; background-color: #2A2A2A ; font-family: Ubuntu">
     <div class="container">
@@ -78,17 +79,17 @@
             </form>
         </div>
 
-<%--        <div class="navbar-header">--%>
-<%--            <form class ="form-view" id="view-form-viewproduct"  action = "/products/displayBySellerId/<%=id%>" method="get">--%>
-<%--                <form :hidden path="id"/>--%>
-<%--                <div class="form-row">--%>
-<%--                    <div class="form-group">--%>
-<%--                        <button  id = "view-profile-viewproduct" type="submit"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Products</button>--%>
-<%--                    </div> <!-- form-group// -->--%>
-<%--                    <!-- form-group end.// -->--%>
-<%--                </div>--%>
-<%--            </form>--%>
-<%--        </div>--%>
+        <%--        <div class="navbar-header">--%>
+        <%--            <form class ="form-view" id="view-form-viewproduct"  action = "/products/displayBySellerId/<%=id%>" method="get">--%>
+        <%--                <form :hidden path="id"/>--%>
+        <%--                <div class="form-row">--%>
+        <%--                    <div class="form-group">--%>
+        <%--                        <button  id = "view-profile-viewproduct" type="submit"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Products</button>--%>
+        <%--                    </div> <!-- form-group// -->--%>
+        <%--                    <!-- form-group end.// -->--%>
+        <%--                </div>--%>
+        <%--            </form>--%>
+        <%--        </div>--%>
         <div class="navbar-header">
             <form class ="form-view" id="view-form" action="/destroy" method="post">
                 <form :hidden path="id"/>
@@ -105,10 +106,14 @@
 <br>
 <div class="jumbotron">
     <div class="container" style="font-family: Ubuntu; font-size: large">
-        <h1> Welcome, ${ecommName}.</h1>
-        <h1> Here is your Business Platform!</h1>
-        <p>We provide platform for crores of Businesses to interact and grow. No Listing fees, easy steps and professional support that helps you grow your business.</p>
-        <p >Start Exploring sellers from around the world..</p>
+        <h2>
+            Seller Info selling <%=p_name%>
+        </h2><br>
+        <p><b>Seller Name: </b>${sellerName}</p>
+        <p><b>Seller Address: </b>${sellerAddress}</p>
+        <p><b>Seller Contact No: </b>${sellerContactNo}</p>
+        <p><b>Seller Shop Name: </b>${shopName}</p><br>
+
     </div>
 </div>
 

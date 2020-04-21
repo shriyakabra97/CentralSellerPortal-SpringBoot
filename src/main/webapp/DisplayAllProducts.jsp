@@ -11,7 +11,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ecommerce Dashboard</title>
+    <title>All Sellers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -78,17 +78,17 @@
             </form>
         </div>
 
-<%--        <div class="navbar-header">--%>
-<%--            <form class ="form-view" id="view-form-viewproduct"  action = "/products/displayBySellerId/<%=id%>" method="get">--%>
-<%--                <form :hidden path="id"/>--%>
-<%--                <div class="form-row">--%>
-<%--                    <div class="form-group">--%>
-<%--                        <button  id = "view-profile-viewproduct" type="submit"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Products</button>--%>
-<%--                    </div> <!-- form-group// -->--%>
-<%--                    <!-- form-group end.// -->--%>
-<%--                </div>--%>
-<%--            </form>--%>
-<%--        </div>--%>
+        <%--        <div class="navbar-header">--%>
+        <%--            <form class ="form-view" id="view-form-viewproduct"  action = "/products/displayBySellerId/<%=id%>" method="get">--%>
+        <%--                <form :hidden path="id"/>--%>
+        <%--                <div class="form-row">--%>
+        <%--                    <div class="form-group">--%>
+        <%--                        <button  id = "view-profile-viewproduct" type="submit"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Products</button>--%>
+        <%--                    </div> <!-- form-group// -->--%>
+        <%--                    <!-- form-group end.// -->--%>
+        <%--                </div>--%>
+        <%--            </form>--%>
+        <%--        </div>--%>
         <div class="navbar-header">
             <form class ="form-view" id="view-form" action="/destroy" method="post">
                 <form :hidden path="id"/>
@@ -103,12 +103,51 @@
     </div>
 </nav>
 <br>
-<div class="jumbotron">
-    <div class="container" style="font-family: Ubuntu; font-size: large">
-        <h1> Welcome, ${ecommName}.</h1>
-        <h1> Here is your Business Platform!</h1>
-        <p>We provide platform for crores of Businesses to interact and grow. No Listing fees, easy steps and professional support that helps you grow your business.</p>
-        <p >Start Exploring sellers from around the world..</p>
+<div id="product-table" class="container" >
+    <div class="row">
+        <div class="col-md-12">
+            <h4> ${ecommName}, Here are All Products</h4>
+            <div class="table-responsive">
+                <table id="mytable" class="table table-bordred table-striped">
+                    <thead>
+                    <th>ProductID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price(Rs.)</th>
+                    <th>Discount(%)</th>
+                    <th>View Seller Info</th>
+<%--                    <th>Delete</th>--%>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="e" items="${allProductList}">
+                        <tr>
+                            <td>${e.productId}</td>
+                            <td>${e.productName}</td>
+                            <td>${e.productDescription}</td>
+                            <td>${e.price}</td>
+                            <td>${e.discount}</td>
+                            <td>
+                                <div class="navbar-header">
+                                    <form class ="form-view" id="view-seller"  action = "/viewSellerByProductId/${e.productId}/<%=e_id%>" method="get">
+                                        <form :hidden path="id"/>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <button id = "view-this-seller" type="submit"   style="color: whitesmoke; background-color: #2A2A2A" class="btn">View</button>
+                                            </div> <!-- form-group// -->
+                                            <!-- form-group end.// -->
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </td>
+<%--                            <td><a data-placement="top" data-toggle="tooltip" href="/DeleteListedProduct.jsp?p_id=${e.productId}&id=<%=id%>"  action="DeleteListedProduct.jsp" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fas fa-trash"></i></button></a></td>--%>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+                <div class="clearfix"></div>
+            </div>
+        </div>
     </div>
 </div>
 

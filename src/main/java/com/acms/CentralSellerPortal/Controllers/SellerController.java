@@ -1,5 +1,7 @@
 package com.acms.CentralSellerPortal.Controllers;
+import com.acms.CentralSellerPortal.Entities.Product;
 import com.acms.CentralSellerPortal.Entities.Seller;
+import com.acms.CentralSellerPortal.Repositories.ProductRepository;
 import com.acms.CentralSellerPortal.Repositories.SellerRepository;
 import com.acms.CentralSellerPortal.Services.SellerService;
 
@@ -25,6 +27,9 @@ public class SellerController {
 
     @Autowired
     SellerRepository sellerRepository;
+
+    @Autowired
+    ProductRepository productRepository;
 
 
     @RequestMapping(value="/addseller"   , method=RequestMethod.POST)
@@ -60,9 +65,20 @@ public class SellerController {
          //return "Updated Database";
     }
 
-    @GetMapping("/sellers")
-    public List<Seller> getAllSellers() {
-        return sellerRepository.findAll();
+    @GetMapping("/sellers/{e_id}")
+    public RedirectView getAllSellers(
+            @RequestParam("e_id") Long ecommId,
+            HttpSession session)
+    {
+        List<Seller> sellerList = sellerRepository.findAll();
+        session.setAttribute("sellerList", sellerList);
+        //return ResponseEntity.ok().body(sellerList);
+        RedirectView rv = new RedirectView();
+        System.out.println(session.getAttributeNames());
+        String rurl="/DisplayAllProducts.jsp?e_id="+Long.toString(ecommId);
+        System.out.println(rurl);
+        rv.setUrl(rurl);
+        return rv;
     }
 
 //    @RequestMapping(value="/viewSeller/{id}" , method=RequestMethod.GET)
@@ -72,7 +88,30 @@ public class SellerController {
 //        Seller seller =sellerRepository.findById(seller_id).orElse(null);
 //        return ResponseEntity.ok().body(seller);
 //    }
+    @RequestMapping(value="/viewSellerByProductId/{p_id}/{e_id}" ,method=RequestMethod.GET)
+    public RedirectView getSellerByProductId(
+            @PathVariable(value = "p_id") long productId,
+            @PathVariable(value = "e_id") long ecommId,
+            HttpSession session)
+    {
+        //Seller seller = sellerRepository.findByProductId_ProductId(productId);
+        Product product= productRepository.findByProductId(productId);
+        Seller seller = product.getSeller();
+        //System.out.println(product.getSeller().getSellerId());
+        //Seller seller = sellerRepository.findById(seller_id).orElse(null);
+        //Seller seller = sellerRepository.findById(seller_id);
+        session.setAttribute("sellerName", seller.getSellerName());
+        session.setAttribute("sellerAddress", seller.getSellerAddress());
+        session.setAttribute("sellerEmailId", seller.getSellerEmailId());
+        session.setAttribute("sellerContactNo", seller.getSellerContactNo());
+        session.setAttribute("shopName", seller.getShopName());
+        RedirectView rv = new RedirectView();
+        String rurl="/SellerByProductId.jsp?e_id="+Long.toString(ecommId)+"&p_name="+product.getProductName();
+        System.out.println(rurl);
+        rv.setUrl(rurl);
+        return rv;
 
+    }
 
     @RequestMapping(value="/viewSeller/{id}" ,method=RequestMethod.GET)
     public RedirectView getSellerById(@PathVariable(value = "id") long seller_id, HttpSession session)

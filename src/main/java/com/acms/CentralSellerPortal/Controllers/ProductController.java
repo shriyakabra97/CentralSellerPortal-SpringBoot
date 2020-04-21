@@ -86,11 +86,22 @@ public class ProductController {
         }
     }
 
-    @GetMapping(value = "/displayAll")
-    public ResponseEntity<List<Product>> getAllProduct()
+    @GetMapping(value = "/displayAll/{e_id}")
+    public RedirectView getAllProduct(
+            @PathVariable("e_id") Long ecommId,
+            HttpSession session
+    )
     {
-        List<Product> productList =productRepository.findAll();
-        return ResponseEntity.ok().body(productList);
+        List<Product> allProductList =productRepository.findAll();
+        session.setAttribute("allProductList",allProductList );
+        RedirectView rv = new RedirectView();
+        System.out.println(session.getAttributeNames());
+        String rurl="/DisplayAllProducts.jsp?e_id="+Long.toString(ecommId);
+        System.out.println(rurl);
+        rv.setUrl(rurl);
+        return rv;
+
+//        return ResponseEntity.ok().body(productList);
     }
 
 
@@ -118,24 +129,10 @@ public class ProductController {
     {
         List<Product> productList = productRepository.findBySeller_SellerId(seller_id);
         System.out.println("getting Products");
-        //System.out.println(productList.get(0));
-        //Seller seller = sellerRepository.findById(seller_id).orElse(null);
         System.out.println(productList);
         session.setAttribute("productList",productList);
         System.out.println(session.getAttribute("productList"));
-        //String[][] str = new String[productList.size()][5];
-//        for(int i = 0; i < productList.size(); i++){
-//
-//                session.setAttribute("string"+i+"0", productList.get(i).getProductId());
-//                session.setAttribute("string"+i+"1", productList.get(i).getProductName());
-//                session.setAttribute("string"+i+"2", productList.get(i).getProductDescription());
-//                session.setAttribute("string"+i+"3", productList.get(i).getPrice());
-//                session.setAttribute("string"+i+"4", productList.get(i).getDiscount());
-//
-//        }
-//        session.setAttribute("listSize", productList.size());
-        //System.out.println((String)string[0][1]);
-        //System.out.println(session.getAttribute("string00"));
+
         RedirectView rv = new RedirectView();
         System.out.println(session.getAttributeNames());
         String rurl="/MyProducts.jsp?id="+Long.toString(seller_id);
