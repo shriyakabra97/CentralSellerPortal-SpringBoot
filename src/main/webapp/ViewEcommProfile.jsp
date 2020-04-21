@@ -11,7 +11,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ecommerce Dashboard</title>
+    <title>View Ecomm Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -67,17 +67,17 @@
             </form>
         </div>
 
-<%--        <div class="navbar-header">--%>
-<%--            <form class ="form-view" id="view-form-viewproduct"  action = "/products/displayBySellerId/<%=id%>" method="get">--%>
-<%--                <form :hidden path="id"/>--%>
-<%--                <div class="form-row">--%>
-<%--                    <div class="form-group">--%>
-<%--                        <button  id = "view-profile-viewproduct" type="submit"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Products</button>--%>
-<%--                    </div> <!-- form-group// -->--%>
-<%--                    <!-- form-group end.// -->--%>
-<%--                </div>--%>
-<%--            </form>--%>
-<%--        </div>--%>
+        <%--        <div class="navbar-header">--%>
+        <%--            <form class ="form-view" id="view-form-viewproduct"  action = "/products/displayBySellerId/<%=id%>" method="get">--%>
+        <%--                <form :hidden path="id"/>--%>
+        <%--                <div class="form-row">--%>
+        <%--                    <div class="form-group">--%>
+        <%--                        <button  id = "view-profile-viewproduct" type="submit"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Products</button>--%>
+        <%--                    </div> <!-- form-group// -->--%>
+        <%--                    <!-- form-group end.// -->--%>
+        <%--                </div>--%>
+        <%--            </form>--%>
+        <%--        </div>--%>
         <div class="navbar-header">
             <form class ="form-view" id="view-form" action="/destroy" method="post">
                 <form :hidden path="id"/>
@@ -92,12 +92,19 @@
     </div>
 </nav>
 <br>
-<div class="jumbotron">
-    <div class="container" style="font-family: Ubuntu; font-size: large">
-        <h1> Welcome, ${ecommName}.</h1>
-        <h1> Here is your Business Platform!</h1>
-        <p>We provide platform for crores of Businesses to interact and grow. No Listing fees, easy steps and professional support that helps you grow your business.</p>
-        <p >Start Exploring sellers from around the world..</p>
+<div class="jumbotron" id="ecomm-profile" style="font-size: large; font-family: Ubuntu " >
+    <div class="container">
+        <div id="seller-profile">
+            <td><b>Welcome,    ${ecommName}</b>         </td>
+            <br><br>
+            <%--        <td>ID: <%=id%>                             </td>--%>
+            <%--        <br>--%>
+            <td><b>Email Id :</b>   ${ecommEmailId}</td>
+            <br>
+
+            <br>
+            <br>
+        </div>
     </div>
 </div>
 

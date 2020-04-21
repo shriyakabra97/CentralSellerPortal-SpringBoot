@@ -1,6 +1,7 @@
 package com.acms.CentralSellerPortal.Controllers;
 import com.acms.CentralSellerPortal.Entities.Ecommerce;
 import com.acms.CentralSellerPortal.Repositories.EcommerceRepository;
+import javax.servlet.http.HttpSession;
 
 
 import com.acms.CentralSellerPortal.Entities.Seller;
@@ -34,7 +35,9 @@ public class LoginController {
 
     @RequestMapping(value="/verifyseller" , method=RequestMethod.GET)
     public RedirectView create(@RequestParam("s_mobile") String s_mobile,
-                               @RequestParam("s_password") String s_password , RedirectAttributes redirectAttrs){
+                               @RequestParam("s_password") String s_password ,
+                               RedirectAttributes redirectAttrs
+                               ){
         List<Seller> seller = new ArrayList<Seller>();
         seller = sellerRepository.findAll();
 
@@ -68,15 +71,21 @@ public class LoginController {
 
     @RequestMapping(value="/verifyecommerce" , method=RequestMethod.GET)
     public RedirectView createecomm(@RequestParam("c_email") String c_email,
-                                    @RequestParam("c_password") String c_password , RedirectAttributes redirectAttrs){
+                                    @RequestParam("c_password") String c_password , RedirectAttributes redirectAttrs,
+                                    HttpSession session
+                                    ){
         List<Ecommerce> ecomm = new ArrayList<Ecommerce>();
         ecomm = ecommerceRepository.findAll();
 
         for(Ecommerce c: ecomm){
             if((c_password).equals(c.getEcommPassword()) && (c_email).equals(c.getEcommEmailId())){
 
+                session.setAttribute("ecommName", c.getEcommName());
+                session.setAttribute("ecommEmailId", c.getEcommEmailId());
+                session.setAttribute("ecommPassword", c.getEcommPassword());
+
                 RedirectView rv = new RedirectView();
-                String rurl="/EcommDashboard.jsp?id="+Long.toString(c.getEcommId());
+                String rurl="/EcommDashboard.jsp?e_id="+Long.toString(c.getEcommId());
                 rv.setUrl(rurl);
                 return rv;
 

@@ -67,17 +67,17 @@
             </form>
         </div>
 
-<%--        <div class="navbar-header">--%>
-<%--            <form class ="form-view" id="view-form-viewproduct"  action = "/products/displayBySellerId/<%=id%>" method="get">--%>
-<%--                <form :hidden path="id"/>--%>
-<%--                <div class="form-row">--%>
-<%--                    <div class="form-group">--%>
-<%--                        <button  id = "view-profile-viewproduct" type="submit"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Products</button>--%>
-<%--                    </div> <!-- form-group// -->--%>
-<%--                    <!-- form-group end.// -->--%>
-<%--                </div>--%>
-<%--            </form>--%>
-<%--        </div>--%>
+        <%--        <div class="navbar-header">--%>
+        <%--            <form class ="form-view" id="view-form-viewproduct"  action = "/products/displayBySellerId/<%=id%>" method="get">--%>
+        <%--                <form :hidden path="id"/>--%>
+        <%--                <div class="form-row">--%>
+        <%--                    <div class="form-group">--%>
+        <%--                        <button  id = "view-profile-viewproduct" type="submit"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Products</button>--%>
+        <%--                    </div> <!-- form-group// -->--%>
+        <%--                    <!-- form-group end.// -->--%>
+        <%--                </div>--%>
+        <%--            </form>--%>
+        <%--        </div>--%>
         <div class="navbar-header">
             <form class ="form-view" id="view-form" action="/destroy" method="post">
                 <form :hidden path="id"/>
@@ -92,14 +92,49 @@
     </div>
 </nav>
 <br>
-<div class="jumbotron">
-    <div class="container" style="font-family: Ubuntu; font-size: large">
-        <h1> Welcome, ${ecommName}.</h1>
-        <h1> Here is your Business Platform!</h1>
-        <p>We provide platform for crores of Businesses to interact and grow. No Listing fees, easy steps and professional support that helps you grow your business.</p>
-        <p >Start Exploring sellers from around the world..</p>
-    </div>
-</div>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <header class="card-header">
+
+                <h4 class="card-title mt-2">Update Ecommerce Profile</h4>
+            </header>
+            <article class="card-body">
+
+                <form class ="form-update" id="updation-form" action = "/ecomm/updateEcommerce/<%=e_id%>" method="post">
+                    <form :hidden path="id"/>
+                    <div class="form-row">
+                        <div class="col form-group">
+                            <label>Name </label>
+                            <input type="text" id="c_name" name="c_name" class="form-control" value=${ecommName} placeholder=${ecommName}>
+                        </div> <!-- form-group end.// -->
+                        <!-- form-group end.// -->
+                    </div> <!-- form-row end.// -->
+
+                    <div class="form-group">
+                        <label>Email address</label>
+                        <input type="email" id="c_mail" name="c_mail" class="form-control"  value= ${ecommEmailId} placeholder=${ecommEmailId}>
+                    </div> <!-- form-group end.// -->
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input class="form-control" id="c_password" name="c_password"  value=${ecommPassword} placeholder=${ecommPassword} type="password" >
+                    </div> <!-- form-group end.// -->
+
+                    <br>
+                    <div class="form-group">
+                        <button  type="submit"  class="btn btn-primary btn-block"> Save Changes</button>
+                    </div> <!-- form-group// -->
+
+                </form>
+            </article> <!-- card-body end .// -->
+            <!--<div class="border-top card-body text-center">Have an account? <a href="">Log In</a></div>-->
+        </div> <!-- card.// -->
+    </div> <!-- col.//-->
+
+</div> <!-- row.//-->
+
+<br><br>
 
 <br>
 
