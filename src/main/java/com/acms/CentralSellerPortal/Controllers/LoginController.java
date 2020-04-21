@@ -1,4 +1,6 @@
 package com.acms.CentralSellerPortal.Controllers;
+import com.acms.CentralSellerPortal.Entities.Ecommerce;
+import com.acms.CentralSellerPortal.Repositories.EcommerceRepository;
 
 
 import com.acms.CentralSellerPortal.Entities.Seller;
@@ -18,6 +20,8 @@ public class LoginController {
 
 
 
+    @Autowired
+    EcommerceRepository ecommerceRepository;
 
 
     @Autowired
@@ -61,4 +65,27 @@ public class LoginController {
 }
   return null;
 }*/
+
+    @RequestMapping(value="/verifyecommerce" , method=RequestMethod.GET)
+    public RedirectView createecomm(@RequestParam("c_email") String c_email,
+                                    @RequestParam("c_password") String c_password , RedirectAttributes redirectAttrs){
+        List<Ecommerce> ecomm = new ArrayList<Ecommerce>();
+        ecomm = ecommerceRepository.findAll();
+
+        for(Ecommerce c: ecomm){
+            if((c_password).equals(c.getEcommPassword()) && (c_email).equals(c.getEcommEmailId())){
+
+                RedirectView rv = new RedirectView();
+                String rurl="/EcommDashboard.jsp?id="+Long.toString(c.getEcommId());
+                rv.setUrl(rurl);
+                return rv;
+
+            }
+
+        }
+        RedirectView rvf = new RedirectView();
+        String furl="/FailedLogin.jsp";
+        rvf.setUrl(furl);
+        return rvf;
+    }
 }

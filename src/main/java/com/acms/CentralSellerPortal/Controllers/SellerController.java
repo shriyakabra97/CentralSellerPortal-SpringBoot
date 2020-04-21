@@ -1,12 +1,15 @@
 package com.acms.CentralSellerPortal.Controllers;
 import com.acms.CentralSellerPortal.Entities.Seller;
 import com.acms.CentralSellerPortal.Repositories.SellerRepository;
+import com.acms.CentralSellerPortal.Services.SellerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.view.RedirectView;
+
 
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +20,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class SellerController {
+    @Autowired
+    SellerService sellerService;
 
     @Autowired
     SellerRepository sellerRepository;
@@ -30,6 +35,7 @@ public class SellerController {
                                @RequestParam("s_mail") String seller_emailId,
                                @RequestParam("s_mobile") String seller_contactNo,
                                @RequestParam("s_password") String password
+                                //HttpSession session
                                 //Model model
 
                                ) {

@@ -44,19 +44,19 @@ and open the template in the editor.
                         <div class="form-row">
                             <div class="col form-group">
                                 <label>Name </label>
-                                <input type="text" id="s_name" name="s_name" class="form-control" placeholder="" required>
+                                <input type="text" id="s_name" name="s_name" class="form-control" placeholder=""  maxlength="100" required>
                             </div> <!-- form-group end.// -->
                             <!-- form-group end.// -->
                         </div> <!-- form-row end.// -->
                         <div class="form-group">
                             <label>Address</label>
-                            <input type="text" id="s_address" name="s_address" class="form-control" placeholder="" required>
+                            <input type="text" id="s_address" name="s_address" class="form-control" placeholder="" maxlength="300" required>
 
                         </div>
                         <div class="form-group">
                             <label>Mobile No.</label>
-                            <input type="number" id="s_mobile" name="s_mobile" class="form-control" placeholder=""   minlength="10" maxlength="10" required>
-
+                            <input type="number" id="s_mobile" name="s_mobile" class="form-control" placeholder=""   minlength="10" maxlength="10"  pattern="[1-9]{1}[0-9]{9}" required>
+                            <small class="form-text text-muted">Please ensure its 10 digit number</small>
                         </div>
                         <div class="form-group">
                             <label>Email address</label>
@@ -80,16 +80,16 @@ and open the template in the editor.
                         </div>
                     <p id ="pass-match" style="color:crimson ; font-family: Arial" ></p>
 
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                    <script>
-                        $('#s_password, #s_pass').on('keyup', function () {
-                        if ($('#s_password').val() == $('#s_pass').val()) {
-                        $('#pass-match').html('Passwords match :D').css('color', 'green');
-                        } else
-                        $('#pass-match').html('Passwords dont match').css('color', 'red');
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                        <script>
+                            $('#s_password, #s_pass').on('keyup', function () {
+                            if ($('#s_password').val() == $('#s_pass').val()) {
+                            $('#pass-match').html('Passwords match :D').css('color', 'green');
+                            } else
+                            $('#pass-match').html('Passwords dont match').css('color', 'red');
 
-                        });
-                    </script>
+                            });
+                        </script>
 
 
 
