@@ -186,7 +186,10 @@ public class SellerController {
             @RequestParam("s_shop") String shop_name,
             @RequestParam("s_mail") String seller_emailId,
             @RequestParam("s_mobile") String seller_contactNo,
-            @RequestParam("s_password") String password)
+            @RequestParam("s_password") String password,
+            HttpSession session
+            )
+
     {
         Seller seller =sellerRepository.findById(seller_id).orElse(null);
         System.out.println("hi................................");
@@ -198,6 +201,13 @@ public class SellerController {
         seller.setSellerPassword(password);
 
         sellerRepository.save(seller);
+        session.setAttribute("sellerId", seller.getSellerId());
+        session.setAttribute("shopName", seller.getShopName());
+        session.setAttribute("sellerContactNo", seller.getSellerContactNo());
+        session.setAttribute("sellerEmailId", seller.getSellerEmailId());
+        session.setAttribute("sellerPassword", seller.getSellerPassword());
+        session.setAttribute("sellerAddress", seller.getSellerAddress());
+        session.setAttribute("sellerName", seller.getSellerName());
         RedirectView rv = new RedirectView();
         String rurl="/SellerDashboard.jsp?id="+Long.toString(seller.getSellerId());
         rv.setUrl(rurl);

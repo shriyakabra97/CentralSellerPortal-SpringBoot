@@ -36,13 +36,22 @@ public class LoginController {
     @RequestMapping(value="/verifyseller" , method=RequestMethod.GET)
     public RedirectView create(@RequestParam("s_mobile") String s_mobile,
                                @RequestParam("s_password") String s_password ,
-                               RedirectAttributes redirectAttrs
+                               RedirectAttributes redirectAttrs,
+                               HttpSession session
+
                                ){
         List<Seller> seller = new ArrayList<Seller>();
         seller = sellerRepository.findAll();
 
         for(Seller s: seller){
             if((s_password).equals(s.getSellerPassword()) && (s_mobile).equals(s.getSellerContactNo())){
+                session.setAttribute("sellerId", s.getSellerId());
+                session.setAttribute("shopName", s.getShopName());
+                session.setAttribute("sellerContactNo", s.getSellerContactNo());
+                session.setAttribute("sellerEmailId", s.getSellerEmailId());
+                session.setAttribute("sellerPassword", s.getSellerPassword());
+                session.setAttribute("sellerAddress", s.getSellerAddress());
+                session.setAttribute("sellerName", s.getSellerName());
 
                 RedirectView rv = new RedirectView();
                 String rurl="/SellerDashboard.jsp?id="+Long.toString(s.getSellerId());
