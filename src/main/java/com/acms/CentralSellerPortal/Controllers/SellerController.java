@@ -39,22 +39,60 @@ public class SellerController {
                                @RequestParam("s_shop") String shop_name,
                                @RequestParam("s_mail") String seller_emailId,
                                @RequestParam("s_mobile") String seller_contactNo,
-                               @RequestParam("s_password") String password
-                                //HttpSession session
+                               @RequestParam("s_password") String password,
+                                HttpSession session
                                 //Model model
 
                                ) {
 
-        Seller seller=new Seller();
-        seller.setSellerName(seller_name);
-        seller.setSellerAddress(seller_address);
-        seller.setShopName(shop_name);
-        seller.setSellerEmailId(seller_emailId);
-        seller.setSellerContactNo(seller_contactNo);
-        seller.setSellerPassword(password);
+        session.removeAttribute("sellerContactNo");
+        session.removeAttribute("sellerEmailId");
+
+        List<Seller> seller;
+        seller = sellerRepository.findAll();
+
+
+        //checking for if entry already exist for unique attribute
+        for(Seller s: seller) {
+            if ((seller_contactNo).equals(s.getSellerContactNo()) && (seller_emailId).equals(s.getSellerEmailId()) ) {
+
+                session.setAttribute("sellerContactNo", s.getSellerContactNo());
+                session.setAttribute("sellerEmailId", s.getSellerEmailId());
+                RedirectView redirectView = new RedirectView();
+                redirectView.setContextRelative(true);
+                redirectView.setUrl("/FailedSellerSignup.jsp");
+                return redirectView;
+            }
+            else
+            if ((seller_contactNo).equals(s.getSellerContactNo()) ) {
+
+                session.setAttribute("sellerContactNo", s.getSellerContactNo());
+                RedirectView redirectView = new RedirectView();
+                redirectView.setContextRelative(true);
+                redirectView.setUrl("/FailedSellerSignup.jsp");
+                return redirectView;
+            }
+            else
+            if ((seller_emailId).equals(s.getSellerEmailId())) {
+
+                session.setAttribute("sellerEmailId", s.getSellerEmailId());
+                RedirectView redirectView = new RedirectView();
+                redirectView.setContextRelative(true);
+                redirectView.setUrl("/FailedSellerSignup.jsp");
+                return redirectView;
+            }
+        }
+
+        Seller seller1=new Seller();
+        seller1.setSellerName(seller_name);
+        seller1.setSellerAddress(seller_address);
+        seller1.setShopName(shop_name);
+        seller1.setSellerEmailId(seller_emailId);
+        seller1.setSellerContactNo(seller_contactNo);
+        seller1.setSellerPassword(password);
         System.out.println("i got here...");
 
-        sellerRepository.save(seller);
+        sellerRepository.save(seller1);
         //model.addAttribute("name", seller_name);
         RedirectView redirectView = new RedirectView();
         redirectView.setContextRelative(true);
