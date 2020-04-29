@@ -18,8 +18,9 @@ public class NotificationService {
         notificationRepository.save(notification);
     }
 
-   /* public List<Notification> findByE_Id(long e_id)
+     public void findByE_Id(long e_id)
+
     {
 
-    } */
+    }
 }
