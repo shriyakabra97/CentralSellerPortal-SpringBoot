@@ -3,8 +3,10 @@ package com.acms.CentralSellerPortal.Entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.sql.Timestamp;
 import java.util.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name="notification")
@@ -30,52 +32,59 @@ public class Notification {
 
     @Column
     @NotNull
-    private Date date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Timestamp timestamp;
 
 
 
-
-    public Notification(int notification_id, @NotNull String notification_message, int seller_id, int product_id, Date date) {
-        this.notification_id = notification_id;
-        this.notification_message = notification_message;
-        this.seller_id = seller_id;
-        this.product_id = product_id;
-        this.date=date;
-
+    public Notification() {
     }
 
-    public long getNotificationId() {
+    public Notification(@NotNull String notification_message, Seller seller, Product product, java.sql.@NotNull Timestamp timestamp) {
+        this.notification_message = notification_message;
+        this.seller = seller;
+        this.product = product;
+        this.timestamp = timestamp;
+    }
+
+    public long getNotification_id() {
         return notification_id;
     }
 
-    public void setProductId(long product_id) {
+    public void setNotification_id(long notification_id) {
         this.notification_id = notification_id;
     }
 
-    public String getNotificationMessage() {
+    public String getNotification_message() {
         return notification_message;
     }
 
-    public void setNotificationMessage(String notification_message) {
+    public void setNotification_message(String notification_message) {
         this.notification_message = notification_message;
     }
 
-    public int getSellerId() {
-        return seller_id;
+    public Seller getSeller() {
+        return seller;
     }
 
-    public void setSellerId(int seller_id) {
-        this.seller_id = seller_id;
-    }
-    public int getProductId() {
-        return product_id;
+    public void setSeller(Seller seller) {
+        this.seller = seller;
     }
 
-    public void setProductId(int product_id) {
-        this.product_id = product_id;
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
 
-  
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
-  }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+}

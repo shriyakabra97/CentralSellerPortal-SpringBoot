@@ -4,6 +4,8 @@ import com.acms.CentralSellerPortal.Entities.Product;
 import com.acms.CentralSellerPortal.Entities.Seller;
 import com.acms.CentralSellerPortal.Repositories.ProductRepository;
 import com.acms.CentralSellerPortal.Repositories.SellerRepository;
+import com.acms.CentralSellerPortal.Services.ProductService;
+import com.acms.CentralSellerPortal.Services.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +22,14 @@ import java.util.Optional;
 public class ProductController {
 
     @Autowired
-    ProductRepository productRepository;
+    ProductService productService;
 
     @Autowired
-    SellerRepository sellerRepository;
+    SellerService sellerService;
 
-    @RequestMapping(value = "/add/{id}", method=RequestMethod.POST)
-    public RedirectView addProduct(@PathVariable(value = "id") Long seller_id,
+
+    @RequestMapping(value = "/postProduct/{s_id}", method=RequestMethod.POST)
+    public RedirectView postProduct(@PathVariable(value = "s_id") Long seller_id,
                                    @RequestParam("p_name") String n ,
                                    @RequestParam("p_description") String d,
                                    @RequestParam("p_price") int p,
@@ -38,87 +41,68 @@ public class ProductController {
         product.setPrice(p);
         product.setDiscount(disc);
 
-        Optional<Seller> optionalSeller = sellerRepository.findById(seller_id);
-        if(optionalSeller.isPresent()) {
-            Seller seller = optionalSeller.get();
-            product.setSeller(seller);
-            productRepository.save(product);
+        Seller seller = sellerService.findById(seller_id);
 
-            //return "updated..";
-        }
+            product.setSeller(seller);
+            productService.save(product);
+
+
         RedirectView rv = new RedirectView();
-        String rurl="/SellerDashboard.jsp?id="+Long.toString(seller_id);
+        String rurl="/SellerDashboard.jsp?id="+seller_id;
         rv.setUrl(rurl);
         return rv;
 
     }
 
-    @GetMapping(value = "/update")
-    public String updateProduct(@RequestParam Long  product_id, @RequestParam String n , @RequestParam String d,
-                                @RequestParam int p, @RequestParam int disc)
+    @RequestMapping(value = "/putProduct/{p_id}/{s_id}" , method = RequestMethod.POST)
+    public RedirectView putProduct(@PathVariable(value = "p_id") Long product_id,
+                                      @PathVariable(value = "s_id") Long seller_id,
+                                      @RequestParam("ep_name") String n ,
+                                      @RequestParam("ep_description") String d,
+                                      @RequestParam("ep_price") int p,
+                                      @RequestParam("ep_discount") int disc)
     {
-        Optional<Product> optionalProduct = productRepository.findById(product_id);
-        if(optionalProduct.isPresent()) {
-            Product product = optionalProduct.get();
+        Product product = productService.findById(product_id);
+
             product.setProductName(n);
             product.setProductDescription(d);
             product.setPrice(p);
             product.setDiscount(disc);
 
-            productRepository.save(product);
-            return "updated";
-        }
-        else
-            return "error updating";
+            productService.save(product);
+
+            RedirectView rv = new RedirectView();
+            String rurl="/SellerDashboard.jsp?id="+seller_id;
+            System.out.println(rurl);
+            rv.setUrl(rurl);
+            return rv;
+
     }
 
-    @GetMapping(value = "/displayAll")
-    public ResponseEntity<List<Product>> getAllProduct()
-    {
-        List<Product> productList =productRepository.findAll();
-        return ResponseEntity.ok().body(productList);
+    @RequestMapping(value = "/deleteProduct/{p_id}/{s_id}")
+    public RedirectView deleteProduct(@PathVariable(value = "p_id") Long product_id,
+                                      @PathVariable(value = "s_id") Long seller_id
+    ){
+        productService.deleteById(product_id);
+
+        RedirectView redirectView = new RedirectView();
+        redirectView.setContextRelative(true);
+        String rurl = "/SellerDashboard.jsp?id="+seller_id;
+        redirectView.setUrl(rurl);
+        return redirectView;
     }
 
-
-    @GetMapping(value = "/displayById")
-    public ResponseEntity<Product> getProductById(@RequestParam Long  product_id)
-    {
-        Product product =productRepository.findById(product_id).orElse(null);
-        return ResponseEntity.ok().body(product);
-    }
-
-    @RequestMapping(value = "/displayBySellerId/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getProductsForSellerId/{id}", method = RequestMethod.GET)
     public RedirectView getProductBySellerId(@PathVariable(value = "id") long seller_id, HttpSession session)
     {
-        List<Product> productList = productRepository.findBySeller_SellerId(seller_id);
-        System.out.println("getting Products");
-        //System.out.println(productList.get(0));
-        //Seller seller = sellerRepository.findById(seller_id).orElse(null);
-        System.out.println(productList);
+        List<Product> productList = productService.findBySeller_Id(seller_id);
+
         session.setAttribute("productList",productList);
-        System.out.println(session.getAttribute("productList"));
-        //String[][] str = new String[productList.size()][5];
-//        for(int i = 0; i < productList.size(); i++){
-//
-//                session.setAttribute("string"+i+"0", productList.get(i).getProductId());
-//                session.setAttribute("string"+i+"1", productList.get(i).getProductName());
-//                session.setAttribute("string"+i+"2", productList.get(i).getProductDescription());
-//                session.setAttribute("string"+i+"3", productList.get(i).getPrice());
-//                session.setAttribute("string"+i+"4", productList.get(i).getDiscount());
-//
-//        }
-//        session.setAttribute("listSize", productList.size());
-        //System.out.println((String)string[0][1]);
-        //System.out.println(session.getAttribute("string00"));
         RedirectView rv = new RedirectView();
-        System.out.println(session.getAttributeNames());
-        String rurl="/SellerDashboard.jsp?id="+Long.toString(seller_id);
+        String rurl="/MyProducts.jsp?id="+seller_id;
         System.out.println(rurl);
         rv.setUrl(rurl);
         return rv;
 
-
-
-        //return ResponseEntity.ok().body(productList);
     }
 }
