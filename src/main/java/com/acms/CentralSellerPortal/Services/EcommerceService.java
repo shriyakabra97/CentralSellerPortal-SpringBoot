@@ -17,10 +17,4 @@ public class EcommerceService {
     {
         ecommerceRepository.save(ecommerce);
     }
-
-    public Ecommerce findById(Long e_id)
-    {
-        Ecommerce ecommerce= ecommerceRepository.findById(e_id).orElse(null);
-        return ecommerce;
-    }
 }

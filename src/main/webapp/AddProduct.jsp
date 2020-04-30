@@ -31,7 +31,7 @@
             </header>
             <article class="card-body">
                 <% long id = Long.parseLong(request.getParameter("id")); %>
-                <form class ="form-addProduct" id="addProduct-form" action = "/products/add/<%=id%>" method="post">
+                <form class ="form-addProduct" id="addProduct-form" action = "/products/postProduct/<%=id%>" method="post">
                     <form :hidden path="id"/>
                     <div class="form-row">
                         <div class="col form-group">

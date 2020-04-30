@@ -3,13 +3,13 @@ package com.acms.CentralSellerPortal.Entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.sql.Timestamp;
+import java.io.Serializable;
+import java.util.Date;
 
 
 @Entity
 @Table(name="ecommerce")
-
-public class Ecommerce {
+public class Ecommerce  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long ecommId;
@@ -29,32 +29,50 @@ public class Ecommerce {
     private String ecommPassword;
 
     @Column
-    @NotNull
-    private Timestamp sqlTimestamp;
+    private Date date=new Date(2323223232L);
+
+    @Column
+    private boolean First_login=true;
 
     public Ecommerce() {
     }
 
-    public Ecommerce(long ecommId, @Size(max = 100) @NotNull String ecommName, @Size(max = 100) @NotNull String ecommEmailId, @NotNull String ecommPassword) {
-        this.ecommId = ecommId;
+
+    public Ecommerce(@Size(max = 100) @NotNull String ecommName, @Size(max = 100) @NotNull String ecommEmailId, @NotNull String ecommPassword, Date date) {
+        this.ecommName = ecommName;
+        this.ecommEmailId = ecommEmailId;
+        this.ecommPassword = ecommPassword;
+        this.date = date;
+    }
+
+    public Ecommerce(@Size(max = 100) @NotNull String ecommName, @Size(max = 100) @NotNull String ecommEmailId, @NotNull String ecommPassword) {
         this.ecommName = ecommName;
         this.ecommEmailId = ecommEmailId;
         this.ecommPassword = ecommPassword;
     }
 
-    public Ecommerce(@Size(max = 100) @NotNull String ecommName, @Size(max = 100) @NotNull String ecommEmailId, @NotNull String ecommPassword, @NotNull Timestamp sqlTimestamp) {
+    public Ecommerce(@Size(max = 100) @NotNull String ecommName, @Size(max = 100) @NotNull String ecommEmailId, @NotNull String ecommPassword, Date date, boolean first_login) {
         this.ecommName = ecommName;
         this.ecommEmailId = ecommEmailId;
         this.ecommPassword = ecommPassword;
-        this.sqlTimestamp = sqlTimestamp;
+        this.date = date;
+        First_login = first_login;
     }
 
-    public Timestamp getSqlTimestamp() {
-        return sqlTimestamp;
+    public boolean isFirst_login() {
+        return First_login;
     }
 
-    public void setSqlTimestamp(Timestamp sqlTimestamp) {
-        this.sqlTimestamp = sqlTimestamp;
+    public void setFirst_login(boolean first_login) {
+        First_login = first_login;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public long getEcommId() {

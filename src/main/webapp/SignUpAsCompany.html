@@ -37,18 +37,19 @@ and open the template in the editor.
                         <h4 class="card-title mt-2">Company Sign up</h4>
                     </header>
                     <article class="card-body">
-                        <form>
+                        <form class ="form-signin" id="admission-form" action = "/postEcommerce" method="post" >	                        <form>
+                            <form :hidden path="id"/>
                             <div class="form-row">
                                 <div class="col form-group">
                                     <label>Company Name </label>   
-                                    <input type="text" class="form-control" placeholder="">
+                                    <input type="text" name="cName" class="form-control" placeholder="">
                                 </div> <!-- form-group end.// -->
                                 <!-- form-group end.// -->
                             </div> <!-- form-row end.// -->
 
                             <div class="form-group">
                                 <label>Mobile No.</label>
-                                <input type="number" class="form-control" placeholder="">
+                                <input type="number" name="cEmailId" class="form-control" placeholder="">
 
                             </div>
                             <!-- form-group end.// -->
@@ -57,11 +58,11 @@ and open the template in the editor.
 
                             <div class="form-group">
                                 <label>Create password</label>
-                                <input class="form-control" type="password">
+                                <input class="form-control" name="cPassword" type="password">
                             </div> <!-- form-group end.// -->
                             <div class="form-group">
                                 <label>Re-type password</label>
-                                <input class="form-control" type="password">
+                                <input class="form-control" name="s_pass"type="password">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block"> Register  </button>

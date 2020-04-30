@@ -8,11 +8,13 @@ and storing data in session object
 
 package com.acms.CentralSellerPortal.Controllers;
 import com.acms.CentralSellerPortal.Entities.Seller;
+import com.acms.CentralSellerPortal.Repositories.NotificationRepository;
 import com.acms.CentralSellerPortal.Repositories.SellerRepository;
 
+import com.acms.CentralSellerPortal.Services.EcommerceService;
+import com.acms.CentralSellerPortal.Services.NotificationService;
 import com.acms.CentralSellerPortal.Services.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -31,19 +34,14 @@ public class SellerController {
     @Autowired
     SellerService sellerService;
 
+    @Autowired
+    NotificationService notificationService;
 
-   // @Autowired
-   // private KafkaTemplate<String,String> kafkaTemplate;
-   // private static final String TOPIC = "user";
+    @Autowired
+    EcommerceService ecommerceService;
 
-   // @Autowired
-   // private EmailService emailService;
 
-    //post method
-    //redirected view to dashboard in success
-    //redirect view to failed login page in case of failure
-    //this api post seller info to db
-    @RequestMapping(value="/postSeller"   , method=RequestMethod.POST)
+    @RequestMapping(value="/addseller"   , method=RequestMethod.POST)
     public RedirectView postSeller(
                                 @RequestParam("s_name") String seller_name,
                                @RequestParam("s_address") String seller_address,
@@ -77,9 +75,12 @@ public class SellerController {
         seller1.setSellerContactNo(seller_contactNo);
         seller1.setSellerPassword(password);
         sellerService.save(seller1);
-        //kafkaTemplate.send(TOPIC, seller_name+seller_contactNo);
-        //emailService.sendMail("anmoltuteja98265@gmail.com", "A new seller has registered", seller_name+" has signed up");
 
+        //emailService.sendMail("anmoltuteja98265@gmail.com", "A new seller has registered", seller_name+" has signed up");
+        long s_id=seller1.getSellerId();
+
+        Date dw=new Date();
+        notificationService.save(seller1.getSellerName()+" has signed up to this portal ",dw ,s_id,0);
         //redirecting
         RedirectView redirectView = new RedirectView();
         redirectView.setContextRelative(true);
@@ -87,10 +88,6 @@ public class SellerController {
         return redirectView;
     }
 
-
-    //Get method
-    //this api to display seller info corresponding to id
-    //view redirected to dashboard
     @RequestMapping(value="/getSellerById/{id}" ,method=RequestMethod.GET)
     public RedirectView getSellerById(@PathVariable(value = "id") long seller_id, HttpSession session)
     {
@@ -107,10 +104,6 @@ public class SellerController {
         return rv;
     }
 
-    //post method
-    //this api will update seller info in db
-    //redirect view to dashboard again
-    //redirect to failed page in case of failure
     @RequestMapping(value="/putSeller/{id}" , method=RequestMethod.POST)
     public RedirectView putSeller(
             @PathVariable(value = "id") Long seller_id,
@@ -149,6 +142,10 @@ public class SellerController {
         session.setAttribute("seller", seller1);
 
 
+        long s_id=seller1.getSellerId();
+
+        Date dw=new Date();
+        notificationService.save(seller1.getSellerName()+" has updated profile",dw ,s_id,0);
         //redirecting
         RedirectView rv = new RedirectView();
         String rurl="/SellerDashboard.jsp?id="+seller1.getSellerId();

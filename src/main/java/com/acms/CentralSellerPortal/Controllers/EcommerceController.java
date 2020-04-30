@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("/ecomm")
+@RequestMapping("/")
 public class EcommerceController {
 
     @Autowired
@@ -25,18 +25,17 @@ public class EcommerceController {
     @Autowired
     SellerService sellerService;
 
+    @Autowired
+    EcommerceRepository ecommerceRepository;
+
     @PostMapping("/postEcommerce")
     public RedirectView postEcommerce(@RequestParam("cName") String ecommerce_name,
                                      @RequestParam("cEmailId") String ecommerce_emailId,
                                      @RequestParam("cPassword") String ecommerce_password)
     {
 
-        Ecommerce ecommerce=new Ecommerce();
-        ecommerce.setEcommName(ecommerce_name);
-        ecommerce.setEcommEmailId(ecommerce_emailId);
-        ecommerce.setEcommPassword(ecommerce_password);
-
-        ecommerceService.save(ecommerce);
+        Ecommerce ecommerce=new Ecommerce(ecommerce_name,ecommerce_emailId,ecommerce_password);
+        ecommerceRepository.save(ecommerce);
 
         RedirectView redirectView = new RedirectView();
         redirectView.setContextRelative(true);
@@ -53,7 +52,7 @@ public class EcommerceController {
     @RequestMapping(value="/getEcommerceById/{e_id}" ,method=RequestMethod.GET)
     public RedirectView getEcommerceById(@PathVariable(value = "e_id") long ecomm_id, HttpSession session)
     {
-        Ecommerce ecommerce = ecommerceService.findById(ecomm_id);
+        Ecommerce ecommerce = ecommerceRepository.findById(ecomm_id).orElse(null);
 
         session.setAttribute("ecommEmailId", ecommerce.getEcommEmailId());
         session.setAttribute("ecommName", ecommerce.getEcommName());
@@ -73,7 +72,7 @@ public class EcommerceController {
             @RequestParam("c_password") String password,
             HttpSession session)
     {
-        Ecommerce ecommerce=ecommerceService.findById(ecommId);
+        Ecommerce ecommerce=ecommerceRepository.findById(ecommId).orElse(null);
         ecommerce.setEcommName(ecommName);
         ecommerce.setEcommEmailId(ecommEmailId);
         ecommerce.setEcommPassword(password);

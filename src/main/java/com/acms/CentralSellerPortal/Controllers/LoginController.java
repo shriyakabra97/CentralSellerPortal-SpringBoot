@@ -72,6 +72,7 @@ public class LoginController {
         for(Ecommerce c: ecomm){
             if((c_password).equals(c.getEcommPassword()) && (c_email).equals(c.getEcommEmailId())){
 
+                c.setFirst_login(false);
                 RedirectView rv = new RedirectView();
                 String rurl="/Ecommdashboard.jsp?id="+Long.toString(c.getEcommId());
                 rv.setUrl(rurl);

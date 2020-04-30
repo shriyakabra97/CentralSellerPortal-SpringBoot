@@ -2,16 +2,14 @@ package com.acms.CentralSellerPortal.Entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.sql.Timestamp;
+import java.io.Serializable;
 import java.util.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.CreationTimestamp;
+
 
 @Entity
 @Table(name="notification")
+public class Notification implements Serializable {
 
-public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long notification_id;
@@ -20,31 +18,35 @@ public class Notification {
     @NotNull
     private String notification_message;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "seller_id") //nullable = false)
-    private Seller seller;
-
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "product_id") //nullable = false)
-    private Product product;
+    @Column
+    private long seller_id;
 
     @Column
-    @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    private Timestamp timestamp;
+    private long product_id;
 
+    @Column
+    private Date ndate=new Date(2323223232L);
 
 
     public Notification() {
     }
 
-    public Notification(@NotNull String notification_message, Seller seller, Product product, java.sql.@NotNull Timestamp timestamp) {
+    public Notification(@NotNull String notification_message, long seller_id, long product_id,  Date ndate) {
         this.notification_message = notification_message;
-        this.seller = seller;
-        this.product = product;
-        this.timestamp = timestamp;
+        this.seller_id = seller_id;
+        this.product_id = product_id;
+        this.ndate = ndate;
+    }
+
+    public Notification(@NotNull String notification_message) {
+        this.notification_message = notification_message;
+    }
+
+    public Notification(@NotNull String notification_message, Date ndate,long seller_id, long product_id) {
+        this.notification_message = notification_message;
+        this.ndate = ndate;
+        this.seller_id = seller_id;
+        this.product_id = product_id;
     }
 
     public long getNotification_id() {
@@ -63,28 +65,27 @@ public class Notification {
         this.notification_message = notification_message;
     }
 
-    public Seller getSeller() {
-        return seller;
+    public long getSeller_id() {
+        return seller_id;
     }
 
-    public void setSeller(Seller seller) {
-        this.seller = seller;
+    public void setSeller_id(long seller_id) {
+        this.seller_id = seller_id;
     }
 
-    public Product getProduct() {
-        return product;
+    public long getProduct_id() {
+        return product_id;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProduct_id(long product_id) {
+        this.product_id = product_id;
     }
 
-
-    public Timestamp getTimestamp() {
-        return timestamp;
+    public Date getNdate() {
+        return ndate;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+    public void setNdate(Date ndate) {
+        this.ndate = ndate;
     }
 }
