@@ -52,6 +52,37 @@ public class ProductController {
         return rv;
 
     }
+    @RequestMapping(value="/viewProductsBySeller/{id}/{e_id}" ,method=RequestMethod.GET)
+    public RedirectView getSellerByProductId(
+            @PathVariable(value = "id") long sellerId,
+            @PathVariable(value = "e_id") long ecommId,
+            HttpSession session)
+    {
+        List<Product> productList = productRepository.findBySeller_SellerId(sellerId);
+        System.out.println("getting Products");
+        System.out.println(productList);
+        session.setAttribute("productList",productList);
+        System.out.println(session.getAttribute("productList"));
+        Optional<Seller> optionalSeller = sellerRepository.findById(sellerId);
+        if(optionalSeller.isPresent()){
+            Seller seller = optionalSeller.get();
+            String sellerName = seller.getSellerName();
+            RedirectView rv = new RedirectView();
+            String rurl="/ProductsBySellerId.jsp?e_id="+Long.toString(ecommId)+"&s_name="+ sellerName;
+            System.out.println(rurl);
+            rv.setUrl(rurl);
+            return rv;
+        }else{
+            RedirectView rv = new RedirectView();
+            String rurl = "/index.html";
+            System.out.println(rurl);
+            rv.setUrl(rurl);
+            return rv;
+        }
+
+
+
+    }
 
     @RequestMapping(value = "/update/{p_id}/{id}" , method = RequestMethod.POST)
     public RedirectView updateProduct(@PathVariable(value = "p_id") Long product_id,@PathVariable(value = "id") Long seller_id,

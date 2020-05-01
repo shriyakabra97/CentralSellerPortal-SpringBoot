@@ -67,11 +67,11 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form-view-sellers" action="/products/displayAll/<%=e_id%>" method="get">
+            <form class ="form-view" id="view-form-view-sellers" action="/sellers/<%=e_id%>" method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
-                        <button id = "view-sellers" type="submit"   style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View All Products</button>
+                        <button id = "view-sellers" type="submit"   style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View All Sellers</button>
                     </div> <!-- form-group// -->
                     <!-- form-group end.// -->
                 </div>

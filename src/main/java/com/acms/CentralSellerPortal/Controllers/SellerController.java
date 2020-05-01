@@ -105,15 +105,17 @@ public class SellerController {
 
     @GetMapping("/sellers/{e_id}")
     public RedirectView getAllSellers(
-            @RequestParam("e_id") Long ecommId,
+            @PathVariable("e_id") Long ecommId,
             HttpSession session)
     {
         List<Seller> sellerList = sellerRepository.findAll();
         session.setAttribute("sellerList", sellerList);
+
         //return ResponseEntity.ok().body(sellerList);
         RedirectView rv = new RedirectView();
         System.out.println(session.getAttributeNames());
-        String rurl="/DisplayAllProducts.jsp?e_id="+Long.toString(ecommId);
+        //String rurl="/DisplayAllProducts.jsp?e_id="+Long.toString(ecommId);
+        String rurl="/DisplayAllSellers.jsp?e_id="+Long.toString(ecommId);
         System.out.println(rurl);
         rv.setUrl(rurl);
         return rv;

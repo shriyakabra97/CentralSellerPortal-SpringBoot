@@ -11,7 +11,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ecommerce Dashboard</title>
+    <title>All Sellers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -103,49 +103,53 @@
     </div>
 </nav>
 <br>
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <header class="card-header">
+<div id="product-table" class="container" >
+    <div class="row">
+        <div class="col-md-12">
+            <h4> ${ecommName}, Here are All Sellers</h4>
+            <div class="table-responsive">
+                <table id="mytable" class="table table-bordred table-striped">
+                    <thead>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Shop Name</th>
+                    <th>Contact No.</th>
+                    <th>Email</th>
+                    <th>View Products</th>
+                    <%--                    <th>Delete</th>--%>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="s" items="${sellerList}">
+                        <tr>
+                            <td>${s.sellerName}</td>
+                            <td>${s.sellerAddress}</td>
+                            <td>${s.shopName}</td>
+                            <td>${s.sellerContactNo}</td>
+                            <td>${s.sellerEmailId}</td>
+                            <td>
+                                <div class="navbar-header">
+                                    <form class ="form-view" id="view-seller"  action = "/products/viewProductsBySeller/${s.sellerId}/<%=e_id%>" method="get">
+                                        <form :hidden path="id"/>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <button id = "view-this-seller" type="submit"   style="color: whitesmoke; background-color: #2A2A2A" class="btn">View</button>
+                                            </div> <!-- form-group// -->
+                                            <!-- form-group end.// -->
+                                        </div>
+                                    </form>
+                                </div>
 
-                <h4 class="card-title mt-2">Update Ecommerce Profile</h4>
-            </header>
-            <article class="card-body">
-
-                <form class ="form-update" id="updation-form" action = "/ecomm/updateEcommerce/<%=e_id%>" method="post">
-                    <form :hidden path="id"/>
-                    <div class="form-row">
-                        <div class="col form-group">
-                            <label>Name </label>
-                            <input type="text" id="c_name" name="c_name" class="form-control" value=${ecommName} placeholder=${ecommName}>
-                        </div> <!-- form-group end.// -->
-                        <!-- form-group end.// -->
-                    </div> <!-- form-row end.// -->
-
-                    <div class="form-group">
-                        <label>Email address</label>
-                        <input type="email" id="c_mail" name="c_mail" class="form-control"  value= ${ecommEmailId} placeholder=${ecommEmailId}>
-                    </div> <!-- form-group end.// -->
-
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input class="form-control" id="c_password" name="c_password"  value=${ecommPassword} placeholder=${ecommPassword} type="password" >
-                    </div> <!-- form-group end.// -->
-
-                    <br>
-                    <div class="form-group">
-                        <button  type="submit"  class="btn btn-primary btn-block"> Save Changes</button>
-                    </div> <!-- form-group// -->
-
-                </form>
-            </article> <!-- card-body end .// -->
-            <!--<div class="border-top card-body text-center">Have an account? <a href="">Log In</a></div>-->
-        </div> <!-- card.// -->
-    </div> <!-- col.//-->
-
-</div> <!-- row.//-->
-
-<br><br>
+                            </td>
+                                <%--                            <td><a data-placement="top" data-toggle="tooltip" href="/DeleteListedProduct.jsp?p_id=${e.productId}&id=<%=id%>"  action="DeleteListedProduct.jsp" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fas fa-trash"></i></button></a></td>--%>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <br>
 

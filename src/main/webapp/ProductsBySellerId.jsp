@@ -30,6 +30,7 @@
 </head>
 <body>
 <% long e_id = Long.parseLong(request.getParameter("e_id")); %>
+<% String s_name = request.getParameter("s_name"); %>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="font-size: medium; background-color: #2A2A2A ; font-family: Ubuntu">
     <div class="container">
@@ -103,49 +104,44 @@
     </div>
 </nav>
 <br>
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card">
-            <header class="card-header">
+<div class="jumbotron">
+    <div class="container" style="font-family: Ubuntu; font-size: large">
+        <h2>
+            Here are the products listed by: <%=s_name%>
+        </h2><br>
+        <div id="product-table" class="container" >
+            <div class="row">
+                <div class="col-md-12">
 
-                <h4 class="card-title mt-2">Update Ecommerce Profile</h4>
-            </header>
-            <article class="card-body">
+                    <div class="table-responsive">
+                        <table id="mytable" class="table table-bordred table-striped">
+                            <thead>
+                            <th>ProductID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price(Rs.)</th>
+                            <th>Discount(%)</th>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="e" items="${productList}">
+                                <tr>
+                                    <td>${e.productId}</td>
+                                    <td>${e.productName}</td>
+                                    <td>${e.productDescription}</td>
+                                    <td>${e.price}</td>
+                                    <td>${e.discount}</td>
+                                    </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                <form class ="form-update" id="updation-form" action = "/ecomm/updateEcommerce/<%=e_id%>" method="post">
-                    <form :hidden path="id"/>
-                    <div class="form-row">
-                        <div class="col form-group">
-                            <label>Name </label>
-                            <input type="text" id="c_name" name="c_name" class="form-control" value=${ecommName} placeholder=${ecommName}>
-                        </div> <!-- form-group end.// -->
-                        <!-- form-group end.// -->
-                    </div> <!-- form-row end.// -->
-
-                    <div class="form-group">
-                        <label>Email address</label>
-                        <input type="email" id="c_mail" name="c_mail" class="form-control"  value= ${ecommEmailId} placeholder=${ecommEmailId}>
-                    </div> <!-- form-group end.// -->
-
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input class="form-control" id="c_password" name="c_password"  value=${ecommPassword} placeholder=${ecommPassword} type="password" >
-                    </div> <!-- form-group end.// -->
-
-                    <br>
-                    <div class="form-group">
-                        <button  type="submit"  class="btn btn-primary btn-block"> Save Changes</button>
-                    </div> <!-- form-group// -->
-
-                </form>
-            </article> <!-- card-body end .// -->
-            <!--<div class="border-top card-body text-center">Have an account? <a href="">Log In</a></div>-->
-        </div> <!-- card.// -->
-    </div> <!-- col.//-->
-
-</div> <!-- row.//-->
-
-<br><br>
+    </div>
+</div>
 
 <br>
 
