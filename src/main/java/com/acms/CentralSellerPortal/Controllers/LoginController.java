@@ -13,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
@@ -72,6 +73,11 @@ public class LoginController {
         for(Ecommerce c: ecomm){
             if((c_password).equals(c.getEcommPassword()) && (c_email).equals(c.getEcommEmailId())){
 
+                if(c.isFirst_login()==true)
+                {
+                    Date d=new Date();
+                    c.setDate(d);
+                }
                 c.setFirst_login(false);
                 RedirectView rv = new RedirectView();
                 String rurl="/Ecommdashboard.jsp?id="+Long.toString(c.getEcommId());

@@ -31,8 +31,8 @@ public class Ecommerce  implements Serializable {
     @Column
     private Date date=new Date(2323223232L);
 
-    @Column
-    private boolean First_login=true;
+    @Column(name="first_login" , columnDefinition = "BOOL default true")
+    private boolean First_login= true;
 
     public Ecommerce() {
     }
@@ -51,12 +51,13 @@ public class Ecommerce  implements Serializable {
         this.ecommPassword = ecommPassword;
     }
 
-    public Ecommerce(@Size(max = 100) @NotNull String ecommName, @Size(max = 100) @NotNull String ecommEmailId, @NotNull String ecommPassword, Date date, boolean first_login) {
+
+    public Ecommerce(@Size(max = 100) @NotNull String ecommName, @Size(max = 100) @NotNull String ecommEmailId, @NotNull String ecommPassword, Date date, boolean First_login) {
         this.ecommName = ecommName;
         this.ecommEmailId = ecommEmailId;
         this.ecommPassword = ecommPassword;
         this.date = date;
-        First_login = first_login;
+        this.First_login = First_login;
     }
 
     public boolean isFirst_login() {
