@@ -11,7 +11,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ecommerce Dashboard</title>
+    <title>Notifications</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -30,7 +30,6 @@
 </head>
 <body>
 <% long e_id = Long.parseLong(request.getParameter("e_id")); %>
-<% String p_name = request.getParameter("p_name"); %>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="font-size: medium; background-color: #2A2A2A ; font-family: Ubuntu">
     <div class="container">
@@ -117,14 +116,36 @@
 <br>
 <div class="jumbotron">
     <div class="container" style="font-family: Ubuntu; font-size: large">
-        <h2>
-            Seller Info selling <%=p_name%>
-        </h2><br>
-        <p><b>Seller Name: </b>${sellerName}</p>
-        <p><b>Seller Address: </b>${sellerAddress}</p>
-        <p><b>Seller Contact No: </b>${sellerContactNo}</p>
-        <p><b>Seller Shop Name: </b>${shopName}</p><br>
+        <h1> Welcome, ${ecommName}. Here are your latest updates..</h1>
+        <div id="product-table" class="container" >
+            <div class="row">
+                <div class="col-md-12">
 
+
+                    <div class="table-responsive">
+                        <table id="mytable" class="table table-bordred">
+                            <thead>
+                            <th>Notifications</th>
+
+                            </thead>
+                            <tbody>
+                            <c:forEach var="n" items="${notificationList}">
+                                <tr>
+                                    <td>
+                                        <form action="/getProductOrSeller/<%=e_id%>/${n.seller_id}/${n.product_id}">
+                                            <button style="border: 0px; background-color: #E9ECEF" type="submit"># ${n.notification_message}</button>
+                                        </form>
+                                    </td>
+
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

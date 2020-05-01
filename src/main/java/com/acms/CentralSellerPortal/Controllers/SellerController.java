@@ -4,6 +4,7 @@ import com.acms.CentralSellerPortal.Entities.Seller;
 import com.acms.CentralSellerPortal.Repositories.ProductRepository;
 import com.acms.CentralSellerPortal.Repositories.SellerRepository;
 import com.acms.CentralSellerPortal.Services.SellerService;
+import com.acms.CentralSellerPortal.Services.NotificationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 
@@ -24,6 +26,9 @@ import java.util.List;
 public class SellerController {
     @Autowired
     SellerService sellerService;
+
+    @Autowired
+    NotificationService notificationService;
 
     @Autowired
     SellerRepository sellerRepository;
@@ -94,6 +99,10 @@ public class SellerController {
 
         sellerRepository.save(seller1);
         //model.addAttribute("name", seller_name);
+        long s_id=seller1.getSellerId();
+
+        Date dw=new Date();
+        notificationService.save(seller1.getSellerName()+" has signed up to this portal ",dw ,s_id,0);
         RedirectView redirectView = new RedirectView();
         redirectView.setContextRelative(true);
         redirectView.setUrl("/AddSellerSuccessful.jsp");
@@ -101,6 +110,36 @@ public class SellerController {
 
 
          //return "Updated Database";
+    }
+    @GetMapping("/getProductOrSeller/{e_id}/{s_id}/{p_id}")
+    public RedirectView getSellerOrProduct(
+            @PathVariable("e_id") Long ecommId,
+            @PathVariable("s_id") Long sellerId,
+            @PathVariable("p_id") Long productId,
+            HttpSession session
+    ){
+        if(sellerId==0){
+            //get product
+            Product notificationProduct= productRepository.findByProductId(productId);
+            session.setAttribute("notificationProduct", notificationProduct);
+            RedirectView rv = new RedirectView();
+            String rurl="/ViewProductNotification.jsp?e_id="+Long.toString(ecommId);
+            System.out.println(rurl);
+            rv.setUrl(rurl);
+            return rv;
+
+
+        }else {
+            //get seller
+            Seller notificationSeller = sellerRepository.findById(sellerId).orElse(null);
+            session.setAttribute("notificationSeller", notificationSeller);
+            RedirectView rv = new RedirectView();
+            String rurl="/ViewSellerNotification.jsp?e_id="+Long.toString(ecommId);
+            System.out.println(rurl);
+            rv.setUrl(rurl);
+            return rv;
+        }
+
     }
 
     @GetMapping("/sellers/{e_id}")
@@ -210,6 +249,10 @@ public class SellerController {
         session.setAttribute("sellerPassword", seller.getSellerPassword());
         session.setAttribute("sellerAddress", seller.getSellerAddress());
         session.setAttribute("sellerName", seller.getSellerName());
+//notification mechanism..
+        long s_id=seller.getSellerId();
+        Date dw=new Date();
+        notificationService.save(seller.getSellerName()+" has updated profile",dw ,s_id,0);
         RedirectView rv = new RedirectView();
         String rurl="/SellerDashboard.jsp?id="+Long.toString(seller.getSellerId());
         rv.setUrl(rurl);

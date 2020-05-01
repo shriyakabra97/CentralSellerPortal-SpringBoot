@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +81,8 @@ public class LoginController {
 
     @RequestMapping(value="/verifyecommerce" , method=RequestMethod.GET)
     public RedirectView createecomm(@RequestParam("c_email") String c_email,
-                                    @RequestParam("c_password") String c_password , RedirectAttributes redirectAttrs,
+                                    @RequestParam("c_password") String c_password ,
+                                    RedirectAttributes redirectAttrs,
                                     HttpSession session
                                     ){
         List<Ecommerce> ecomm = new ArrayList<Ecommerce>();
@@ -88,7 +90,12 @@ public class LoginController {
 
         for(Ecommerce c: ecomm){
             if((c_password).equals(c.getEcommPassword()) && (c_email).equals(c.getEcommEmailId())){
-
+                System.out.println("before setting");
+                c.setFirst_login(false);
+                //Date date = new Date();
+                //c.setDate(date);
+                System.out.println(c.isFirst_login());
+                //c.setFirst_login(false);
                 session.setAttribute("ecommName", c.getEcommName());
                 session.setAttribute("ecommEmailId", c.getEcommEmailId());
                 session.setAttribute("ecommPassword", c.getEcommPassword());

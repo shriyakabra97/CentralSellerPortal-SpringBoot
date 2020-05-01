@@ -30,7 +30,6 @@
 </head>
 <body>
 <% long e_id = Long.parseLong(request.getParameter("e_id")); %>
-<% String p_name = request.getParameter("p_name"); %>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="font-size: medium; background-color: #2A2A2A ; font-family: Ubuntu">
     <div class="container">
@@ -79,7 +78,7 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form-view-notifivation" action="/getAllNotification/<%=e_id%>" method="get">
+            <form class ="form-view" id="view-form-view-notifivation" action="getAllNotification/<%=e_id%>" method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
@@ -115,18 +114,24 @@
     </div>
 </nav>
 <br>
-<div class="jumbotron">
+<div class="jumbotron" id="product">
     <div class="container" style="font-family: Ubuntu; font-size: large">
-        <h2>
-            Seller Info selling <%=p_name%>
-        </h2><br>
-        <p><b>Seller Name: </b>${sellerName}</p>
-        <p><b>Seller Address: </b>${sellerAddress}</p>
-        <p><b>Seller Contact No: </b>${sellerContactNo}</p>
-        <p><b>Seller Shop Name: </b>${shopName}</p><br>
+        <h2>From Notifications: Updated Product </h2>
+        <p><b>Name:</b>${notificationProduct.productName}</p>
+        <p><b>Description</b>${notificationProduct.productDescription}</p>
+        <p><b>Price:</b>${notificationProduct.price}</p>
+        <p><b>Discount</b>${notificationProduct.discount}</p><br>
+        <form action="/viewSellerByProductId/${notificationProduct.productId}/<%=e_id%>">
+            <button type="submit" class="btn btn-outline-primary">View Seller</button>
+        </form>
+
+
 
     </div>
 </div>
+
+
+
 
 <br>
 

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name="ecommerce")
@@ -27,16 +28,42 @@ public class Ecommerce implements Serializable {
     @NotNull
     private String ecommPassword;
 
+    @Column
+    private Date date=new Date(2323223232L);
+
+    @Column
+    private boolean first_login = true;
+
     public Ecommerce(){}
 
     public Ecommerce(long ecommId,
                      @Size(max = 100) @NotNull String ecommName,
                      @Size(max = 100) @NotNull String ecommEmailId,
-                     @NotNull String ecommPassword) {
+                     @NotNull String ecommPassword,
+                     Date date,
+                     boolean first_login
+                    ) {
         this.ecommId = ecommId;
         this.ecommName = ecommName;
         this.ecommEmailId = ecommEmailId;
         this.ecommPassword = ecommPassword;
+        this.date = date;
+        this.first_login = first_login;
+    }
+    public boolean isFirst_login() {
+        return first_login;
+    }
+
+    public void setFirst_login(boolean first_login) {
+        this.first_login = first_login;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public long getEcommId() {

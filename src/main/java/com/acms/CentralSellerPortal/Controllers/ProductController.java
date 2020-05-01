@@ -4,6 +4,7 @@ import com.acms.CentralSellerPortal.Entities.Product;
 import com.acms.CentralSellerPortal.Entities.Seller;
 import com.acms.CentralSellerPortal.Repositories.ProductRepository;
 import com.acms.CentralSellerPortal.Repositories.SellerRepository;
+import com.acms.CentralSellerPortal.Services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,9 @@ public class ProductController {
 
     @Autowired
     SellerRepository sellerRepository;
+
+    @Autowired
+    NotificationService notificationService;
 
     @RequestMapping(value = "/add/{id}", method=RequestMethod.POST)
     public RedirectView addProduct(@PathVariable(value = "id") Long seller_id,
@@ -43,9 +48,14 @@ public class ProductController {
             Seller seller = optionalSeller.get();
             product.setSeller(seller);
             productRepository.save(product);
+            long p_id=product.getProductId();
+            Date dw=new Date();
+            notificationService.save(seller.getSellerName()+" has added a product a new product "+product.getProductName(),dw ,0,p_id);
+
 
             //return "updated..";
         }
+
         RedirectView rv = new RedirectView();
         String rurl="/SellerDashboard.jsp?id="+Long.toString(seller_id);
         rv.setUrl(rurl);
@@ -100,6 +110,13 @@ public class ProductController {
             product.setDiscount(disc);
 
             productRepository.save(product);
+            Seller seller=product.getSeller();
+            long p_id=product.getProductId();
+
+            Date dw=new Date();
+            notificationService.save(seller.getSellerName()+" has updated a product a product "+product.getProductName(),dw ,0,p_id);
+
+
 //            return "updated";
             RedirectView rv = new RedirectView();
             String rurl="/SellerDashboard.jsp?id="+seller_id;

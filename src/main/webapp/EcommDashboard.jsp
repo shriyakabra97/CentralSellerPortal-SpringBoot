@@ -77,6 +77,17 @@
                 </div>
             </form>
         </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form-view-notifivation" action="getAllNotification/<%=e_id%>" method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <button id = "view-notification" type="submit"   style="color: whitesmoke; background-color: #2A2A2A" class="btn"> Notifications</button>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
 
 <%--        <div class="navbar-header">--%>
 <%--            <form class ="form-view" id="view-form-viewproduct"  action = "/products/displayBySellerId/<%=id%>" method="get">--%>
