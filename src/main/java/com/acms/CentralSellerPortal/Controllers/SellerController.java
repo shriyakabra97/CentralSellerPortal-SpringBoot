@@ -3,10 +3,7 @@ import com.acms.CentralSellerPortal.Entities.Product;
 import com.acms.CentralSellerPortal.Entities.Seller;
 import com.acms.CentralSellerPortal.Repositories.ProductRepository;
 import com.acms.CentralSellerPortal.Repositories.SellerRepository;
-import com.acms.CentralSellerPortal.Services.EcommerceService;
-import com.acms.CentralSellerPortal.Services.ProductService;
-import com.acms.CentralSellerPortal.Services.SellerService;
-import com.acms.CentralSellerPortal.Services.NotificationService;
+import com.acms.CentralSellerPortal.Services.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +34,9 @@ public class SellerController {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    private EmailService emailService;
 
 
     @RequestMapping(value="/postSeller"   , method=RequestMethod.POST)
@@ -100,6 +100,10 @@ public class SellerController {
         System.out.println("i got here...");
 
         sellerService.save(seller1);
+        emailService.sendMail("shriyakabra97@gmail.com",
+                "A new seller has registered",
+                seller_name+" has signed up." +
+                        "This is a system generated e-mail. Please do not reply.");
         //model.addAttribute("name", seller_name);
         long s_id=seller1.getSellerId();
 
