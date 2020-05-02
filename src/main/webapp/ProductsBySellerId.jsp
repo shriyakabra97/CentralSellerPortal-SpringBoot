@@ -53,7 +53,7 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form-viewprofile"  action = "/ecomm/viewEcommerce/<%=e_id%>" method="get">
+            <form class ="form-view" id="view-form-viewprofile"  action = "/ecomm/getEcommerce/<%=e_id%>" method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
@@ -75,7 +75,7 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form-view-sellers" action="/sellers/<%=e_id%>" method="get">
+            <form class ="form-view" id="view-form-view-sellers" action="/getAllSellers/<%=e_id%>" method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
@@ -125,7 +125,6 @@
                             <div class="form-group">
                                 <select name="state" id="maxRows" class="form-control" style="width: 120px ;height: 30px; font-size: medium ">
                                     <option value="5000">Show All</option>
-                                    <option value="2">2</option>
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="20">20</option>

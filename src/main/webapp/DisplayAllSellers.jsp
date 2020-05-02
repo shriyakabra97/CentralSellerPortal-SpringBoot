@@ -54,7 +54,7 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form-viewprofile"  action = "/ecomm/viewEcommerce/<%=e_id%>" method="get">
+            <form class ="form-view" id="view-form-viewprofile"  action = "/ecomm/getEcommerce/<%=e_id%>" method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
@@ -76,7 +76,7 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form-view-sellers" action="/sellers/<%=e_id%>" method="get">
+            <form class ="form-view" id="view-form-view-sellers" action="/getAllSellers/<%=e_id%>" method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
@@ -87,7 +87,7 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form-view-notifivation" action="/getAllNotification/<%=e_id%>" method="get">
+            <form class ="form-view" id="view-form-view-notification" action="/getAllNotification/<%=e_id%>" method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
@@ -149,7 +149,7 @@
                             <td>${s.sellerEmailId}</td>
                             <td>
                                 <div class="navbar-header">
-                                    <form class ="form-view" id="view-seller"  action = "/products/viewProductsBySeller/${s.sellerId}/<%=e_id%>" method="get">
+                                    <form class ="form-view" id="view-seller"  action = "/products/getProductsBySeller/${s.sellerId}/<%=e_id%>" method="get">
                                         <form :hidden path="id"/>
                                         <div class="form-row">
                                             <div class="form-group">

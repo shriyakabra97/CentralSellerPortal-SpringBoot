@@ -8,6 +8,8 @@ import com.acms.CentralSellerPortal.Entities.Seller;
 
 import com.acms.CentralSellerPortal.Repositories.EcommerceRepository;
 import com.acms.CentralSellerPortal.Repositories.ProductRepository;
+import com.acms.CentralSellerPortal.Services.EcommerceService;
+import com.acms.CentralSellerPortal.Services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,11 +24,12 @@ import java.util.List;
 public class EcommerceController {
 
     @Autowired
-    EcommerceRepository ecommerceRepository;
-    @Autowired
-    ProductRepository productRepository;
+    EcommerceService ecommerceService;
 
-    @RequestMapping(value="/addecommerce")
+    @Autowired
+    ProductService productService;
+
+    @RequestMapping(value="/postEcommerce")
     public RedirectView addecommerce(@RequestParam("cName") String ecommerce_name,
                                      @RequestParam("cEmailId") String ecommerce_emailId,
                                      @RequestParam("cPassword") String ecommerce_password)
@@ -37,35 +40,35 @@ public class EcommerceController {
         ecommerce.setEcommEmailId(ecommerce_emailId);
         ecommerce.setEcommPassword(ecommerce_password);
 
-        ecommerceRepository.save(ecommerce);
+        ecommerceService.save(ecommerce);
         System.out.println("inside ecomm controller after saving data in db..");
         RedirectView redirectView = new RedirectView();
         redirectView.setContextRelative(true);
         redirectView.setUrl("/index.html");
         return redirectView;
     }
-    @GetMapping("/displayAllEcommerce")
+    @GetMapping("/getAllEcommerce")
     public ResponseEntity<List<Ecommerce>> getAllEcommerce() {
         System.out.println("Evaluating emmorece : ");
-        List<Ecommerce> ecommerceList =ecommerceRepository.findAll();
+        List<Ecommerce> ecommerceList =ecommerceService.findAll();
         System.out.println("Displaying emmorece : ");
         return ResponseEntity.ok().body(ecommerceList);
     }
 
-    @GetMapping(value = "/displayAllProducts")
-    public ResponseEntity<List<Product>> getAllProduct()
-    {
-        List<Product> productList =productRepository.findAll();
-        return ResponseEntity.ok().body(productList);
-    }
+//    @GetMapping(value = "/displayAllProducts")
+//    public ResponseEntity<List<Product>> getAllProduct()
+//    {
+//        List<Product> productList =productService.findAll();
+//        return ResponseEntity.ok().body(productList);
+//    }
 
-    @RequestMapping(value="/viewEcommerce/{e_id}" ,method=RequestMethod.GET)
+    @RequestMapping(value="/getEcommerce/{e_id}" ,method=RequestMethod.GET)
     public RedirectView getSellerById(@PathVariable(value = "e_id") long ecomm_id, HttpSession session)
     {
         System.out.println("Getting your details ecomm..please wait!!");
         System.out.println(ecomm_id);
         //EcommerceRepository ecommerceRepository;
-        Ecommerce ecommerce = ecommerceRepository.findById(ecomm_id).orElse(null);
+        Ecommerce ecommerce = ecommerceService.findById(ecomm_id).orElse(null);
 
         session.setAttribute("ecommEmailId", ecommerce.getEcommEmailId());
         session.setAttribute("ecommName", ecommerce.getEcommName());
@@ -82,7 +85,7 @@ public class EcommerceController {
         return rv;
     }
 
-    @RequestMapping(value="/updateEcommerce/{e_id}" , method=RequestMethod.POST)
+    @RequestMapping(value="/postUpdatedEcommerce/{e_id}" , method=RequestMethod.POST)
     public RedirectView updateUser(
             @PathVariable(value = "e_id") Long ecommId,
             @RequestParam("c_name") String ecommName,
@@ -90,7 +93,7 @@ public class EcommerceController {
             @RequestParam("c_password") String password,
             HttpSession session)
     {
-        Ecommerce ecommerce=ecommerceRepository.findById(ecommId).orElse(null);
+        Ecommerce ecommerce=ecommerceService.findById(ecommId).orElse(null);
         System.out.println("hi................................");
         ecommerce.setEcommName(ecommName);
         ecommerce.setEcommEmailId(ecommEmailId);
@@ -99,7 +102,7 @@ public class EcommerceController {
         session.setAttribute("ecommEmailId", ecommerce.getEcommEmailId());
         session.setAttribute("ecommPassword", ecommerce.getEcommPassword());
 
-        ecommerceRepository.save(ecommerce);
+        ecommerceService.save(ecommerce);
         RedirectView rv = new RedirectView();
         String rurl="/EcommDashboard.jsp?e_id="+Long.toString(ecommerce.getEcommId());
         rv.setUrl(rurl);

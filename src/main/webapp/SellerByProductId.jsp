@@ -26,7 +26,11 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-
+    <style>
+        body{
+            font-family: Ubuntu;
+        }
+    </style>
 </head>
 <body>
 <% long e_id = Long.parseLong(request.getParameter("e_id")); %>
@@ -46,7 +50,7 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form-viewprofile"  action = "/ecomm/viewEcommerce/<%=e_id%>" method="get">
+            <form class ="form-view" id="view-form-viewprofile"  action = "/ecomm/getEcommerce/<%=e_id%>" method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
@@ -68,7 +72,7 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form-view-sellers" action="/sellers/<%=e_id%>" method="get">
+            <form class ="form-view" id="view-form-view-sellers" action="/getAllSellers/<%=e_id%>" method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
@@ -90,17 +94,6 @@
             </form>
         </div>
 
-        <%--        <div class="navbar-header">--%>
-        <%--            <form class ="form-view" id="view-form-viewproduct"  action = "/products/displayBySellerId/<%=id%>" method="get">--%>
-        <%--                <form :hidden path="id"/>--%>
-        <%--                <div class="form-row">--%>
-        <%--                    <div class="form-group">--%>
-        <%--                        <button  id = "view-profile-viewproduct" type="submit"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Products</button>--%>
-        <%--                    </div> <!-- form-group// -->--%>
-        <%--                    <!-- form-group end.// -->--%>
-        <%--                </div>--%>
-        <%--            </form>--%>
-        <%--        </div>--%>
         <div class="navbar-header">
             <form class ="form-view" id="view-form" action="/destroy" method="post">
                 <form :hidden path="id"/>

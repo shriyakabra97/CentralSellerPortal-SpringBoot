@@ -19,6 +19,11 @@ and open the template in the editor.
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <style>
+            body{
+                font-family: Ubuntu;
+            }
+        </style>
 
     </head>
     <body>
@@ -41,7 +46,7 @@ and open the template in the editor.
                         <h4 class="card-title mt-2">Company Sign up</h4>
                     </header>
                     <article class="card-body">
-                        <form class ="form-signin" id="ecomm-admission-form" action = "/ecomm/addecommerce" method="post" ><form>
+                        <form class ="form-signin" id="ecomm-admission-form" action = "/ecomm/postEcommerce" method="post" ><form>
                             <form :hidden path="id"/>
 
                             <div class="form-row">

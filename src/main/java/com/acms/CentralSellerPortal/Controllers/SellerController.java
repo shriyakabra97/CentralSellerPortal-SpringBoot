@@ -3,6 +3,8 @@ import com.acms.CentralSellerPortal.Entities.Product;
 import com.acms.CentralSellerPortal.Entities.Seller;
 import com.acms.CentralSellerPortal.Repositories.ProductRepository;
 import com.acms.CentralSellerPortal.Repositories.SellerRepository;
+import com.acms.CentralSellerPortal.Services.EcommerceService;
+import com.acms.CentralSellerPortal.Services.ProductService;
 import com.acms.CentralSellerPortal.Services.SellerService;
 import com.acms.CentralSellerPortal.Services.NotificationService;
 
@@ -31,14 +33,14 @@ public class SellerController {
     NotificationService notificationService;
 
     @Autowired
-    SellerRepository sellerRepository;
+    EcommerceService ecommerceService;
 
     @Autowired
-    ProductRepository productRepository;
+    ProductService productService;
 
 
-    @RequestMapping(value="/addseller"   , method=RequestMethod.POST)
-    public RedirectView addseller(
+    @RequestMapping(value="/postSeller"   , method=RequestMethod.POST)
+    public RedirectView postSeller(
                                 @RequestParam("s_name") String seller_name,
                                @RequestParam("s_address") String seller_address,
                                @RequestParam("s_shop") String shop_name,
@@ -54,7 +56,7 @@ public class SellerController {
         session.removeAttribute("sellerEmailId");
 
         List<Seller> seller;
-        seller = sellerRepository.findAll();
+        seller = sellerService.findAll();
 
 
         //checking for if entry already exist for unique attribute
@@ -97,7 +99,7 @@ public class SellerController {
         seller1.setSellerPassword(password);
         System.out.println("i got here...");
 
-        sellerRepository.save(seller1);
+        sellerService.save(seller1);
         //model.addAttribute("name", seller_name);
         long s_id=seller1.getSellerId();
 
@@ -120,7 +122,7 @@ public class SellerController {
     ){
         if(sellerId==0){
             //get product
-            Product notificationProduct= productRepository.findByProductId(productId);
+            Product notificationProduct= productService.findByProductId(productId);
             session.setAttribute("notificationProduct", notificationProduct);
             RedirectView rv = new RedirectView();
             String rurl="/ViewProductNotification.jsp?e_id="+Long.toString(ecommId);
@@ -131,7 +133,7 @@ public class SellerController {
 
         }else {
             //get seller
-            Seller notificationSeller = sellerRepository.findById(sellerId).orElse(null);
+            Seller notificationSeller = sellerService.findById(sellerId);
             session.setAttribute("notificationSeller", notificationSeller);
             RedirectView rv = new RedirectView();
             String rurl="/ViewSellerNotification.jsp?e_id="+Long.toString(ecommId);
@@ -142,12 +144,12 @@ public class SellerController {
 
     }
 
-    @GetMapping("/sellers/{e_id}")
+    @GetMapping("/getAllSellers/{e_id}")
     public RedirectView getAllSellers(
             @PathVariable("e_id") Long ecommId,
             HttpSession session)
     {
-        List<Seller> sellerList = sellerRepository.findAll();
+        List<Seller> sellerList = sellerService.findAll();
         session.setAttribute("sellerList", sellerList);
 
         //return ResponseEntity.ok().body(sellerList);
@@ -167,14 +169,14 @@ public class SellerController {
 //        Seller seller =sellerRepository.findById(seller_id).orElse(null);
 //        return ResponseEntity.ok().body(seller);
 //    }
-    @RequestMapping(value="/viewSellerByProductId/{p_id}/{e_id}" ,method=RequestMethod.GET)
+    @RequestMapping(value="/getSellerByProductId/{p_id}/{e_id}" ,method=RequestMethod.GET)
     public RedirectView getSellerByProductId(
             @PathVariable(value = "p_id") long productId,
             @PathVariable(value = "e_id") long ecommId,
             HttpSession session)
     {
         //Seller seller = sellerRepository.findByProductId_ProductId(productId);
-        Product product= productRepository.findByProductId(productId);
+        Product product= productService.findByProductId(productId);
         Seller seller = product.getSeller();
         //System.out.println(product.getSeller().getSellerId());
         //Seller seller = sellerRepository.findById(seller_id).orElse(null);
@@ -192,12 +194,12 @@ public class SellerController {
 
     }
 
-    @RequestMapping(value="/viewSeller/{id}" ,method=RequestMethod.GET)
+    @RequestMapping(value="/getSellerById/{id}" ,method=RequestMethod.GET)
     public RedirectView getSellerById(@PathVariable(value = "id") long seller_id, HttpSession session)
     {
         System.out.println("Getting your details seller..please wait!!");
         System.out.println(seller_id);
-        Seller seller = sellerRepository.findById(seller_id).orElse(null);
+        Seller seller = sellerService.findById(seller_id);
 
         session.setAttribute("sellerContactNo", seller.getSellerContactNo());
         session.setAttribute("sellerAddress", seller.getSellerAddress());
@@ -219,7 +221,7 @@ public class SellerController {
 
 
 
-    @RequestMapping(value="/UpdateSeller/{id}" , method=RequestMethod.POST)
+    @RequestMapping(value="/postUpdatedSeller/{id}" , method=RequestMethod.POST)
     public RedirectView updateUser(
             @PathVariable(value = "id") Long seller_id,
             @RequestParam("s_name") String seller_name,
@@ -232,7 +234,7 @@ public class SellerController {
             )
 
     {
-        Seller seller =sellerRepository.findById(seller_id).orElse(null);
+        Seller seller =sellerService.findById(seller_id);
         System.out.println("hi................................");
         seller.setSellerName(seller_name);
         seller.setSellerAddress(seller_address);
@@ -241,7 +243,7 @@ public class SellerController {
         seller.setSellerContactNo(seller_contactNo);
         seller.setSellerPassword(password);
 
-        sellerRepository.save(seller);
+        sellerService.save(seller);
         session.setAttribute("sellerId", seller.getSellerId());
         session.setAttribute("shopName", seller.getShopName());
         session.setAttribute("sellerContactNo", seller.getSellerContactNo());

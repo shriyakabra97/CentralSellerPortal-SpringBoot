@@ -5,6 +5,8 @@ import com.acms.CentralSellerPortal.Entities.Seller;
 import com.acms.CentralSellerPortal.Repositories.ProductRepository;
 import com.acms.CentralSellerPortal.Repositories.SellerRepository;
 import com.acms.CentralSellerPortal.Services.NotificationService;
+import com.acms.CentralSellerPortal.Services.ProductService;
+import com.acms.CentralSellerPortal.Services.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,15 +24,15 @@ import java.util.Optional;
 public class ProductController {
 
     @Autowired
-    ProductRepository productRepository;
+    ProductService productService;
 
     @Autowired
-    SellerRepository sellerRepository;
+    SellerService sellerService;
 
     @Autowired
     NotificationService notificationService;
 
-    @RequestMapping(value = "/add/{id}", method=RequestMethod.POST)
+    @RequestMapping(value = "/postProduct/{id}", method=RequestMethod.POST)
     public RedirectView addProduct(@PathVariable(value = "id") Long seller_id,
                                    @RequestParam("p_name") String n ,
                                    @RequestParam("p_description") String d,
@@ -43,11 +45,12 @@ public class ProductController {
         product.setPrice(p);
         product.setDiscount(disc);
 
-        Optional<Seller> optionalSeller = sellerRepository.findById(seller_id);
+        //this can be wrong
+        Optional<Seller> optionalSeller = Optional.ofNullable(sellerService.findById(seller_id));
         if(optionalSeller.isPresent()) {
             Seller seller = optionalSeller.get();
             product.setSeller(seller);
-            productRepository.save(product);
+            productService.save(product);
             long p_id=product.getProductId();
             Date dw=new Date();
             notificationService.save(seller.getSellerName()+" has added a product a new product "+product.getProductName(),dw ,0,p_id);
@@ -62,18 +65,19 @@ public class ProductController {
         return rv;
 
     }
-    @RequestMapping(value="/viewProductsBySeller/{id}/{e_id}" ,method=RequestMethod.GET)
-    public RedirectView getSellerByProductId(
+    @RequestMapping(value="/getProductsBySeller/{id}/{e_id}" ,method=RequestMethod.GET)
+    public RedirectView getProductBySeller(
             @PathVariable(value = "id") long sellerId,
             @PathVariable(value = "e_id") long ecommId,
             HttpSession session)
     {
-        List<Product> productList = productRepository.findBySeller_SellerId(sellerId);
+        List<Product> productList = productService.findBySeller_SellerId(sellerId);
         System.out.println("getting Products");
         System.out.println(productList);
         session.setAttribute("productList",productList);
         System.out.println(session.getAttribute("productList"));
-        Optional<Seller> optionalSeller = sellerRepository.findById(sellerId);
+        //this can be wrong
+        Optional<Seller> optionalSeller = Optional.ofNullable(sellerService.findById(sellerId));
         if(optionalSeller.isPresent()){
             Seller seller = optionalSeller.get();
             String sellerName = seller.getSellerName();
@@ -94,14 +98,15 @@ public class ProductController {
 
     }
 
-    @RequestMapping(value = "/update/{p_id}/{id}" , method = RequestMethod.POST)
+    @RequestMapping(value = "/postUpdatedProduct/{p_id}/{id}" , method = RequestMethod.POST)
     public RedirectView updateProduct(@PathVariable(value = "p_id") Long product_id,@PathVariable(value = "id") Long seller_id,
                                 @RequestParam("ep_name") String n ,
                                 @RequestParam("ep_description") String d,
                                 @RequestParam("ep_price") int p,
                                 @RequestParam("ep_discount") int disc)
     {
-        Optional<Product> optionalProduct = productRepository.findById(product_id);
+        //this can be wrong
+        Optional<Product> optionalProduct = Optional.ofNullable(productService.findById(product_id));
         if(optionalProduct.isPresent()) {
             Product product = optionalProduct.get();
             product.setProductName(n);
@@ -109,7 +114,7 @@ public class ProductController {
             product.setPrice(p);
             product.setDiscount(disc);
 
-            productRepository.save(product);
+            productService.save(product);
             Seller seller=product.getSeller();
             long p_id=product.getProductId();
 
@@ -134,13 +139,13 @@ public class ProductController {
         }
     }
 
-    @GetMapping(value = "/displayAll/{e_id}")
+    @GetMapping(value = "/getAllProducts/{e_id}")
     public RedirectView getAllProduct(
             @PathVariable("e_id") Long ecommId,
             HttpSession session
     )
     {
-        List<Product> allProductList =productRepository.findAll();
+        List<Product> allProductList =productService.findAll();
         session.setAttribute("allProductList",allProductList );
         RedirectView rv = new RedirectView();
         System.out.println(session.getAttributeNames());
@@ -153,17 +158,17 @@ public class ProductController {
     }
 
 
-    @GetMapping(value = "/displayById")
-    public ResponseEntity<Product> getProductById(@RequestParam Long  product_id)
-    {
-        Product product =productRepository.findById(product_id).orElse(null);
-        return ResponseEntity.ok().body(product);
-    }
+//    @GetMapping(value = "/displayById")
+//    public ResponseEntity<Product> getProductById(@RequestParam Long  product_id)
+//    {
+//        Product product =productService.findById(product_id);
+//        return ResponseEntity.ok().body(product);
+//    }
     @RequestMapping(value = "/delete/{p_id}/{id}")
     public RedirectView deleteProduct(@PathVariable(value = "p_id") Long product_id,
                                       @PathVariable(value = "id") Long seller_id
                                       ){
-        productRepository.deleteById(product_id);
+        productService.deleteById(product_id);
 
         RedirectView redirectView = new RedirectView();
         redirectView.setContextRelative(true);
@@ -172,10 +177,10 @@ public class ProductController {
         return redirectView;
     }
 
-    @RequestMapping(value = "/displayBySellerId/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getBySellerId/{id}", method = RequestMethod.GET)
     public RedirectView getProductBySellerId(@PathVariable(value = "id") long seller_id, HttpSession session)
     {
-        List<Product> productList = productRepository.findBySeller_SellerId(seller_id);
+        List<Product> productList = productService.findBySeller_SellerId(seller_id);
         System.out.println("getting Products");
         System.out.println(productList);
         session.setAttribute("productList",productList);

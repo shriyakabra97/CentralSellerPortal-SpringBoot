@@ -33,6 +33,11 @@
     });
     });
     </script>
+    <style>
+        body{
+            font-family: Ubuntu;
+        }
+    </style>
 
 
 </head>
@@ -53,7 +58,7 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form-viewprofile"  action = "/viewSeller/<%=id%>" method="get">
+            <form class ="form-view" id="view-form-viewprofile"  action = "/getSellerById/<%=id%>" method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
@@ -86,7 +91,7 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form-viewproduct"  action = "/products/displayBySellerId/<%=id%>" method="get">
+            <form class ="form-view" id="view-form-viewproduct"  action = "/products/getBySellerId/<%=id%>" method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">

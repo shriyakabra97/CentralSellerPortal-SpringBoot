@@ -45,7 +45,7 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form-viewprofile"  action = "/ecomm/viewEcommerce/<%=e_id%>" method="get">
+            <form class ="form-view" id="view-form-viewprofile"  action = "/ecomm/getEcommerce/<%=e_id%>" method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
@@ -67,7 +67,7 @@
             </form>
         </div>
         <div class="navbar-header">
-            <form class ="form-view" id="view-form-view-sellers" action="/products/displayAll/<%=e_id%>" method="get">
+            <form class ="form-view" id="view-form-view-sellers" action="/products/getAllProducts/<%=e_id%>" method="get">
                 <form :hidden path="id"/>
                 <div class="form-row">
                     <div class="form-group">
@@ -77,18 +77,6 @@
                 </div>
             </form>
         </div>
-
-        <%--        <div class="navbar-header">--%>
-        <%--            <form class ="form-view" id="view-form-viewproduct"  action = "/products/displayBySellerId/<%=id%>" method="get">--%>
-        <%--                <form :hidden path="id"/>--%>
-        <%--                <div class="form-row">--%>
-        <%--                    <div class="form-group">--%>
-        <%--                        <button  id = "view-profile-viewproduct" type="submit"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Products</button>--%>
-        <%--                    </div> <!-- form-group// -->--%>
-        <%--                    <!-- form-group end.// -->--%>
-        <%--                </div>--%>
-        <%--            </form>--%>
-        <%--        </div>--%>
         <div class="navbar-header">
             <form class ="form-view" id="view-form" action="/destroy" method="post">
                 <form :hidden path="id"/>
@@ -128,7 +116,7 @@
                             <td>${e.discount}</td>
                             <td>
                                 <div class="navbar-header">
-                                    <form class ="form-view" id="view-seller"  action = "/viewSellerByProductId/${e.productId}/<%=e_id%>" method="get">
+                                    <form class ="form-view" id="view-seller"  action = "/getSellerByProductId/${e.productId}/<%=e_id%>" method="get">
                                         <form :hidden path="id"/>
                                         <div class="form-row">
                                             <div class="form-group">

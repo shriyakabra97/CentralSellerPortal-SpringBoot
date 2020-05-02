@@ -18,6 +18,11 @@ and open the template in the editor.
     <link rel="stylesheet" href="../../css/main.css">
     <script src="../../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <style>
+        body{
+            font-family: Ubuntu;
+        }
+    </style>
 
 </head>
 <body>
@@ -39,7 +44,7 @@ and open the template in the editor.
                     <h4 class="card-title mt-2">Seller Sign up</h4>
                 </header>
                 <article class="card-body">
-                    <form class ="form-signin" id="admission-form" action = "/addseller" method="post" ><form>
+                    <form class ="form-signin" id="admission-form" action = "/postSeller" method="post" ><form>
                         <form :hidden path="id"/>
                         <div class="form-row">
                             <div class="col form-group">
@@ -90,25 +95,6 @@ and open the template in the editor.
 
                             });
                         </script>
-<%--                        <script>--%>
-<%--                            function validateemail()--%>
-<%--                            {--%>
-<%--                                var x=document.myform.s_mail.value;--%>
-<%--                                var atposition=x.indexOf("@");--%>
-<%--                                var dotposition=x.lastIndexOf(".");--%>
-<%--                                if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){--%>
-<%--                                    alert("Please enter a valid e-mail address \n atpostion:"+atposition+"\n dotposition:"+dotposition);--%>
-<%--                                    return false;--%>
-<%--                                }--%>
-<%--                            }--%>
-<%--                        </script>--%>
-
-
-
-
-
-
-
                         <div class="form-group">
                             <button id="sub-btn" type="submit" class="btn btn-primary btn-block"> Register  </button>
                         </div>
