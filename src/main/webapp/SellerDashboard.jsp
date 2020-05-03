@@ -1,4 +1,4 @@
-
+<%@ page import="com.acms.CentralSellerPortal.Controllers.SpringSessionController" %>
 <%@ page import="com.acms.CentralSellerPortal.Entities.Seller" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.acms.CentralSellerPortal.Entities.Product" %>
@@ -21,115 +21,108 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
     <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="../css/main.css">
+
+<%--    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">--%>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+    <script>
+    $(document).ready(function(){
+    $("#view-form-viewprofile").click(function(){
+    $("#profile").show();
+    });
+    });
+    </script>
+    <style>
+        body{
+            font-family: Ubuntu;
+        }
+    </style>
 
 
 </head>
 <body>
+<% long id = Long.parseLong(request.getParameter("id")); %>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="font-size: medium; background-color: #2A2A2A ; font-family: Ubuntu">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#" method="get" style="color:gray ; font-size: 18px">Central Seller Portal</a>
+            <form class ="form-view" id="view-form-head"   method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <a  type="submit"  href="/SellerDashboard.jsp?id=<%=id%>" style="color: whitesmoke" class="btn"> Central Seller Portal</a>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form-viewprofile"  action = "/getSellerById/<%=id%>" method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <button id = "view-profile" type="submit"   style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Your Profile</button>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form-updateseller"  method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <a class="btn" href="/UpdateSellerProfile.jsp?id=<%=id%>" style="color: whitesmoke; background-color: #2A2A2A" action="UpdateSellerProfile.jsp" role="button">Update Profile</a>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form-addproduct"   method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <a  id = "view-profile-addproduct" type="submit" href="/AddProduct.jsp?id=<%=id%>"  action="AddProduct.jsp"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> Add Product</a>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form-viewproduct"  action = "/products/getBySellerId/<%=id%>" method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <button  id = "view-profile-viewproduct" type="submit"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Products</button>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form" action="/destroy" method="post">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <button class="btn" type="submit" style="color: whitesmoke; background-color: #2A2A2A" role="button">Logout</button>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
         </div>
     </div>
 </nav>
 <br>
-
 <div class="jumbotron">
-    <div class="container">
-
-
-
-        <% long id = Long.parseLong(request.getParameter("id")); %>
-<%--        <jsp:useBean id="seller" scope="request" class="com.acms.CentralSellerPortal.Entities.Seller"/>--%>
-        <form class ="form-view" id="view-form"  action = "/viewSeller/<%=id%>" method="get">
-            <form :hidden path="id"/>
-            <div class="form-row">
-                <div class="form-group">
-                    <button  type="submit"   class="btn btn-primary btn-block"> View Your Profile</button>
-                </div> <!-- form-group// -->
-                <!-- form-group end.// -->
-            </div>
-        </form>
-
-
-<%--        ${seller}--%>
-        <td>Welcome   ${sellerName}         </td>
-        <br>
-        <td>Contact No:   ${sellerContactNo}</td>
-        <br>
-        <td>E-mail:   ${sellerEmailId}      </td>
-        <br>
-        <td>Store Name:    ${shopName}       </td>
-        <br>
-        <td>Address:   ${sellerAddress}     </td>
-        <br>
-        <br>
-        <a class="btn btn-primary" href="/UpdateSellerProfile.jsp?id=<%=id%>"  action="UpdateSellerprofile.jsp" role="button">Update Profile</a>
-        <a class="btn btn-primary" href="/index.html" role="button">Logout</a>
+    <div class="container" style="font-family: Ubuntu; font-size: large">
+        <h1> Welcome, ${sellerName}.</h1>
+        <h1> Here is your Business Platform!</h1>
+        <p>We provide platform for crores of Businesses to interact and grow. No Listing fees, easy steps and professional support that helps you grow your business.</p>
+        <p >Start Selling...</p>
     </div>
 </div>
-
-<div class="container">
-    <div class="row">
-        <form class ="form-view" id="view-form-products"  action = "/products/displayBySellerId/<%=id%>" method="get">
-            <form :hidden path="id"/>
-            <div class="form-row">
-                <div class="form-group">
-                    <button  type="submit"   class="btn btn-primary btn-block"> View Your Products</button>
-                </div> <!-- form-group// -->
-                <!-- form-group end.// -->
-            </div>
-        </form>
-
-
-        <div class="col-md-12">
-            <h4> ${sellerName}, Here are your Listed Products</h4>
-            <div class="table-responsive">
-
-
-                <table id="mytable" class="table table-bordred table-striped">
-
-                    <thead>
-                    <th>ProductID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Price(Rs.)</th>
-                    <th>Discount(%)</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                    </thead>
-                    <tbody>
-<%--                    <jsp:useBean id="productList" scope="request" type="java.util.List" class="com.acms.CentralSellerPortal.Entities.Product"/>--%>
-                    <c:forEach var="e" items="${productList}">
-                    <tr>
-                        <td>${e.productId}</td>
-                        <td>${e.productName}</td>
-                        <td>${e.productDescription}</td>
-                        <td>${e.price}</td>
-                        <td>${e.discount}</td>
-                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><i class="fas fa-pencil-square-o"></i></button></p></td>
-                        <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><i class="fas fa-trash"></i></button></p></td>
-                    </tr>
-                    </c:forEach>
-
-
-
-                    </tbody>
-
-                </table>
-
-                <div class="clearfix"></div>
-
-            </div>
-
-        </div>
-    </div>
-</div>
-<dev class="container">
-    <a id="add_row"  href="/AddProduct.jsp?id=<%=id%>"  action="AddProduct.jsp"  class="btn btn-primary float-right" style="color: white; margin-right: 30px ;margin-bottom: 30px ; margin-top: 10px" role="button">Add Product</a>
-</dev>
 
 <br>
 

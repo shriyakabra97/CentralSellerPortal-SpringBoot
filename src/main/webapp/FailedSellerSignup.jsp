@@ -31,6 +31,7 @@
             <br><br> <h2 style="color: darksalmon">Failed to Signup</h2>
             <br>
             <p style="color: darksalmon; font-size: large; font-family: Arial">Something went wrong. Sorry for the inconvenience.</p><br><br>
+            <p style="color: darksalmon; font-size: large; font-family: Arial">${sellerContactNo} ${sellerEmailId} already exists.</p><br><br>
             <a href="SignUpAsSeller.jsp" action="SignUpAsSeller.jsp" class="btn btn-primary" style="font-size: medium"> Return to Signup </a>
             <br><br>
         </div>

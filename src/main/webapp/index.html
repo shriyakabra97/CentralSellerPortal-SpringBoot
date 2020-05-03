@@ -16,6 +16,7 @@
 
     <style>
         body {
+            font-family: Ubuntu;
             padding-top: 50px;
             padding-bottom: 20px;
         }
@@ -72,25 +73,24 @@
                         <input type="submit"  id="sub" class="btnSubmit" value="Login" />
                     </div>
                     <div class="form-group">
-                        <a href="SignUpAsSeller.html" action="SignUpAsSeller.html" class="ForgetPwd">Not a seller yet? Register here..</a>
+                        <a href="SignUpAsSeller.jsp" action="SignUpAsSeller.jsp" class="ForgetPwd">Not a member yet? Register here..</a>
                     </div>
                 </form>
             </div>
             <div class="col-md-6 login-form-2">
-                <h3>Company?</h3>
-                <form>
+                <h3>E-commerce Platform?</h3>
+                <form id="ecomm-login-form" action = "/verifyecommerce" method="get">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Contact No." value="" />
+                        <input type="text" name="c_email" class="form-control" placeholder="Email Id" value="" />
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Your Password" value="" />
+                        <input type="password" name="c_password" class="form-control" placeholder="Your Password" value="" />
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btnSubmit" value="Login" />
                     </div>
                     <div class="form-group">
-
-                        <a href="SignUpAsCompany.html" action="SignUpAsCompany.html" class="ForgetPwd" value="Login">Not a company yet? Register here..</a>
+                        <a href="SignUpAsCompany.jsp" action="SignUpAsCompany.jsp" class="ForgetPwd" value="Login">Not a member yet? Register here..</a>
                     </div>
                 </form>
             </div>
@@ -98,40 +98,15 @@
     </div>
     <div class="row">
 
-        <!--        <div class="col-md-4">
-                  <h2>Seller?</h2>
-                  <form>
-
-                  </form>
-                  <p><a class="btn btn-default" href="#" role="button">Don't have a Seller Account, Sign up here. &raquo;</a></p>
-                </div>
-                <div class="col-md-4">
-                  <h2>Company?</h2>
-                  <p><a class="btn btn-default" href="#" role="button">Don't have a Company Account, Sign up here. &raquo;</a></p>
-               </div>-->
 
     </div>
 
     <hr>
 
-    <footer>
-        <p><a>Hello Admin, click here to login</a></p>
-    </footer>
-</div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+<!--    <footer>-->
+<!--        <p><a>Hello Admin, click here to login</a></p>-->
+<!--    </footer>-->
+</div> <!-- /container -->
 
-<script src="js/vendor/bootstrap.min.js"></script>
-
-<script src="js/main.js"></script>
-
-<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-<script>
-    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-        e.src='//www.google-analytics.com/analytics.js';
-        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-    ga('create','UA-XXXXX-X','auto');ga('send','pageview');
-</script>
 </body>
 </html>

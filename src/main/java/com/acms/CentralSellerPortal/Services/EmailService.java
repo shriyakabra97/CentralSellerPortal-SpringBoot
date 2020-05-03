@@ -1,15 +1,22 @@
 package com.acms.CentralSellerPortal.Services;
 
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.mail.SimpleMailMessage;
-        import org.springframework.mail.javamail.JavaMailSender;
-        import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
 
 @Service("emailService")
 public class EmailService
 {
+
+    private static JavaMailSender mailSender;
+
+
     @Autowired
-    private JavaMailSender mailSender;
+    public void setJavaMailer(JavaMailSender mailSender) {
+        EmailService.mailSender=mailSender;
+    }
+
 
     // @Autowired
     //  private SimpleMailMessage preConfiguredMessage;
@@ -17,7 +24,7 @@ public class EmailService
     /**
      * This method will send compose and send the message
      * */
-    public void sendMail(String to, String subject, String body)
+    public static void sendMail(String to, String subject, String body)
     {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);

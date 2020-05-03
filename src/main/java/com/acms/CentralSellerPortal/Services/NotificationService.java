@@ -21,6 +21,8 @@ public class NotificationService {
     @Autowired
     EcommerceRepository ecommerceRepository;
 
+    public static boolean flag = false;
+
     public void save(String message,
                      Date date,long s_id,long p_id)
     {
@@ -30,6 +32,7 @@ public class NotificationService {
         //notification.setNotification_message(message);
 
         notificationRepository.save(notification);
+        flag= true;
     }
 
      public List<Notification> findByE_Id(long e_id)

@@ -11,12 +11,81 @@
     <link rel="stylesheet" href="../../css/main.css">
     <script src="../../js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
     <title>Update Seller Profile</title>
+    <style>
+        body{
+            font-family: Ubuntu;
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<% long id = Long.parseLong(request.getParameter("id")); %>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="font-size: medium; background-color: #2A2A2A ; font-family: Ubuntu">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#" style="color:gray ; font-size: 18px">Central Seller Portal</a>
+            <form class ="form-view" id="view-form-head"   method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <a  type="submit"  href="/SellerDashboard.jsp?id=<%=id%>" style="color: whitesmoke" class="btn"> Central Seller Portal</a>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form-viewprofile"  action = "/getSellerById/<%=id%>" method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <button id = "view-profile" type="submit"   style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Your Profile</button>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form-updateseller"  method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <a class="btn" href="/UpdateSellerProfile.jsp?id=<%=id%>" style="color: whitesmoke; background-color: #2A2A2A" action="UpdateSellerProfile.jsp" role="button">Update Profile</a>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form-addproduct"   method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <a  id = "view-profile-addproduct" type="submit" href="/AddProduct.jsp?id=<%=id%>"  action="AddProduct.jsp"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> Add Product</a>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form-viewproduct"  action = "/products/getBySellerId/<%=id%>" method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <button  id = "view-profile-viewproduct" type="submit"  style="color: whitesmoke; background-color: #2A2A2A" class="btn"> View Products</button>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
+        </div>
+        <div class="navbar-header">
+            <form class ="form-view" id="view-form" action="/destroy" method="get">
+                <form :hidden path="id"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <button class="btn" href="/index.html" type="submit" style="color: whitesmoke; background-color: #2A2A2A" role="button">Logout</button>
+                    </div> <!-- form-group// -->
+                    <!-- form-group end.// -->
+                </div>
+            </form>
         </div>
     </div>
 </nav>
@@ -29,8 +98,8 @@
                 <h4 class="card-title mt-2">Update Seller Profile</h4>
             </header>
             <article class="card-body">
-                <% long id = Long.parseLong(request.getParameter("id")); %>
-                <form class ="form-update" id="updation-form" action = "/UpdateSeller/<%=id%>" method="post">
+
+                <form class ="form-update" id="updation-form" action = "/postUpdatedSeller/<%=id%>" method="post">
                     <form :hidden path="id"/>
                     <div class="form-row">
                         <div class="col form-group">
@@ -46,23 +115,23 @@
                     </div>
                     <div class="form-group">
                         <label>Mobile No.</label>
-                        <input type="number" id="s_mobile" name="s_mobile"  class="form-control" value=${sellerContact} placeholder=${sellerContact}>
+                        <input type="number" id="s_mobile" name="s_mobile"  class="form-control" value=${sellerContactNo} placeholder=${sellerContactNo}>
 
                     </div>
                     <div class="form-group">
                         <label>Email address</label>
-                        <input type="email" id="s_mail" name="s_mail" class="form-control"  value= ${sellerEmail} placeholder=${sellerEmail}>
+                        <input type="email" id="s_mail" name="s_mail" class="form-control"  value= ${sellerEmailId} placeholder=${sellerEmailId}>
                     </div> <!-- form-group end.// -->
                     <div class="form-group">
                         <label>Store Name</label>
-                        <input type="text" id="s_shop" name="s_shop"  class="form-control" value=${sellerShopName} placeholder=${sellerShopName}>
+                        <input type="text" id="s_shop" name="s_shop"  class="form-control" value=${shopName} placeholder=${shopName}>
 
                     </div>
 
 
                     <div class="form-group">
                         <label>Password</label>
-                        <input class="form-control" id="s_password" name="s_password"  value=${seller_pass} placeholder=${seller_pass} type="password" >
+                        <input class="form-control" id="s_password" name="s_password"  value=${sellerPassword} placeholder=${sellerPassword} type="password" >
                     </div> <!-- form-group end.// -->
 
                     <br>

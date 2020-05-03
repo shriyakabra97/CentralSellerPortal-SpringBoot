@@ -41,7 +41,7 @@ public class SellerController {
     EcommerceService ecommerceService;
 
 
-    @RequestMapping(value="/addseller"   , method=RequestMethod.POST)
+    @RequestMapping(value="/postSeller"   , method=RequestMethod.POST)
     public RedirectView postSeller(
                                 @RequestParam("s_name") String seller_name,
                                @RequestParam("s_address") String seller_address,
