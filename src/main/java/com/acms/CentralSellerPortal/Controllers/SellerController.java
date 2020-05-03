@@ -104,6 +104,7 @@ public class SellerController {
                 "A new seller has registered",
                 seller_name+" has signed up." +
                         "This is a system generated e-mail. Please do not reply.");
+
         //model.addAttribute("name", seller_name);
         long s_id=seller1.getSellerId();
 
