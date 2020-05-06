@@ -1,7 +1,3 @@
-/*
-Autor Anmol Tuteja
-adding a service layer to access the db
- */
 package com.acms.CentralSellerPortal.Services;
 
 import com.acms.CentralSellerPortal.Entities.Seller;
@@ -15,7 +11,7 @@ import java.util.List;
 public class SellerService {
 
     @Autowired
-    SellerRepository sellerRepository;
+    private SellerRepository sellerRepository;
 
     public void save(Seller seller) {
         sellerRepository.save(seller);
@@ -34,4 +30,3 @@ public class SellerService {
     }
 
 }
-

@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.TimerTask;
 
 @SpringBootApplication
 @EnableJpaRepositories
+@RequestMapping("/HomePage")
 public class CentralSellerPortalApplication {
 
 	private static EmailService emailService;
@@ -71,6 +73,8 @@ public class CentralSellerPortalApplication {
 
 
 	}
+
+
 
 
 }

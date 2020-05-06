@@ -1,13 +1,10 @@
-/* Anmol Tuteja
-Entity class for creating table with this schema in database
-with one to many mapping to product table
-*/
 package com.acms.CentralSellerPortal.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
@@ -20,50 +17,50 @@ public class Seller implements Serializable {
     private long sellerId;
 
     @Column
-    @Size(max=100)
+    @Size(max=50)
     @NotNull
     private String sellerName;
 
     @Column
-    @Size(max=300)
+    @Size(max=100)
     @NotNull
     private String sellerAddress;
 
     @Column
-    @Size(max=100)
+    @Size(max=50)
     @NotNull
     private String shopName;
 
     @Column(unique= true)
     @Size(max=10)
     @NotNull
+    @Pattern(regexp="(^$|[0-9]{10})")
     private String sellerContactNo;
 
     @Column(unique= true)
-    @Size(max=100)
+    @Size(max=30)
     @NotNull
+    @Pattern(regexp = "(^(\\D)+(\\w)*((\\.(\\w)+)?)+@(\\D)+(\\w)*((\\.(\\D)+(\\w)*)+)?(\\.)[a-z]{2,}$)")
     private String sellerEmailId;
 
     @Column
     @NotNull
+    @Pattern(regexp="(^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$)")
     private String sellerPassword;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Product> product;
 
-    //constructor
+
     public Seller() {}
 
-    public Seller(@NotNull String seller_name, @NotNull String seller_address, @NotNull String shop_name, @NotNull String seller_contactNo, @NotNull String seller_emailId , @NotNull String seller_password ) {
-        this.sellerName = seller_name;
-        this.sellerAddress = seller_address;
-        this.shopName = shop_name;
-        this.sellerContactNo = seller_contactNo;
-        this.sellerEmailId = seller_emailId;
-        this.sellerPassword = seller_password;
-    }
 
+    public Seller(@Size(max = 50) @NotNull String sellerName, @Size(max = 100) @NotNull String sellerAddress, @Size(max = 50) @NotNull String shopName, @Size(max = 10) @NotNull @Pattern(regexp = "(^$|[0-9]{10})") String sellerContactNo, @Size(max = 30) @NotNull @Pattern(regexp = "(^(\\D)+(\\w)*((\\.(\\w)+)?)+@(\\D)+(\\w)*((\\.(\\D)+(\\w)*)+)?(\\.)[a-z]{2,}$)") String sellerEmailId, @NotNull @Pattern(regexp = "(^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$)") String sellerPassword) {
+        this.sellerName = sellerName;
+        this.sellerAddress = sellerAddress;
+        this.shopName = shopName;
+        this.sellerContactNo = sellerContactNo;
+        this.sellerEmailId = sellerEmailId;
+        this.sellerPassword = sellerPassword;
+    }
 
     public long getSellerId() {
         return sellerId;
@@ -121,14 +118,6 @@ public class Seller implements Serializable {
         this.sellerPassword = seller_password;
     }
 
-
-   public List<Product> getProduct() {
-       return product;
-    }
-
-    public void setProduct(List<Product> product) {
-       this.product = product;
-    }
 
 
 }

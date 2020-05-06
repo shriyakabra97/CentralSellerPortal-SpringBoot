@@ -2,70 +2,64 @@ package com.acms.CentralSellerPortal.Entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
-
 @Entity
 @Table(name="ecommerce")
-public class Ecommerce  implements Serializable {
+
+public class Ecommerce implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long ecommId;
 
     @Column
-    @Size(max=100)
+    @Size(max=50)
     @NotNull
     private String ecommName;
 
     @Column(unique= true)
-    @Size(max=100)
+    @Size(max=30)
     @NotNull
+    @Pattern(regexp = "(^(\\D)+(\\w)*((\\.(\\w)+)?)+@(\\D)+(\\w)*((\\.(\\D)+(\\w)*)+)?(\\.)[a-z]{2,}$)")
     private String ecommEmailId;
 
     @Column
     @NotNull
+    @Pattern(regexp="(^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$)")
     private String ecommPassword;
 
+    @NotNull
     @Column
     private Date date=new Date(2323223232L);
 
-    @Column(name="first_login" , columnDefinition = "BOOL default true")
-    private boolean First_login= true;
+    @Column
+    private boolean first_login = true;
 
-    public Ecommerce() {
-    }
+    public Ecommerce(){}
 
-
-    public Ecommerce(@Size(max = 100) @NotNull String ecommName, @Size(max = 100) @NotNull String ecommEmailId, @NotNull String ecommPassword, Date date) {
+    public Ecommerce(@Size(max = 50) @NotNull String ecommName, @Size(max = 30) @NotNull @Pattern(regexp = "(^(\\D)+(\\w)*((\\.(\\w)+)?)+@(\\D)+(\\w)*((\\.(\\D)+(\\w)*)+)?(\\.)[a-z]{2,}$)") String ecommEmailId, @NotNull @Pattern(regexp = "(^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$)") String ecommPassword, @NotNull Date date, boolean first_login) {
         this.ecommName = ecommName;
         this.ecommEmailId = ecommEmailId;
         this.ecommPassword = ecommPassword;
         this.date = date;
+        this.first_login = first_login;
     }
 
-    public Ecommerce(@Size(max = 100) @NotNull String ecommName, @Size(max = 100) @NotNull String ecommEmailId, @NotNull String ecommPassword) {
+    public Ecommerce(@Size(max = 50) @NotNull String ecommName, @Size(max = 30) @NotNull @Pattern(regexp = "(^(\\D)+(\\w)*((\\.(\\w)+)?)+@(\\D)+(\\w)*((\\.(\\D)+(\\w)*)+)?(\\.)[a-z]{2,}$)") String ecommEmailId, @NotNull @Pattern(regexp = "(^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$)") String ecommPassword) {
         this.ecommName = ecommName;
         this.ecommEmailId = ecommEmailId;
         this.ecommPassword = ecommPassword;
-    }
-
-
-    public Ecommerce(@Size(max = 100) @NotNull String ecommName, @Size(max = 100) @NotNull String ecommEmailId, @NotNull String ecommPassword, Date date, boolean First_login) {
-        this.ecommName = ecommName;
-        this.ecommEmailId = ecommEmailId;
-        this.ecommPassword = ecommPassword;
-        this.date = date;
-        this.First_login = First_login;
     }
 
     public boolean isFirst_login() {
-        return First_login;
+        return first_login;
     }
 
     public void setFirst_login(boolean first_login) {
-        First_login = first_login;
+        this.first_login = first_login;
     }
 
     public Date getDate() {
@@ -79,7 +73,6 @@ public class Ecommerce  implements Serializable {
     public long getEcommId() {
         return ecommId;
     }
-
 
     public void setEcommId(long ecommId) {
         this.ecommId = ecommId;

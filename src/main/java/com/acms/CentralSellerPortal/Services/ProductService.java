@@ -11,7 +11,7 @@ import java.util.List;
 public class ProductService {
 
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
 
 
     public void save(Product product)
@@ -31,7 +31,21 @@ public class ProductService {
 
     public List<Product> findBySeller_Id(Long seller_id)
     {
-        List<Product> productList = productRepository.findBySeller_Id(seller_id);
+        List<Product> productList = productRepository.findBySeller_SellerId(seller_id);
         return productList;
+    }
+
+    public Product findByProductId(Long productId){
+        Product product = productRepository.findByProductId(productId);
+        return  product;
+    }
+
+    public List<Product> findBySeller_SellerId(Long seller_id){
+        List<Product> productList = productRepository.findBySeller_SellerId(seller_id);
+        return  productList;
+    }
+    public  List<Product> findAll(){
+        List<Product> allProductList = productRepository.findAll();
+        return  allProductList;
     }
 }

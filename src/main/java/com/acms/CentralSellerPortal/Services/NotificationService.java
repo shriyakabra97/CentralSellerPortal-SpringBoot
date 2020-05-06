@@ -16,10 +16,10 @@ import java.util.List;
 public class NotificationService {
 
     @Autowired
-    NotificationRepository notificationRepository;
+    private NotificationRepository notificationRepository;
 
     @Autowired
-    EcommerceRepository ecommerceRepository;
+    private EcommerceRepository ecommerceRepository;
 
     public static boolean flag = false;
 
@@ -28,14 +28,15 @@ public class NotificationService {
     {
 
         Notification notification=new Notification(message,date,s_id,p_id);
-        //notification.setNdate(date);
-        //notification.setNotification_message(message);
+
 
         notificationRepository.save(notification);
-        flag= true;
+        flag = true;
+
+
     }
 
-     public List<Notification> findByE_Id(long e_id)
+    public List<Notification> findByE_Id(long e_id)
     {
         Ecommerce ecommerce=ecommerceRepository.findById(e_id).orElse(null);
         Date date=ecommerce.getDate();

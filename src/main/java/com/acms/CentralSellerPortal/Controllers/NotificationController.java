@@ -3,7 +3,7 @@ package com.acms.CentralSellerPortal.Controllers;
 import com.acms.CentralSellerPortal.Entities.Ecommerce;
 import com.acms.CentralSellerPortal.Entities.Notification;
 import com.acms.CentralSellerPortal.Repositories.EcommerceRepository;
-import com.acms.CentralSellerPortal.Services.EcommerceService;
+//import com.acms.CentralSellerPortal.Services.EcommerceService;
 import com.acms.CentralSellerPortal.Services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,29 +20,31 @@ import java.util.List;
 public class NotificationController {
 
     @Autowired
-    NotificationService notificationService;
+    private NotificationService notificationService;
 
     @Autowired
-    EcommerceRepository ecommerceRepository;
+    private EcommerceRepository ecommerceRepository;
 
-  @RequestMapping(value = "/getAllNotification/{e_id}", method = RequestMethod.GET)
-    public void getProductBySellerId(@PathVariable(value = "e_id") long e_id, HttpSession session)
-  {
-      Ecommerce ecommerce=ecommerceRepository.findById(e_id).orElse(null);
-      boolean log=ecommerce.isFirst_login();
-      List<Notification> notificationList;
+    @RequestMapping(value = "/getAllNotification/{e_id}", method = RequestMethod.GET)
+    public RedirectView getNotifications(@PathVariable(value = "e_id") long e_id,
+                                     HttpSession session)
+    {
+        Ecommerce ecommerce=ecommerceRepository.findById(e_id).orElse(null);
+        boolean log=ecommerce.isFirst_login();
+        List<Notification> notificationList;
+        if(log==false) {
+            notificationList = notificationService.findByE_Id(e_id);
 
-      if(log==false) {
-          notificationList = notificationService.findByE_Id(e_id);
 
-          for (Notification n : notificationList)
-              System.out.println(n.getNotification_message() + " " + n.getNdate() + "\n");
-
-          session.setAttribute("notificationList", notificationList);
-          notificationList.clear();
-      }
+            session.setAttribute("notificationList", notificationList);
+        }
         Date dt=new Date();
         ecommerce.setDate(dt);
+
+        RedirectView rv = new RedirectView();
+        String rurl="/Notifications.jsp?e_id="+e_id;
+        rv.setUrl(rurl);
+        return rv;
 
     }
 }
