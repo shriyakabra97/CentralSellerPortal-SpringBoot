@@ -60,7 +60,7 @@ public class ProductController {
         }
 
         RedirectView rv = new RedirectView();
-        String rurl="/SellerDashboard.jsp?id="+Long.toString(seller_id);
+        String rurl="/MyProducts.jsp?id="+Long.toString(seller_id);
         rv.setUrl(rurl);
         return rv;
 
