@@ -56,19 +56,33 @@ public class SellerController {
 
         List<Seller> seller;
         seller = sellerService.findAll();
+        int flag=0;
+        session.removeAttribute("sellerContactNo");
+        session.removeAttribute("sellerEmailId");
 
 
         //checking for if entry already exist for unique attribute
         for(Seller s: seller) {
-            if ((seller_contactNo).equals(s.getSellerContactNo()) && (seller_emailId).equals(s.getSellerEmailId()) ) {
+
+            if ((seller_emailId).equals(s.getSellerEmailId()) ) {
+                session.setAttribute("sellerEmailId", s.getSellerEmailId());
+                flag=1;
+            }
+
+            if ((seller_contactNo).equals(s.getSellerContactNo())  ) {
 
                 session.setAttribute("sellerContactNo", s.getSellerContactNo());
-                session.setAttribute("sellerEmailId", s.getSellerEmailId());
-                RedirectView redirectView = new RedirectView();
-                redirectView.setContextRelative(true);
-                redirectView.setUrl("/FailedSellerSignup.jsp");
-                return redirectView;
+                flag=1;
             }
+
+        }
+
+        if(flag==1)
+        {
+            RedirectView redirectView = new RedirectView();
+            redirectView.setContextRelative(true);
+            redirectView.setUrl("/FailedSellerSignup.jsp");
+            return redirectView;
         }
 
         Seller seller1=new Seller(seller_name,seller_address,shop_name,seller_contactNo,seller_emailId,password);
@@ -201,17 +215,31 @@ public class SellerController {
         List<Seller> sellers ;
         sellers = sellerService.findAll();
 
+        int flag=0;
+        session.removeAttribute("sellerContactNo");
+        session.removeAttribute("sellerEmailId");
+
         //checking for if entry already exist for unique attribute
         for(Seller s: sellers) {
-            if ((seller_contactNo).equals(s.getSellerContactNo()) && (seller_emailId).equals(s.getSellerEmailId()) ) {
+            if ((seller_emailId).equals(s.getSellerEmailId()) ) {
+                session.setAttribute("sellerEmailId", s.getSellerEmailId());
+                flag=1;
+            }
+
+            if ((seller_contactNo).equals(s.getSellerContactNo())  ) {
 
                 session.setAttribute("sellerContactNo", s.getSellerContactNo());
-                session.setAttribute("sellerEmailId", s.getSellerEmailId());
-                RedirectView redirectView = new RedirectView();
-                redirectView.setContextRelative(true);
-                redirectView.setUrl("/FailedSellerSignup.jsp");
-                return redirectView;
+                flag=1;
             }
+
+        }
+
+        if(flag==1)
+        {
+            RedirectView redirectView = new RedirectView();
+            redirectView.setContextRelative(true);
+            redirectView.setUrl("/FailedSellerSignup.jsp");
+            return redirectView;
         }
 
 
