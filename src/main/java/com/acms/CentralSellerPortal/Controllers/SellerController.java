@@ -260,7 +260,7 @@ public class SellerController {
         session.setAttribute("sellerPassword", seller.getSellerPassword());
         session.setAttribute("sellerAddress", seller.getSellerAddress());
         session.setAttribute("sellerName", seller.getSellerName());
-//notification mechanism..
+        //notification mechanism..
         long s_id=seller.getSellerId();
         Date dw=new Date();
         notificationService.save(seller.getSellerName()+" has updated profile",dw ,s_id,0);
