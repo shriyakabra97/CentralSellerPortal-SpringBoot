@@ -107,7 +107,7 @@ public class EcommerceController {
         List<Ecommerce> ecommerces=ecommerceService.findAll();
         for(Ecommerce e:ecommerces){
 
-            if ((ecommEmailId).equals(e.getEcommEmailId())  ) {
+            if ((ecommEmailId).equals(e.getEcommEmailId())  && !(ecommId).equals(e.getEcommId()) ) {
 
                 session.setAttribute("ecommEmailId", e.getEcommEmailId());
                 flag=1;

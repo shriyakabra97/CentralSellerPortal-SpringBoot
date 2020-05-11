@@ -221,12 +221,12 @@ public class SellerController {
 
         //checking for if entry already exist for unique attribute
         for(Seller s: sellers) {
-            if ((seller_emailId).equals(s.getSellerEmailId()) ) {
+            if ((seller_emailId).equals(s.getSellerEmailId()) && !(seller_id).equals(s.getSellerId())) {
                 session.setAttribute("sellerEmailId", s.getSellerEmailId());
                 flag=1;
             }
 
-            if ((seller_contactNo).equals(s.getSellerContactNo())  ) {
+            if ((seller_contactNo).equals(s.getSellerContactNo()) && !(seller_id).equals(s.getSellerId() )) {
 
                 session.setAttribute("sellerContactNo", s.getSellerContactNo());
                 flag=1;
