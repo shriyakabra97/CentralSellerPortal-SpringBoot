@@ -7,6 +7,7 @@ import com.acms.CentralSellerPortal.Repositories.EcommerceRepository;
 import com.acms.CentralSellerPortal.Services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +26,7 @@ public class NotificationController {
     @Autowired
     private EcommerceRepository ecommerceRepository;
 
-    @RequestMapping(value = "/getAllNotification/{e_id}", method = RequestMethod.GET)
+    @GetMapping("/getAllNotification/{e_id}")
     public RedirectView getNotifications(@PathVariable(value = "e_id") long e_id,
                                      HttpSession session)
     {
