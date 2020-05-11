@@ -99,7 +99,7 @@
             </header>
             <article class="card-body">
 
-                <form class ="form-update" id="updation-form" action = "/postUpdatedSeller/<%=id%>" method="post">
+                <form class ="form-update" id="updation-form" action = "/postUpdatedSeller/<%=id%>" method="post"  onsubmit="return Validate()" >
                     <form :hidden path="id"/>
                     <div class="form-row">
                         <div class="col form-group">
@@ -134,6 +134,29 @@
                         <input class="form-control" id="s_password" name="s_password"  value=${sellerPassword} placeholder=${sellerPassword} type="password" minlength="6" maxlength="20" required>
                         <small class="text-muted">Password should contain 1 digit,1 lower case,1 upper case,1 special character.</small>
                     </div> <!-- form-group end.// -->
+
+                    <script type="text/javascript">
+
+                        function Validate() {
+                            var password = document.getElementById("s_password").value;
+                            var email= document.getElementById("s_mail").value;
+                            var pattern= /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{6,}$/;
+                            var email_pattern=/^(\D)+(\w)*((\.(\w)+)?)+@(\D)+(\w)*((\.(\D)+(\w)*)+)?(\.)[a-z]{2,}$/;
+
+
+                            if(!pattern.test(password)){
+                                alert("Password should contain 1 digit,1 lower case,1 upper case,1 special character");
+                                return false;
+                            }
+
+                            if(!email_pattern.test(email)){
+                                alert("Please follow standard email format");
+                                return false;
+                            }
+
+                            return true;
+                        }
+                    </script>
 
                     <br>
                     <div class="form-group">
