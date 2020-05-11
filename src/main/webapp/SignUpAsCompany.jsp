@@ -89,16 +89,33 @@ and open the template in the editor.
                                 });
                             </script>
                             <script type="text/javascript">
+
                                 function Validate() {
                                     var password = document.getElementById("cPassword").value;
                                     var confirmPassword = document.getElementById("cPass").value;
+                                    var email= document.getElementById("cEmailId").value;
+                                    var pattern= /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{6,}$/;
+                                    var email_pattern=/^(\D)+(\w)*((\.(\w)+)?)+@(\D)+(\w)*((\.(\D)+(\w)*)+)?(\.)[a-z]{2,}$/;
+
                                     if (password != confirmPassword) {
                                         alert("Passwords do not match.");
                                         return false;
                                     }
+
+                                    if(!pattern.test(password)){
+                                        alert("Password should contain 1 digit,1 lower case,1 upper case,1 special character");
+                                        return false;
+                                    }
+
+                                    if(!email_pattern.test(email)){
+                                        alert("Please follow standard email format");
+                                        return false;
+                                    }
+
                                     return true;
                                 }
                             </script>
+
 
 
                             <div class="form-group">

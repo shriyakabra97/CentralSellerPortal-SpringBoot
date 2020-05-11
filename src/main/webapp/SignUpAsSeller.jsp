@@ -80,6 +80,9 @@ and open the template in the editor.
                             <label>Create password</label>
                             <input class="form-control" id="s_password" name="s_password" type="password"  minlength="6"  maxlength="20" required>
                             <small class="text-muted">Password should contain 1 digit,1 lower case,1 upper case,1 special character.</small>
+
+                            <!--pattern="(?=.*\d)(?=.*[a-z])(?=.*[@#$%^&+=])(?=.*[A-Z]).{6,}"
+                            //title="Must contain at least one number and one uppercase and lowercase letter, 1 special character and at least 6 or more characters  -->
                         </div> <!-- form-group end.// -->
                         <div class="form-group">
                             <label>Confirm password</label>
@@ -97,32 +100,36 @@ and open the template in the editor.
 
                             });
                         </script>
+
                         <script type="text/javascript">
+
                             function Validate() {
                                 var password = document.getElementById("s_password").value;
                                 var confirmPassword = document.getElementById("s_pass").value;
+                                var email= document.getElementById("s_mail").value;
                                 var pattern= /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{6,}$/;
+                                var email_pattern=/^(\D)+(\w)*((\.(\w)+)?)+@(\D)+(\w)*((\.(\D)+(\w)*)+)?(\.)[a-z]{2,}$/;
+
                                 if (password != confirmPassword) {
                                     alert("Passwords do not match.");
                                     return false;
                                 }
 
-                                //pattern="(?=.*\d)(?=.*[a-z])(?=.*[@#$%^&+=])(?=.*[A-Z]).{6,}"
-                                //title="Must contain at least one number and one uppercase and lowercase letter, 1 special character and at least 6 or more characters
-                               if(s_password.value.match(pattern))
-                               {
-                                   return true;
+                                if(!pattern.test(password)){
+                                    alert("Password should contain 1 digit,1 lower case,1 upper case,1 special character");
+                                    return false;
+                                }
 
-                               }
-                               else {
-                                   alert("Password should contain 1 digit,1 lower case,1 upper case,1 special character");
-                                   return false;
-                                   }
+                                if(!email_pattern.test(email)){
+                                    alert("Please follow standard email format");
+                                    return false;
+                                }
 
-
-                                return true;
+                               return true;
                             }
                         </script>
+
+
                         <div class="form-group">
                             <button id="sub-btn" type="submit" class="btn btn-primary btn-block"> Register  </button>
                         </div>
