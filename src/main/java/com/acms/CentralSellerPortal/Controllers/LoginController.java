@@ -46,7 +46,12 @@ public class LoginController {
 
         for(Seller s: seller){
             if((s_password).equals(s.getSellerPassword()) && (s_mobile).equals(s.getSellerContactNo())){
-
+                session.setAttribute("sellerContactNo", s.getSellerContactNo());
+                session.setAttribute("sellerAddress", s.getSellerAddress());
+                session.setAttribute("sellerName", s.getSellerName());
+                session.setAttribute("sellerEmailId", s.getSellerEmailId());
+                session.setAttribute("shopName", s.getShopName());
+                session.setAttribute("sellerPassword",s.getSellerPassword());
 
                 RedirectView rv = new RedirectView();
                 String rurl="/SellerDashboard.jsp?id="+s.getSellerId();
@@ -81,9 +86,9 @@ public class LoginController {
                 }
                 c.setFirst_login(false);
 
-               // session.setAttribute("ecommName", c.getEcommName());
-               // session.setAttribute("ecommEmailId", c.getEcommEmailId());
-               // session.setAttribute("ecommPassword", c.getEcommPassword());
+                session.setAttribute("ecommName", c.getEcommName());
+                session.setAttribute("ecommEmailId", c.getEcommEmailId());
+                session.setAttribute("ecommPassword", c.getEcommPassword());
 
                 RedirectView rv = new RedirectView();
                 String rurl="/EcommDashboard.jsp?e_id="+Long.toString(c.getEcommId());
