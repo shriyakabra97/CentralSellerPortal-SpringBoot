@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+acms<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -49,14 +49,14 @@ and open the template in the editor.
                         <div class="form-row">
                             <div class="col form-group">
                                 <label>Name </label>
-                                <input type="text" id="s_name" name="s_name" class="form-control" placeholder=""  maxlength="100" required>
+                                <input type="text" id="s_name" name="s_name" class="form-control" placeholder=""  maxlength="50" required>
 
                             </div> <!-- form-group end.// -->
                             <!-- form-group end.// -->
                         </div> <!-- form-row end.// -->
                         <div class="form-group">
                             <label>Address</label>
-                            <input type="text" id="s_address" name="s_address" class="form-control" placeholder="" maxlength="300" required>
+                            <input type="text" id="s_address" name="s_address" class="form-control" placeholder="" maxlength="100" required>
 
                         </div>
                         <div class="form-group">
@@ -66,23 +66,24 @@ and open the template in the editor.
                         </div>
                         <div class="form-group">
                             <label>Email address</label>
-                            <input type="email" id="s_mail" name="s_mail" class="form-control" maxlength="100" placeholder="" required>
+                            <input type="email" id="s_mail" name="s_mail" class="form-control" maxlength="30" placeholder="" required>
                             <small class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div> <!-- form-group end.// -->
                         <div class="form-group">
                             <label>Store Name</label>
-                            <input type="text" id="s_shop" name="s_shop" class="form-control"  maxlength="100" placeholder="" required>
+                            <input type="text" id="s_shop" name="s_shop" class="form-control"  maxlength="50" placeholder="" required>
 
                         </div>
 
 
                         <div class="form-group">
                             <label>Create password</label>
-                            <input class="form-control" id="s_password" name="s_password" type="password" minlength="4"  maxlength="20" required>
+                            <input class="form-control" id="s_password" name="s_password" type="password" minlength="6"  maxlength="20" required>
+                            <small class="text-muted">Password should contain 1 digit,1 lower case,1 upper case,1 special character.</small>
                         </div> <!-- form-group end.// -->
                         <div class="form-group">
                             <label>Confirm password</label>
-                            <input class="form-control"  id="s_pass" name="s_pass" type="password" minlength="4" maxlength="20" required>
+                            <input class="form-control"  id="s_pass" name="s_pass" type="password" minlength="6" maxlength="20" required>
                         </div>
                     <p id ="pass-match" style="color:crimson ; font-family: Arial" ></p>
 

@@ -52,14 +52,14 @@ and open the template in the editor.
                             <div class="form-row">
                                 <div class="col form-group">
                                     <label>Company Name </label>   
-                                    <input type="text"  id="cName" name="cName" class="form-control" maxlength="100" placeholder="" required>
+                                    <input type="text"  id="cName" name="cName" class="form-control" maxlength="50" placeholder="" required>
                                 </div> <!-- form-group end.// -->
                                 <!-- form-group end.// -->
                             </div> <!-- form-row end.// -->
 
                             <div class="form-group">
                                 <label>Email address</label>
-                                <input type="email" id="cEmailId" name="cEmailId" class="form-control" maxlength="100" placeholder="" required>
+                                <input type="email" id="cEmailId" name="cEmailId" class="form-control" maxlength="30" placeholder="" required>
                                 <small class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
 
@@ -69,11 +69,12 @@ and open the template in the editor.
 
                             <div class="form-group">
                                 <label>Create password</label>
-                                <input class="form-control" name="cPassword"  id="cPassword" type="password" minlength="4" maxlength="20" required>
+                                <input class="form-control" name="cPassword"  id="cPassword" type="password" minlength="6" maxlength="20" required>
+                                <small class="text-muted">Password should contain 1 digit,1 lower case,1 upper case,1 special character.</small>
                             </div> <!-- form-group end.// -->
                             <div class="form-group">
                                 <label>Confirm password</label>
-                                <input class="form-control" name="cPass" id="cPass" type="password" minlength="4" maxlength="20" required>
+                                <input class="form-control" name="cPass" id="cPass" type="password" minlength="6" maxlength="20" required>
                             </div>
                             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
                             <p id ="c-pass-match" style="color:crimson ; font-family: Arial" ></p>

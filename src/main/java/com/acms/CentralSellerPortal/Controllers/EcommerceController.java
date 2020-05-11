@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/ecomm")
 public class EcommerceController {
 
     @Autowired
@@ -52,7 +52,7 @@ public class EcommerceController {
         return ResponseEntity.ok().body(ecommerceList);
     }
 
-    @PostMapping("/getEcommerce/{e_id}" )
+    @GetMapping("/getEcommerce/{e_id}" )
     public RedirectView getSellerById(@PathVariable(value = "e_id") long ecomm_id, HttpSession session)
     {
         Ecommerce ecommerce = ecommerceService.findById(ecomm_id).orElse(null);
