@@ -78,7 +78,7 @@ and open the template in the editor.
 
                         <div class="form-group">
                             <label>Create password</label>
-                            <input class="form-control" id="s_password" name="s_password" type="password" minlength="6"  maxlength="20" required>
+                            <input class="form-control" id="s_password" name="s_password" type="password"  minlength="6"  maxlength="20" required>
                             <small class="text-muted">Password should contain 1 digit,1 lower case,1 upper case,1 special character.</small>
                         </div> <!-- form-group end.// -->
                         <div class="form-group">
@@ -101,10 +101,25 @@ and open the template in the editor.
                             function Validate() {
                                 var password = document.getElementById("s_password").value;
                                 var confirmPassword = document.getElementById("s_pass").value;
+                                var pattern= /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{6,}$/;
                                 if (password != confirmPassword) {
                                     alert("Passwords do not match.");
                                     return false;
                                 }
+
+                                //pattern="(?=.*\d)(?=.*[a-z])(?=.*[@#$%^&+=])(?=.*[A-Z]).{6,}"
+                                //title="Must contain at least one number and one uppercase and lowercase letter, 1 special character and at least 6 or more characters
+                               if(s_password.value.match(pattern))
+                               {
+                                   return true;
+
+                               }
+                               else {
+                                   alert("Password should contain 1 digit,1 lower case,1 upper case,1 special character");
+                                   return false;
+                                   }
+
+
                                 return true;
                             }
                         </script>
