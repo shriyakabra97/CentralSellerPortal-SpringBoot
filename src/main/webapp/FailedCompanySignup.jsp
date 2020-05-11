@@ -28,9 +28,15 @@
 <div class="container">
     <div class="row text-center">
         <div class="col-sm-6 col-sm-offset-3">
-            <br><br> <h2 style="color: darksalmon">Failed to Signup</h2>
+            <br><br> <h2 style="color: red">Failed to Signup</h2>
             <br>
-            <p style="color: darksalmon; font-size: large; font-family: Arial">Something went wrong. Sorry for the inconvenience.</p><br><br>
+
+            <p  style="color: green; font-size: large; font-family: Arial"><%
+               if (session.getAttribute("ecommEmailId") != null)
+                out.println("Email Id :" + session.getAttribute("ecommEmailId")+ " already exists");
+            %>
+
+            <p style="color: green; font-size: large; font-family: Arial">Please try with different values!!</p><br><br>
             <a href="SignUpAsCompany.jsp" action="SignUpAsCompany.jsp" class="btn btn-primary" style="font-size: medium"> Return to Signup </a>
             <br><br>
         </div>

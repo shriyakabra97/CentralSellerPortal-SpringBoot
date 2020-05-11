@@ -32,9 +32,32 @@ public class EcommerceController {
     @PostMapping("/postEcommerce")
     public RedirectView addecommerce(@RequestParam("cName") String ecommerce_name,
                                      @RequestParam("cEmailId") String ecommerce_emailId,
-                                     @RequestParam("cPassword") String ecommerce_password)
+                                     @RequestParam("cPassword") String ecommerce_password,
+                                     HttpSession session)
     {
 
+        int flag=0;
+        session.removeAttribute("sellerContactNo");
+        session.removeAttribute("sellerEmailId");
+
+        List<Ecommerce> ecommerces=ecommerceService.findAll();
+        for(Ecommerce e:ecommerces){
+
+            if ((ecommerce_emailId).equals(e.getEcommEmailId())  ) {
+
+                session.setAttribute("ecommEmailId", e.getEcommEmailId());
+                flag=1;
+            }
+
+        }
+
+        if(flag==1)
+        {
+            RedirectView redirectView = new RedirectView();
+            redirectView.setContextRelative(true);
+            redirectView.setUrl("/FailedCompanySignup.jsp");
+            return redirectView;
+        }
 
         ecommerceService.save(new Ecommerce(ecommerce_name,ecommerce_emailId,ecommerce_password));
 
@@ -76,6 +99,31 @@ public class EcommerceController {
             @RequestParam("c_password") String password,
             HttpSession session)
     {
+
+        int flag=0;
+        session.removeAttribute("sellerContactNo");
+        session.removeAttribute("sellerEmailId");
+
+        List<Ecommerce> ecommerces=ecommerceService.findAll();
+        for(Ecommerce e:ecommerces){
+
+            if ((ecommEmailId).equals(e.getEcommEmailId())  ) {
+
+                session.setAttribute("ecommEmailId", e.getEcommEmailId());
+                flag=1;
+            }
+
+        }
+
+        if(flag==1)
+        {
+            RedirectView redirectView = new RedirectView();
+            redirectView.setContextRelative(true);
+            redirectView.setUrl("/FailedCompanySignup.jsp");
+            return redirectView;
+        }
+
+
         Ecommerce ecommerce=ecommerceService.findById(ecommId).orElse(null);
         ecommerce.setEcommName(ecommName);
         ecommerce.setEcommEmailId(ecommEmailId);
