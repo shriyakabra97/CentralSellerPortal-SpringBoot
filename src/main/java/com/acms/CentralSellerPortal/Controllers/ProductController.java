@@ -119,7 +119,7 @@ public class ProductController {
             long p_id=product.getProductId();
 
             Date dw=new Date();
-            notificationService.save(seller.getSellerName()+" has updated a product a product "+product.getProductName(),dw ,0,p_id, true);
+            notificationService.save(seller.getSellerName()+" has updated the product "+product.getProductName(),dw ,0,p_id, true);
 
 
 //            return "updated";

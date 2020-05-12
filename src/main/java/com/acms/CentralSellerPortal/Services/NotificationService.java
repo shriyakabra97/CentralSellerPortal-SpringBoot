@@ -30,8 +30,6 @@ public class NotificationService {
         Notification notification=new Notification(message,date,s_id,p_id , update);
 
         Notification old = notificationRepository.findBySellerIdAndProductIdAndIsUpdate(s_id , p_id, update);
-
-        System.out.println("old : "+ old);
         if(old != null) {
             System.out.println("entered old wala if");
             notificationRepository.delete(old);
