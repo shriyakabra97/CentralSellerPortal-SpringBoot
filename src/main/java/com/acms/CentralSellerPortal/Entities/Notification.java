@@ -12,11 +12,11 @@ public class Notification implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long notification_id;
+    private long notificationId;
 
     @Column
     @NotNull
-    private String notification_message;
+    private String notificationMessage;
 
     @Column
     private long sellerId;
@@ -34,40 +34,40 @@ public class Notification implements Serializable {
     public Notification() {
     }
 
-    public Notification(@NotNull String notification_message, long seller_id, long productId, Date ndate, boolean isUpdate) {
-        this.notification_message = notification_message;
-        this.sellerId = seller_id;
+    public Notification(@NotNull String notificationMessage, long sellerId, long productId,  Date ndate) {
+        this.notificationMessage = notificationMessage;
+        this.sellerId = sellerId;
         this.productId = productId;
         this.ndate = ndate;
         this.isUpdate = isUpdate;
     }
 
-    public Notification(@NotNull String notification_message) {
-        this.notification_message = notification_message;
+    public Notification(@NotNull String notificationMessage) {
+        this.notificationMessage = notificationMessage;
     }
 
-    public Notification(String message, Date date, long s_id, long p_id, boolean update) {
-        this.notification_message = message;
-        this.ndate = date;
-        this.sellerId = s_id;
-        this.productId = p_id;
+    public Notification(@NotNull String notificationMessage, Date ndate,long sellerId, long productId, boolean update) {
+        this.notificationMessage = notificationMessage;
+        this.ndate = ndate;
+        this.sellerId = sellerId;
+        this.productId = productId;
         this.isUpdate = update;
     }
 
-    public long getNotification_id() {
-        return notification_id;
+    public long getNotificationId() {
+        return notificationId;
     }
 
-    public void setNotification_id(long notification_id) {
-        this.notification_id = notification_id;
+    public void setNotificationId(long notificationId) {
+        this.notificationId = notificationId;
     }
 
-    public String getNotification_message() {
-        return notification_message;
+    public String getNotificationMessage() {
+        return notificationMessage;
     }
 
-    public void setNotification_message(String notification_message) {
-        this.notification_message = notification_message;
+    public void setNotificationMessage(String notificationMessage) {
+        this.notificationMessage = notificationMessage;
     }
 
     public long getSellerId() {
