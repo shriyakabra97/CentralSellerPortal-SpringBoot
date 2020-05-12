@@ -93,7 +93,7 @@ public class SellerController {
         long s_id=seller1.getSellerId();
 
         Date dw=new Date();
-        notificationService.save(seller1.getSellerName()+" has signed up to this portal ",dw ,s_id,0);
+        notificationService.save(seller1.getSellerName()+" has signed up to this portal ",dw ,s_id,0, false);
         RedirectView redirectView = new RedirectView();
         redirectView.setContextRelative(true);
         redirectView.setUrl("/AddSellerSuccessful.jsp");
@@ -263,7 +263,7 @@ public class SellerController {
         //notification mechanism..
         long s_id=seller.getSellerId();
         Date dw=new Date();
-        notificationService.save(seller.getSellerName()+" has updated profile",dw ,s_id,0);
+        notificationService.save(seller.getSellerName()+" has updated profile",dw ,s_id,0, true);
         RedirectView rv = new RedirectView();
         String rurl="/SellerDashboard.jsp?id="+Long.toString(seller.getSellerId());
         rv.setUrl(rurl);

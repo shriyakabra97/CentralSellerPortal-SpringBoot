@@ -53,7 +53,7 @@ public class ProductController {
             productService.save(product);
             long p_id=product.getProductId();
             Date dw=new Date();
-            notificationService.save(seller.getSellerName()+" has added a product a new product "+product.getProductName(),dw ,0,p_id);
+            notificationService.save(seller.getSellerName()+" has added a product a new product "+product.getProductName(),dw ,0,p_id, false);
 
 
             //return "updated..";
@@ -119,7 +119,7 @@ public class ProductController {
             long p_id=product.getProductId();
 
             Date dw=new Date();
-            notificationService.save(seller.getSellerName()+" has updated a product a product "+product.getProductName(),dw ,0,p_id);
+            notificationService.save(seller.getSellerName()+" has updated a product a product "+product.getProductName(),dw ,0,p_id, true);
 
 
 //            return "updated";

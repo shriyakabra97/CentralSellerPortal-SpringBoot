@@ -26,7 +26,8 @@ public class NotificationController {
     @Autowired
     private EcommerceRepository ecommerceRepository;
 
-    @GetMapping("/getAllNotification/{e_id}")
+    //@GetMapping("/getAllNotification/{e_id}")
+    @RequestMapping(value="/getAllNotification/{e_id}" , method=RequestMethod.GET)
     public RedirectView getNotifications(@PathVariable(value = "e_id") long e_id,
                                      HttpSession session)
     {
