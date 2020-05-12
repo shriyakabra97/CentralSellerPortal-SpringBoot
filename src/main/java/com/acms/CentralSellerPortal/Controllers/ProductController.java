@@ -162,7 +162,10 @@ public class ProductController {
     public RedirectView deleteProduct(@PathVariable(value = "p_id") Long product_id,
                                       @PathVariable(value = "id") Long seller_id
                                       ){
+        Date dw=new Date();
+        notificationService.save(productService.findById(product_id).getProductName()+" was deleted",dw ,0,0, true);
         productService.deleteById(product_id);
+
 
         RedirectView redirectView = new RedirectView();
         redirectView.setContextRelative(true);

@@ -109,27 +109,30 @@ public class SellerController {
             @PathVariable("p_id") Long productId,
             HttpSession session
     ){
-        if(sellerId==0){
+        RedirectView rv = new RedirectView();
+
+        if(sellerId==0&&productId!=0){
             //get product
             Product notificationProduct= productService.findByProductId(productId);
             session.setAttribute("notificationProduct", notificationProduct);
-            RedirectView rv = new RedirectView();
             String rurl="/ViewProductNotification.jsp?e_id="+Long.toString(ecommId);
             System.out.println(rurl);
             rv.setUrl(rurl);
             return rv;
 
 
-        }else {
+        }else if(productId==0&&sellerId!=0){
             //get seller
             Seller notificationSeller = sellerService.findById(sellerId);
             session.setAttribute("notificationSeller", notificationSeller);
-            RedirectView rv = new RedirectView();
             String rurl="/ViewSellerNotification.jsp?e_id="+Long.toString(ecommId);
             System.out.println(rurl);
             rv.setUrl(rurl);
             return rv;
+        }else if (productId==0&&sellerId==0){
+            rv.setUrl("/ProductDeleted.jsp?e_id="+Long.toString(ecommId));
         }
+        return rv;
 
     }
 
